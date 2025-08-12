@@ -69,7 +69,7 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
 
   // WhatsApp function
   const handleWhatsAppClick = () => {
-    const phoneNumber = "+923004692585"; // Replace with your actual WhatsApp number
+    const phoneNumber = "+923008255276"; // Replace with your actual WhatsApp number
     const message =
       "Hi! I'm interested in the Forthing vehicle. Can you provide more information?";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
