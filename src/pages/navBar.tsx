@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { ChevronDown, X } from 'lucide-react';
 import type { NavbarProps, Brand, PageType } from '../pages/types'; // Import from shared types
 import logo from '../assets/Logo-main.svg';
-import starIcon from '../assets/icon.svg';
 
 const Navbar: React.FC<NavbarProps> = ({ onPageChange, currentPage }) => {
   const [isBrandsOpen, setIsBrandsOpen] = useState<boolean>(false);
@@ -165,14 +164,10 @@ const Navbar: React.FC<NavbarProps> = ({ onPageChange, currentPage }) => {
             </a>
           </nav>
 
-          {/* Right Side - Rating (Desktop) */}
-          <div className="hidden lg:flex items-center">
-            <img 
-              src={starIcon} 
-              alt="Star" 
-              className="w-8 h-8 text-gray-600 mr-3"
-            />
-            <span className="text-black font-bold text-lg">789,967</span>
+          {/* Right Side - We Saved Text (Desktop) */}
+          <div className="hidden lg:flex flex-col items-center">
+            <span className="text-xs font-medium text-gray-600 uppercase tracking-wide">We Saved</span>
+            <span className="text-black font-bold text-lg">786,679</span>
           </div>
 
           {/* Mobile Menu Button */}
@@ -305,15 +300,11 @@ const Navbar: React.FC<NavbarProps> = ({ onPageChange, currentPage }) => {
             </a>
           </nav>
 
-          {/* Mobile Rating Footer */}
+          {/* Mobile We Saved Footer */}
           <div className="border-t border-gray-200 p-6">
-            <div className="flex items-center justify-center">
-              <img 
-                src={starIcon} 
-                alt="Star" 
-                className="w-8 h-8 text-gray-600 mr-3"
-              />
-              <span className="text-black font-bold text-lg">789,967</span>
+            <div className="flex flex-col items-center">
+              <span className="text-med font-medium text-gray-600 uppercase tracking-wide">We Saved</span>
+              <span className="text-black font-bold text-lg">786,679</span>
             </div>
           </div>
         </div>

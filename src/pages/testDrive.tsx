@@ -1,5 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Upload, ChevronLeft, Download, ChevronRight, ArrowLeft } from "lucide-react";
+import {
+  Upload,
+  ChevronLeft,
+  Download,
+  ChevronRight,
+  ArrowLeft,
+} from "lucide-react";
 import TermsAndConditions from "../pages/termsAndConditions";
 
 // Mock image URLs
@@ -22,8 +28,15 @@ import interiorgreen from "../assets/interiorgreen.png";
 const bannerImage = testDrive;
 
 // Type definitions
-type ExteriorColor = 'greenB' |'whiteB' | 'blue' | 'grey'  | 'green' | 'black' | 'white';
-type InteriorColor = 'black' | 'brown' | 'green';
+type ExteriorColor =
+  | "greenB"
+  | "whiteB"
+  | "blue"
+  | "grey"
+  | "green"
+  | "black"
+  | "white";
+type InteriorColor = "black" | "brown" | "green";
 
 type ExteriorRestrictions = {
   [key in ExteriorColor]: InteriorColor[];
@@ -70,23 +83,25 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   onSubmit,
 }) => {
   const [selectedCar, setSelectedCar] = useState<string>("");
-  const [selectedExteriorColor, setSelectedExteriorColor] = useState<string>("");
-  const [selectedInteriorColor, setSelectedInteriorColor] = useState<string>("");
+  const [selectedExteriorColor, setSelectedExteriorColor] =
+    useState<string>("");
+  const [selectedInteriorColor, setSelectedInteriorColor] =
+    useState<string>("");
   const [selectedBrand] = useState<string>("RIDDARA");
   const [colorSliderIndex, setColorSliderIndex] = useState<number>(0);
   const [showTermsAndConditions, setShowTermsAndConditions] = useState(false);
 
   const getVisibleItemsCount = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.innerWidth < 640) return 2;
-      if (window.innerWidth < 768) return 3;  
+      if (window.innerWidth < 768) return 3;
       return 4;
     }
     return 4;
   };
 
   const getItemWidth = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.innerWidth < 640) return 140;
       if (window.innerWidth < 768) return 160;
       return 180;
@@ -118,9 +133,27 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   });
 
   const cars = [
-    { id: "RD6-2WD-Air", name: "RD6 2WD Air", subtitle: "Body Type : Truck", image: car1, price: "7500000" },
-    { id: "RD6-AWD-Pro", name: "RD6 AWD Pro", subtitle: "Body Type : Truck", image: car2, price: "8250000" },
-    { id: "RD6-AWD-Ultra", name: "RD6 AWD Ultra", subtitle: "Body Type : Truck", image: car3, price: "8990000" },
+    {
+      id: "RD6-2WD-Air",
+      name: "RD6 2WD Air",
+      subtitle: "Body Type : Truck",
+      image: car1,
+      price: "7500000",
+    },
+    {
+      id: "RD6-AWD-Pro",
+      name: "RD6 AWD Pro",
+      subtitle: "Body Type : Truck",
+      image: car2,
+      price: "8250000",
+    },
+    {
+      id: "RD6-AWD-Ultra",
+      name: "RD6 AWD Ultra",
+      subtitle: "Body Type : Truck",
+      image: car3,
+      price: "8990000",
+    },
   ];
 
   const allExteriorColors = [
@@ -148,52 +181,53 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
         grey: ["black", "brown"],
         green: ["green"],
         black: ["black", "brown"],
-        white: ["black", "brown"]
-      }
+        white: ["black", "brown"],
+      },
     },
     "RD6-AWD-Pro": {
       exterior: {
-        greenB: [ "green"],
-        blue: [ "brown"],
-        grey: [ "brown"],
-        whiteB: [ "brown"],
+        greenB: ["green"],
+        blue: ["brown"],
+        grey: ["brown"],
+        whiteB: ["brown"],
         green: ["green"],
         black: ["brown"],
-        white: [ "brown"]
-      }
+        white: ["brown"],
+      },
     },
     "RD6-AWD-Ultra": {
       exterior: {
-        greenB: [ "green"],
-        blue: [ "brown"],
-        grey: [ "brown"],
-        whiteB: [ "brown"],
+        greenB: ["green"],
+        blue: ["brown"],
+        grey: ["brown"],
+        whiteB: ["brown"],
         green: ["green"],
         black: ["brown"],
-        white: [ "brown"]
-      }
-    }
+        white: ["brown"],
+      },
+    },
   };
 
   const getAvailableExteriorColors = () => {
     if (!selectedCar) return allExteriorColors;
-    return allExteriorColors.filter(color => 
-      color.id in modelRestrictions[selectedCar].exterior
+    return allExteriorColors.filter(
+      (color) => color.id in modelRestrictions[selectedCar].exterior
     );
   };
 
   const getAvailableInteriorColors = () => {
     if (!selectedCar || !selectedExteriorColor) return [];
-    
+
     const carRestrictions = modelRestrictions[selectedCar];
     if (!carRestrictions) return [];
-    
+
     const exteriorRestrictions = carRestrictions.exterior;
-    const allowedInteriorIds = exteriorRestrictions[selectedExteriorColor as ExteriorColor];
-    
+    const allowedInteriorIds =
+      exteriorRestrictions[selectedExteriorColor as ExteriorColor];
+
     if (!allowedInteriorIds) return [];
-    
-    return allInteriorColors.filter(interior => 
+
+    return allInteriorColors.filter((interior) =>
       allowedInteriorIds.includes(interior.id as InteriorColor)
     );
   };
@@ -221,11 +255,17 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     setColorSliderIndex((prev) => Math.max(prev - 1, 0));
   };
 
-  const handleInputChange = (field: string, value: string | boolean | File | null) => {
+  const handleInputChange = (
+    field: string,
+    value: string | boolean | File | null
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleFileUpload = (field: string, event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (
+    field: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0] || null;
     handleInputChange(field, file);
   };
@@ -273,16 +313,14 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     return (
       <div className="relative w-full h-screen">
         <TermsAndConditions />
-        
+
         {/* Transparent back button overlay */}
         <button
           onClick={handleBackFromTerms}
           className="fixed top-24 left-6 z-[999] flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
         >
           <ArrowLeft className="w-5 h-5 text-gray-700" />
-          <span className="text-sm font-medium text-gray-700">
-            Go Back 
-          </span>
+          <span className="text-sm font-medium text-gray-700">Go Back</span>
         </button>
       </div>
     );
@@ -292,7 +330,10 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     <div className="w-full">
       {/* Hero Section */}
       <div className="relative w-full h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${bannerImage})` }} />
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${bannerImage})` }}
+        />
         <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="relative z-20 flex items-center justify-center h-full">
           <div className="text-center text-white max-w-2xl px-6">
@@ -300,7 +341,8 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
               BOOK YOUR DREAM CAR
             </h1>
             <p className="text-lg md:text-xl leading-relaxed mb-12 opacity-90 drop-shadow-md max-w-lg mx-auto">
-              Pick your favorite EV and make it yours with proper convenience and ease.
+              Pick your favorite EV and make it yours with proper convenience
+              and ease.
             </p>
           </div>
         </div>
@@ -312,7 +354,9 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
           {/* Step 1: Choose Your Car */}
           <div className="bg-gray-200/50 p-8 rounded-lg mb-8 relative">
             <div className="ml-28 flex items-center justify-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">CHOOSE YOUR CAR</h2>
+              <h2 className="text-2xl font-bold text-gray-800">
+                CHOOSE YOUR CAR
+              </h2>
             </div>
             <div className="ml-28 flex justify-center">
               <button className="px-8 py-3 text-sm font-semibold rounded-md bg-black text-white cursor-default">
@@ -328,15 +372,25 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
                   <div
                     key={car.id}
                     className={`bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
-                      selectedCar === car.id ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
+                      selectedCar === car.id
+                        ? "ring-2 ring-blue-500 bg-blue-50"
+                        : "hover:shadow-lg"
                     }`}
                     onClick={() => handleCarSelection(car.id)}
                   >
                     <div className="mb-4">
-                      <img src={car.image} alt={car.name} className="w-full h-24 object-contain" />
+                      <img
+                        src={car.image}
+                        alt={car.name}
+                        className="w-full h-24 object-contain"
+                      />
                     </div>
-                    <h4 className="font-bold text-gray-800 text-center text-lg mb-2">{car.name}</h4>
-                    <p className="text-gray-600 text-sm text-center">{car.subtitle}</p>
+                    <h4 className="font-bold text-gray-800 text-center text-lg mb-2">
+                      {car.name}
+                    </h4>
+                    <p className="text-gray-600 text-sm text-center">
+                      {car.subtitle}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -355,29 +409,45 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
                     <button
                       onClick={prevColor}
                       className={`p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
-                        colorSliderIndex === 0 ? 'opacity-50 cursor-not-allowed' : ''
+                        colorSliderIndex === 0
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                       }`}
                       disabled={colorSliderIndex === 0}
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
                     <div className="flex-1 mx-4 overflow-hidden">
-                      <div 
+                      <div
                         className="flex gap-4 transition-transform duration-300 ease-in-out"
-                        style={{ transform: `translateX(-${colorSliderIndex * getItemWidth()}px)` }}
+                        style={{
+                          transform: `translateX(-${
+                            colorSliderIndex * getItemWidth()
+                          }px)`,
+                        }}
                       >
                         {getAvailableExteriorColors().map((color) => (
                           <div
                             key={color.id}
                             className={`bg-white p-3 sm:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 flex-shrink-0 w-32 sm:w-36 md:w-40 ${
-                              selectedExteriorColor === color.id ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
+                              selectedExteriorColor === color.id
+                                ? "ring-2 ring-blue-500 bg-blue-50"
+                                : "hover:shadow-lg"
                             }`}
-                            onClick={() => handleExteriorColorSelection(color.id)}
+                            onClick={() =>
+                              handleExteriorColorSelection(color.id)
+                            }
                           >
                             <div className="mb-3 h-20 sm:h-24 flex items-center justify-center overflow-hidden rounded">
-                              <img src={color.image} alt={color.name} className="w-full h-full object-contain" />
+                              <img
+                                src={color.image}
+                                alt={color.name}
+                                className="w-full h-full object-contain"
+                              />
                             </div>
-                            <p className="text-gray-800 text-center font-semibold text-xs sm:text-sm">{color.name}</p>
+                            <p className="text-gray-800 text-center font-semibold text-xs sm:text-sm">
+                              {color.name}
+                            </p>
                           </div>
                         ))}
                       </div>
@@ -385,10 +455,17 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
                     <button
                       onClick={nextColor}
                       className={`p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
-                        colorSliderIndex >= getAvailableExteriorColors().length - getVisibleItemsCount() 
-                          ? 'opacity-50 cursor-not-allowed' : ''
+                        colorSliderIndex >=
+                        getAvailableExteriorColors().length -
+                          getVisibleItemsCount()
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                       }`}
-                      disabled={colorSliderIndex >= getAvailableExteriorColors().length - getVisibleItemsCount()}
+                      disabled={
+                        colorSliderIndex >=
+                        getAvailableExteriorColors().length -
+                          getVisibleItemsCount()
+                      }
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -410,14 +487,22 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
                     <div
                       key={color.id}
                       className={`bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
-                        selectedInteriorColor === color.id ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
+                        selectedInteriorColor === color.id
+                          ? "ring-2 ring-blue-500 bg-blue-50"
+                          : "hover:shadow-lg"
                       }`}
                       onClick={() => setSelectedInteriorColor(color.id)}
                     >
                       <div className="mb-4 overflow-hidden rounded">
-                        <img src={color.image} alt={color.name} className="w-full h-32 object-contain" />
+                        <img
+                          src={color.image}
+                          alt={color.name}
+                          className="w-full h-32 object-contain"
+                        />
                       </div>
-                      <p className="text-gray-800 text-center font-semibold">{color.name}</p>
+                      <p className="text-gray-800 text-center font-semibold">
+                        {color.name}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -726,7 +811,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
                       }
                       className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
                     >
-                       <option value="" disabled>
+                      <option value="" disabled>
                         Select yes or no
                       </option>
                       <option value="Yes">Yes</option>
@@ -987,8 +1072,11 @@ const OrderReview: React.FC<{
               {/* Car Image */}
               <div className="lg:w-1/2 flex justify-center">
                 <img
-                  src={selectedCarDetails?.image || car1}
-                  alt={selectedCarDetails?.name || "Selected Vehicle"}
+                  src={selectedExteriorColorDetails?.image || img1}
+                  alt={
+                    selectedExteriorColorDetails?.name ||
+                    "Selected exterior color"
+                  }
                   className="w-full max-w-md h-auto object-contain"
                 />
               </div>

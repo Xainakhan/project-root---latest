@@ -978,9 +978,14 @@ const OrderReview: React.FC<{
 
               {/* Car Image */}
               <div className="lg:w-1/2 flex justify-center">
-                <img
-                  src={selectedCarDetails?.image || forthingCar1}
-                  alt={selectedCarDetails?.name || "Selected Vehicle"}
+                    <img
+                      src={
+                        selectedExteriorColorDetails?.image || forthingExterior3
+                      }
+                      alt={
+                        selectedExteriorColorDetails?.name ||
+                        "Selected exterior color"
+                      }
                   className="w-full max-w-md h-auto object-contain"
                 />
               </div>
