@@ -6,10 +6,7 @@ interface FAQItem {
 }
 
 const faqs: FAQItem[] = [
-  {
-    question: "Ask A Question?",
-    answer: "Briefly Explain Your Answers Here..."
-  },
+  {question: "Ask A Question?", answer: "Briefly Explain Your Answers Here..."},
   { question: "Ask A Question?", answer: "Your answer here..." },
   { question: "Ask A Question?", answer: "Your answer here..." },
   { question: "Ask A Question?", answer: "Your answer here..." },
@@ -20,7 +17,7 @@ const faqs: FAQItem[] = [
 ];
 
 const FAQPage: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

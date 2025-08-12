@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { Upload, ChevronLeft, Download, ChevronRight } from "lucide-react";
+import { Upload, ChevronLeft, Download, ChevronRight, ArrowLeft } from "lucide-react";
+import TermsAndConditions from "../pages/termsAndConditions";
 
 // Mock image URLs
 import testDrive from "../assets/testDrive.png";
@@ -16,7 +17,7 @@ import img7 from "../assets/Exterior/img5.png";
 import interiorblack from "../assets/interiorblack.png";
 import interiorbrown from "../assets/interiorbrown.png";
 import interiorgreen from "../assets/interiorgreen.png";
-import Newsletter from "../pages/newsLetter";
+// import Newsletter from "../pages/newsLetter";
 
 const bannerImage = testDrive;
 
@@ -73,6 +74,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   const [selectedInteriorColor, setSelectedInteriorColor] = useState<string>("");
   const [selectedBrand] = useState<string>("RIDDARA");
   const [colorSliderIndex, setColorSliderIndex] = useState<number>(0);
+  const [showTermsAndConditions, setShowTermsAndConditions] = useState(false);
 
   const getVisibleItemsCount = () => {
     if (typeof window !== 'undefined') {
@@ -228,6 +230,14 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     handleInputChange(field, file);
   };
 
+  const handleTermsClick = () => {
+    setShowTermsAndConditions(true);
+  };
+
+  const handleBackFromTerms = () => {
+    setShowTermsAndConditions(false);
+  };
+
   const handleSubmit = () => {
     if (!selectedCar || !selectedExteriorColor || !selectedInteriorColor) {
       alert("Please select a car, exterior color, and interior color.");
@@ -257,6 +267,26 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
       formData,
     });
   };
+
+  // If showing terms and conditions, render it with back button overlay
+  if (showTermsAndConditions) {
+    return (
+      <div className="relative w-full h-screen">
+        <TermsAndConditions />
+        
+        {/* Transparent back button overlay */}
+        <button
+          onClick={handleBackFromTerms}
+          className="fixed top-24 left-6 z-[999] flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+        >
+          <ArrowLeft className="w-5 h-5 text-gray-700" />
+          <span className="text-sm font-medium text-gray-700">
+            Go Back 
+          </span>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -792,9 +822,13 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
                     />
                     <span className="text-sm text-gray-700">
                       I have read and accept{" "}
-                      <a href="#" className="text-blue-500 underline">
+                      <button
+                        type="button"
+                        onClick={handleTermsClick}
+                        className="text-blue-500 underline hover:text-blue-600"
+                      >
                         Terms & Conditions
-                      </a>
+                      </button>
                     </span>
                   </label>
                 </div>
@@ -1286,7 +1320,7 @@ const MainApp: React.FC = () => {
         />
       )}
       {/* Newsletter Section */}
-      <Newsletter />
+      {/* <Newsletter /> */}
       <div className="border-t border-gray-300" />
       {/* Footer Section */}
       {/* <Footer /> */}
