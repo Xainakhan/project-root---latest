@@ -1,8 +1,10 @@
 // pages/navBar.tsx
 import React, { useState } from 'react';
 import { ChevronDown, X } from 'lucide-react';
+// import { Link } from 'react-router-dom';
 import type { NavbarProps, Brand, PageType } from '../pages/types'; // Import from shared types
 import logo from '../assets/Logo-main.svg';
+// import starIcon from '../assets/icon.svg';
 
 const Navbar: React.FC<NavbarProps> = ({ onPageChange, currentPage }) => {
   const [isBrandsOpen, setIsBrandsOpen] = useState<boolean>(false);

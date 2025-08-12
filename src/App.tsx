@@ -1,88 +1,125 @@
 // App.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "./pages/navBar";
-import type { PageType } from "./pages/types"; 
+import type { PageType } from "./pages/types";
 import ContactForm from "./pages/contactUs";
-
+import Footer from "./pages/footer";
 // Import page components
 import HomePage from "./pages/homePage";
 import ZeekrPage from "./pages/zeekr";
 import RiddaraPage from "./pages/riddara";
 import ForthingPage from "./pages/forthing";
 import JmevPage from "./pages/jmev";
-// import MainApp from './pages/testDrive'; // This should be your MainApp component that includes both EVTestDrive and OrderReview
 import AboutPage from "./pages/aboutUs";
 import News from "./pages/newsAndInsights";
-// import TestDrive from "./pages/test";
 import StoreLocation from "./pages/location";
+import CombinedCareer from "./pages/career";
 import TermsAndConditions from "./pages/termsAndConditions";
-import Faqs from "./pages/faqs";
-import Mission from "./pages/mission";
-import Vision from "./pages/vision";
-import Career from "./pages/career";
-import Footer from "./pages/footer";
+import FAQPage from "./pages/faqs";
 
-function App() {
-  // State to track current page - properly typed
+// Component that handles navigation logic
+const AppContent = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [currentPage, setCurrentPage] = useState<PageType>("home");
 
-  // Function to handle page changes - parameter name matches interface exactly
-  const handlePageChange = (page: PageType) => {
+  // Map paths to page types
+  const pathToPageMap: Record<string, PageType> = {
+    "/": "home",
+    "/home": "home",
+    "/homepage": "homepage",
+    "/about": "about",
+    "/zeekr": "zeekr",
+    "/riddara": "riddara",
+    "/forthing": "forthing",
+    "/jmev": "jmev",
+    "/news": "news",
+    "/contact": "contact",
+    "/locations": "locations",
+    "/career": "career",
+    "/faqs": "faqs",
+    "/terms-and-conditions": "termsAndConditions",
+    "/vision": "vision",
+    "/mission": "mission"
+  };
+
+  // Map page types to paths
+  const pageToPathMap: Record<PageType, string> = {
+    "home": "/",
+    "homepage": "/",
+    "about": "/about",
+    "zeekr": "/zeekr",
+    "riddara": "/riddara",
+    "forthing": "/forthing",
+    "jmev": "/jmev",
+    "news": "/news",
+    "contact": "/contact",
+    "locations": "/locations",
+    "career": "/career",
+    "faqs": "/faqs",
+    "termsAndConditions": "/terms-and-conditions",
+    "vision": "/vision",
+    "mission": "/mission"
+  };
+
+  // Update currentPage when location changes
+  useEffect(() => {
+    const page = pathToPageMap[location.pathname] || "home";
     setCurrentPage(page);
-    console.log("Navigating to:", page); // Debug log
+  }, [location.pathname]);
+
+  // Function to handle page changes - maintains the same interface
+  const handlePageChange = (page: PageType) => {
+    const path = pageToPathMap[page];
+    navigate(path);
+    setCurrentPage(page);
+    console.log("Navigating to:", page, "at path:", path);
   };
 
   // Function to handle back navigation to homepage
   const handleBackToHome = () => {
+    navigate("/");
     setCurrentPage("home");
-    console.log("Navigating back to home"); // Debug log
-  };
-
-  // Function to render the current page
-  const renderCurrentPage = () => {
-    switch (currentPage) {
-      case "zeekr":
-        return <ZeekrPage />;
-      case "riddara":
-        return <RiddaraPage onBack={handleBackToHome} />;
-      case "forthing":
-        return <ForthingPage onBack={handleBackToHome} />;
-      case "jmev":
-        return <JmevPage onBack={handleBackToHome} />;
-      case "about":
-        return <AboutPage />;
-      case "news":
-        return <News onBack={handleBackToHome} />;
-      case "termsAndConditions":
-        return <TermsAndConditions />;
-      case "faqs":
-        return <Faqs />;
-      case "contact":
-        return <ContactForm />;
-      case "locations":
-        return <StoreLocation />;
-      case "vision":
-        return <Vision />;
-      case "mission":
-        return <Mission />;
-      case "career":
-        return <Career />;  
-      case "home":
-      case "homepage": 
-      default:
-        return <HomePage />;
-    }
+    console.log("Navigating back to home");
   };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar onPageChange={handlePageChange} currentPage={currentPage} />
-      <main className="flex-grow">{renderCurrentPage()}</main>
-      {/* <Newsletter />
-      <div className="border-t border-gray-300" />
-      <Footer /> */}
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/zeekr" element={<ZeekrPage />} />
+          <Route path="/riddara" element={<RiddaraPage onBack={handleBackToHome} />} />
+          <Route path="/forthing" element={<ForthingPage onBack={handleBackToHome} />} />
+          <Route path="/jmev" element={<JmevPage onBack={handleBackToHome} />} />
+          <Route path="/news" element={<News onBack={handleBackToHome} />} />
+          <Route path="/contact" element={<ContactForm />} />
+          <Route path="/locations" element={<StoreLocation />} />
+          <Route path="/career" element={<CombinedCareer />} />
+          <Route path="/faqs" element={<FAQPage />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+          {/* Vision and Mission routes - you can add actual components later */}
+          <Route path="/vision" element={<AboutPage />} />
+          <Route path="/mission" element={<AboutPage />} />
+          {/* Catch all route - redirect to home */}
+          <Route path="*" element={<HomePage />} />
+        </Routes>
+      </main>
       <Footer onPageChange={handlePageChange} />
     </div>
+  );
+};
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 
