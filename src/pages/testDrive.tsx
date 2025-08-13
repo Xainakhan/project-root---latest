@@ -5,19 +5,9 @@ import {
   Download,
   ChevronRight,
   ArrowLeft,
-  CheckCircle,
-  AlertCircle,
-  Clock,
 } from "lucide-react";
 import TermsAndConditions from "../pages/termsAndConditions";
 import emailjs from "@emailjs/browser";
-
-// Your EmailJS Configuration
-const EMAIL_SERVICE_CONFIG = {
-  serviceId: "service_mjm7lw4",
-  templateId: "template_kykqidq",
-  publicKey: "3CE34DLDJCls1aIFf",
-};
 
 // Mock image URLs
 import testDrive from "../assets/testDrive.png";
@@ -34,9 +24,16 @@ import img7 from "../assets/Exterior/img5.png";
 import interiorblack from "../assets/interiorblack.png";
 import interiorbrown from "../assets/interiorbrown.png";
 import interiorgreen from "../assets/interiorgreen.png";
+// import Newsletter from "../pages/newsLetter";
 
 const bannerImage = testDrive;
 
+// EmailJS Configuration
+const EMAIL_SERVICE_CONFIG = {
+  serviceId: "service_mjm7lw4",
+  templateId: "template_kykqidq",
+  publicKey: "3CE34DLDJCls1aIFf",
+};
 // Type definitions
 type ExteriorColor =
   | "greenB"
@@ -46,7 +43,6 @@ type ExteriorColor =
   | "green"
   | "black"
   | "white";
-
 type InteriorColor = "black" | "brown" | "green";
 
 type ExteriorRestrictions = {
@@ -72,7 +68,7 @@ interface OrderData {
     fatherHusbandName: string;
     gender: string;
     dateOfBirth: string;
-    email: string;
+    email: string; // Added email field
     primaryPhone: string;
     secondaryPhone: string;
     state: string;
@@ -102,10 +98,6 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   const [selectedBrand] = useState<string>("RIDDARA");
   const [colorSliderIndex, setColorSliderIndex] = useState<number>(0);
   const [showTermsAndConditions, setShowTermsAndConditions] = useState(false);
-  const [emailStatus, setEmailStatus] = useState<{
-    status: string;
-    bookingId?: string;
-  }>({ status: "idle" });
 
   const getVisibleItemsCount = () => {
     if (typeof window !== "undefined") {
@@ -131,7 +123,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     fatherHusbandName: "",
     gender: "",
     dateOfBirth: "",
-    email: "",
+    email: "", // Added email field to state
     primaryPhone: "",
     secondaryPhone: "",
     state: "",
@@ -177,7 +169,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     { id: "greenB", name: "Green & Black Roof", image: img1 },
     { id: "blue", name: "Blue", image: img2 },
     { id: "grey", name: "Grey", image: img3 },
-    { id: "whiteB", name: "White & Black", image: img4 },
+    { id: "whiteb", name: "White & Black", image: img4 },
     { id: "green", name: "Green", image: img5 },
     { id: "black", name: "Black", image: img6 },
     { id: "white", name: "White", image: img7 },
@@ -223,76 +215,6 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
         white: ["brown"],
       },
     },
-  };
-
-  const getAvailableExteriorColors = () => {
-    if (!selectedCar) return allExteriorColors;
-    return allExteriorColors.filter(
-      (color) => color.id in modelRestrictions[selectedCar].exterior
-    );
-  };
-
-  const getAvailableInteriorColors = () => {
-    if (!selectedCar || !selectedExteriorColor) return [];
-
-    const carRestrictions = modelRestrictions[selectedCar];
-    if (!carRestrictions) return [];
-
-    const exteriorRestrictions = carRestrictions.exterior;
-    const allowedInteriorIds =
-      exteriorRestrictions[selectedExteriorColor as ExteriorColor];
-
-    if (!allowedInteriorIds) return [];
-
-    return allInteriorColors.filter((interior) =>
-      allowedInteriorIds.includes(interior.id as InteriorColor)
-    );
-  };
-
-  const handleCarSelection = (carId: string) => {
-    setSelectedCar(carId);
-    setSelectedExteriorColor("");
-    setSelectedInteriorColor("");
-    setColorSliderIndex(0);
-  };
-
-  const handleExteriorColorSelection = (colorId: string) => {
-    setSelectedExteriorColor(colorId);
-    setSelectedInteriorColor("");
-  };
-
-  const nextColor = () => {
-    const availableColors = getAvailableExteriorColors();
-    const visibleItems = getVisibleItemsCount();
-    const maxIndex = Math.max(0, availableColors.length - visibleItems);
-    setColorSliderIndex((prev) => Math.min(prev + 1, maxIndex));
-  };
-
-  const prevColor = () => {
-    setColorSliderIndex((prev) => Math.max(prev - 1, 0));
-  };
-
-  const handleInputChange = (
-    field: string,
-    value: string | boolean | File | null
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleFileUpload = (
-    field: string,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files?.[0] || null;
-    handleInputChange(field, file);
-  };
-
-  const handleTermsClick = () => {
-    setShowTermsAndConditions(true);
-  };
-
-  const handleBackFromTerms = () => {
-    setShowTermsAndConditions(false);
   };
 
   // Helper functions
@@ -415,7 +337,79 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     }
   };
 
-  const handleSubmit = async () => {
+  
+
+  const getAvailableExteriorColors = () => {
+    if (!selectedCar) return allExteriorColors;
+    return allExteriorColors.filter(
+      (color) => color.id in modelRestrictions[selectedCar].exterior
+    );
+  };
+
+  const getAvailableInteriorColors = () => {
+    if (!selectedCar || !selectedExteriorColor) return [];
+
+    const carRestrictions = modelRestrictions[selectedCar];
+    if (!carRestrictions) return [];
+
+    const exteriorRestrictions = carRestrictions.exterior;
+    const allowedInteriorIds =
+      exteriorRestrictions[selectedExteriorColor as ExteriorColor];
+
+    if (!allowedInteriorIds) return [];
+
+    return allInteriorColors.filter((interior) =>
+      allowedInteriorIds.includes(interior.id as InteriorColor)
+    );
+  };
+
+  const handleCarSelection = (carId: string) => {
+    setSelectedCar(carId);
+    setSelectedExteriorColor("");
+    setSelectedInteriorColor("");
+    setColorSliderIndex(0);
+  };
+
+  const handleExteriorColorSelection = (colorId: string) => {
+    setSelectedExteriorColor(colorId);
+    setSelectedInteriorColor("");
+  };
+
+  const nextColor = () => {
+    const availableColors = getAvailableExteriorColors();
+    const visibleItems = getVisibleItemsCount();
+    const maxIndex = Math.max(0, availableColors.length - visibleItems);
+    setColorSliderIndex((prev) => Math.min(prev + 1, maxIndex));
+  };
+
+  const prevColor = () => {
+    setColorSliderIndex((prev) => Math.max(prev - 1, 0));
+  };
+
+  const handleInputChange = (
+    field: string,
+    value: string | boolean | File | null
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleFileUpload = (
+    field: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0] || null;
+    handleInputChange(field, file);
+  };
+
+  const handleTermsClick = () => {
+    setShowTermsAndConditions(true);
+  };
+
+  const handleBackFromTerms = () => {
+    setShowTermsAndConditions(false);
+  };
+
+  const handleSubmit = () => {
     if (!selectedCar || !selectedExteriorColor || !selectedInteriorColor) {
       alert("Please select a car, exterior color, and interior color.");
       return;
@@ -441,70 +435,13 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
       return;
     }
 
-    const orderData = {
+    onSubmit({
       selectedCar,
       selectedExteriorColor,
       selectedInteriorColor,
       selectedBrand,
       formData,
-    };
-
-    // Send email first
-    setEmailStatus({ status: "sending" });
-    const emailResult = await sendVerificationEmail(orderData);
-
-    if (emailResult.success) {
-      setEmailStatus({ status: "sent", bookingId: emailResult.bookingId });
-      onSubmit(orderData);
-    } else {
-      setEmailStatus({ status: "failed", bookingId: emailResult.bookingId });
-      alert(
-        "Failed to send confirmation email. Please try again or contact support."
-      );
-    }
-  };
-
-  // Email Status Component
-  const EmailStatusIndicator: React.FC<{
-    status: string;
-    bookingId?: string;
-  }> = ({ status, bookingId }) => {
-    if (status === "idle") return null;
-
-    const statusConfig = {
-      sending: {
-        icon: Clock,
-        color: "text-blue-600",
-        bg: "bg-blue-50",
-        text: "Sending verification email...",
-      },
-      sent: {
-        icon: CheckCircle,
-        color: "text-green-600",
-        bg: "bg-green-50",
-        text: `Email sent successfully! Booking ID: ${bookingId}`,
-      },
-      failed: {
-        icon: AlertCircle,
-        color: "text-red-600",
-        bg: "bg-red-50",
-        text: "Email failed to send. Please contact support.",
-      },
-    };
-
-    const config = statusConfig[status as keyof typeof statusConfig];
-    if (!config) return null;
-
-    const IconComponent = config.icon;
-
-    return (
-      <div
-        className={`w-full p-4 mb-4 rounded-md ${config.bg} ${config.color} flex items-center`}
-      >
-        <IconComponent className="w-5 h-5 mr-2" />
-        <span>{config.text}</span>
-      </div>
-    );
+    });
   };
 
   // If showing terms and conditions, render it with back button overlay
@@ -550,16 +487,17 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
       {/* Form Section */}
       <div className="bg-gray-100 min-h-screen py-16">
         <div className="max-w-6xl mx-auto px-6">
-          {/* Email Status Indicator */}
-          {emailStatus.status !== "idle" && (
-            <EmailStatusIndicator
-              status={emailStatus.status}
-              bookingId={emailStatus.bookingId}
-            />
-          )}
-
           {/* Step 1: Choose Your Car */}
           <div className="bg-gray-200/50 p-8 rounded-lg mb-8 relative">
+            {/* Step 1 watermark */}
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
+              <div className="flex items-center">
+                <span className="text-gray-500/40 text-2xl font-bold tracking-widest mr-2">
+                  STEP
+                </span>
+                <span className="text-gray-500/40 text-5xl font-bold">1</span>
+              </div>
+            </div>
             <div className="ml-28 flex items-center justify-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">
                 CHOOSE YOUR CAR
@@ -607,6 +545,15 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
           {/* Step 2: Exterior Color */}
           {selectedCar && (
             <div className="bg-gray-200/50 p-8 rounded-lg mb-8 relative">
+              {/* Step 1 watermark */}
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
+                <div className="flex items-center">
+                  <span className="text-gray-500/40 text-2xl font-bold tracking-widest mr-2">
+                    STEP
+                  </span>
+                  <span className="text-gray-500/40 text-5xl font-bold">2</span>
+                </div>
+              </div>
               <div className="ml-28">
                 <h3 className="text-xl font-bold text-gray-800 text-center mb-6">
                   EXTERIOR COLOR <span className="text-red-500">*</span>
@@ -1159,6 +1106,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     </div>
   );
 };
+
 const OrderReview: React.FC<{
   orderData: OrderData;
   onBackToVehicle: () => void;
