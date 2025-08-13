@@ -48,18 +48,7 @@ export const Forthing = () => {
 
         {/* Buttons positioned at bottom right */}
         <div className="absolute bottom-8 right-8 flex space-x-4">
-          <button
-            className="px-8 py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-            style={{ borderRadius: "8px" }}
-          >
-            BOOK NOW
-          </button>
-          <button
-            className="px-8 py-4 border-2 border-black text-white bg-black hover:bg-white hover:text-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-            style={{ borderRadius: "8px" }}
-          >
-            BROCHURE
-          </button>
+        
         </div>
       </div>
 
