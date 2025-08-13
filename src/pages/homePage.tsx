@@ -38,12 +38,14 @@ import zeekrX from "../assets/Homepage-interior/ZeekeX.png";
 import zeekrInterior from "../assets/Homepage-interior/ZeekrInterior.png";
 import Newsletter from "../pages/newsLetter";
 // import Footer from "../pages/footer";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
   const [currentHeroBanner, setCurrentHeroBanner] = useState(0);
   const [currentInteriorBanner, setCurrentInteriorBanner] = useState(0);
   const [currentPage, setCurrentPage] = useState("home");
   const [isMuted, setIsMuted] = useState(true);
+  const navigate = useNavigate();
 
   const heroBanners = [
     { id: 1, image: ZeekrBan },
@@ -156,30 +158,31 @@ const Homepage = () => {
       id: 1,
       title: "CSM & GEELY Signed MOU To Launch Zeekr In Pakistan",
       image: CSMGeely,
-      slug: "csm-geely-mou-zeekr-pakistan"
+      slug: "csm-geely-mou-zeekr-pakistan",
     },
     {
       id: 2,
-      title: "Dealer Meetup Organized By Capital Smart City At Serena Hotel, Islamabad",
+      title:
+        "Dealer Meetup Organized By Capital Smart City At Serena Hotel, Islamabad",
       image: sareena,
-      slug: "dealer-meetup-serena-hotel-islamabad"
+      slug: "dealer-meetup-serena-hotel-islamabad",
     },
     {
       id: 3,
       title: "Zeging Excellence For Pakistan's Automotive Future",
       image: autoMob,
-      slug: "pakistan-automotive-future-excellence"
-    }
+      slug: "pakistan-automotive-future-excellence",
+    },
   ];
 
   // Handle car image click navigation
   const handleCarClick = (page: string) => {
-    setCurrentPage(page);
+    navigate(`/${page}`);
   };
 
   // Handle news card click navigation
-  const handleNewsClick = () => {
-    setCurrentPage("news");
+  const handleNewsClick = (slug: string) => {
+    navigate(`/news/${slug}`);
   };
 
   // Handle back to home
@@ -538,10 +541,10 @@ const Homepage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {newsItems.map((newsItem) => (
-              <div 
-                key={newsItem.id} 
+              <div
+                key={newsItem.id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
-                onClick={handleNewsClick}
+                onClick={() => handleNewsClick(newsItem.slug)}
               >
                 <img
                   src={newsItem.image}
@@ -556,9 +559,8 @@ const Homepage = () => {
               </div>
             ))}
           </div>
-          
-          <div className="text-center mt-12">
-          </div>
+
+          <div className="text-center mt-12"></div>
         </div>
       </section>
 
