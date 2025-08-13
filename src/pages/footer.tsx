@@ -39,8 +39,8 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
       links: [
         { label: "Contact Us", href: "#", page: "contact" },
         { label: "Global Reviews", href: "#", page: "home" },
-        { label: "Careers", href: "#", page: "career" }, // Now links to careers page
-        { label: "FAQs", href: "#", page: "faqs" }, // Now links to FAQs page
+        { label: "Careers", href: "#", page: "career" },
+        { label: "FAQs", href: "#", page: "faqs" },
       ],
     },
     {
@@ -99,6 +99,11 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
     { label: "Law Enforcement", href: "#" },
   ];
 
+  // Scroll to top helper
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "instant" }); // change to "smooth" if needed
+  };
+
   // Handle link clicks
   const handleLinkClick = (
     page: PageType | undefined,
@@ -107,10 +112,9 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
     e.preventDefault();
 
     if (page) {
-      // Internal navigation
       onPageChange(page);
+      scrollToTop();
     } else {
-      // External links or future functionality - you can handle these as needed
       console.log("Link clicked but no page mapping defined");
     }
   };
@@ -118,6 +122,7 @@ const Footer: React.FC<FooterProps> = ({ onPageChange }) => {
   // Handle logo click to go home
   const handleLogoClick = () => {
     onPageChange("home");
+    scrollToTop();
   };
 
   return (
