@@ -5,8 +5,19 @@ import {
   Download,
   ChevronRight,
   ArrowLeft,
+  CheckCircle,
+  AlertCircle,
+  Clock,
 } from "lucide-react";
 import TermsAndConditions from "../pages/termsAndConditions";
+import emailjs from "@emailjs/browser";
+
+// Your EmailJS Configuration
+const EMAIL_SERVICE_CONFIG = {
+  serviceId: "service_mjm7lw4",
+  templateId: "template_kykqidq",
+  publicKey: "3CE34DLDJCls1aIFf",
+};
 
 // Mock image URLs
 import testDrive from "../assets/testDrive.png";
@@ -23,7 +34,6 @@ import img7 from "../assets/Exterior/img5.png";
 import interiorblack from "../assets/interiorblack.png";
 import interiorbrown from "../assets/interiorbrown.png";
 import interiorgreen from "../assets/interiorgreen.png";
-// import Newsletter from "../pages/newsLetter";
 
 const bannerImage = testDrive;
 
@@ -36,6 +46,7 @@ type ExteriorColor =
   | "green"
   | "black"
   | "white";
+
 type InteriorColor = "black" | "brown" | "green";
 
 type ExteriorRestrictions = {
@@ -61,6 +72,7 @@ interface OrderData {
     fatherHusbandName: string;
     gender: string;
     dateOfBirth: string;
+    email: string;
     primaryPhone: string;
     secondaryPhone: string;
     state: string;
@@ -90,6 +102,10 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   const [selectedBrand] = useState<string>("RIDDARA");
   const [colorSliderIndex, setColorSliderIndex] = useState<number>(0);
   const [showTermsAndConditions, setShowTermsAndConditions] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<{
+    status: string;
+    bookingId?: string;
+  }>({ status: "idle" });
 
   const getVisibleItemsCount = () => {
     if (typeof window !== "undefined") {
@@ -115,6 +131,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     fatherHusbandName: "",
     gender: "",
     dateOfBirth: "",
+    email: "",
     primaryPhone: "",
     secondaryPhone: "",
     state: "",
@@ -160,7 +177,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     { id: "greenB", name: "Green & Black Roof", image: img1 },
     { id: "blue", name: "Blue", image: img2 },
     { id: "grey", name: "Grey", image: img3 },
-    { id: "whiteb", name: "White & Black", image: img4 },
+    { id: "whiteB", name: "White & Black", image: img4 },
     { id: "green", name: "Green", image: img5 },
     { id: "black", name: "Black", image: img6 },
     { id: "white", name: "White", image: img7 },
@@ -278,7 +295,127 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     setShowTermsAndConditions(false);
   };
 
-  const handleSubmit = () => {
+  // Helper functions
+  const generateBookingId = () => {
+    return (
+      "CSM-" +
+      Date.now().toString().slice(-8) +
+      Math.random().toString(36).substr(2, 4).toUpperCase()
+    );
+  };
+
+  const calculateBasePrice = (carId: string): number => {
+    const prices: { [key: string]: number } = {
+      "RD6-2WD-Air": 7500000,
+      "RD6-AWD-Pro": 8250000,
+      "RD6-AWD-Ultra": 8990000,
+    };
+    return prices[carId] || 8990000;
+  };
+
+  const calculateAdvanceAmount = (orderData: OrderData): number => {
+    const basePrice = calculateBasePrice(orderData.selectedCar);
+    const percentage = parseInt(orderData.formData.advancePayment) || 20;
+    return Math.floor(basePrice * (percentage / 100));
+  };
+
+  const calculateRemainingAmount = (orderData: OrderData): number => {
+    const basePrice = calculateBasePrice(orderData.selectedCar);
+    const advanceAmount = calculateAdvanceAmount(orderData);
+    return basePrice - advanceAmount;
+  };
+
+  // Get car name helper
+  const getCarName = (carId: string): string => {
+    const carNames: { [key: string]: string } = {
+      "RD6-2WD-Air": "RD6 2WD Air",
+      "RD6-AWD-Pro": "RD6 AWD Pro",
+      "RD6-AWD-Ultra": "RD6 AWD Ultra",
+    };
+    return carNames[carId] || carId;
+  };
+
+  // Email sending function
+  const sendVerificationEmail = async (orderData: OrderData) => {
+    const bookingId = generateBookingId();
+    const basePrice = calculateBasePrice(orderData.selectedCar);
+    const advanceAmount = calculateAdvanceAmount(orderData);
+    const remainingAmount = calculateRemainingAmount(orderData);
+    const currentDate = new Date().toLocaleDateString("en-GB");
+
+    const templateParams = {
+      // Customer Info
+      firstName: orderData.formData.firstName,
+      lastName: orderData.formData.lastName,
+      customerEmail: orderData.formData.email,
+      fatherHusbandName: orderData.formData.fatherHusbandName,
+      gender: orderData.formData.gender,
+      dateOfBirth: orderData.formData.dateOfBirth,
+      cnic: orderData.formData.cnic,
+
+      // Vehicle Info
+      selectedBrand: orderData.selectedBrand,
+      selectedCar: getCarName(orderData.selectedCar),
+      selectedExteriorColor: orderData.selectedExteriorColor,
+      selectedInteriorColor: orderData.selectedInteriorColor,
+
+      // Contact Info
+      primaryPhone: orderData.formData.primaryPhone,
+      secondaryPhone: orderData.formData.secondaryPhone || "Not provided",
+      addressCNIC: orderData.formData.addressCNIC,
+      city: orderData.formData.city,
+      state: orderData.formData.state,
+
+      // Business Info
+      individualCorporate: orderData.formData.individualCorporate,
+      salesTaxRegistration:
+        orderData.formData.salesTaxRegistration || "Not provided",
+      ntnNumber: orderData.formData.ntnNumber || "Not provided",
+      statusFilter: orderData.formData.statusFilter || "Not specified",
+
+      // Payment Info
+      advancePayment: orderData.formData.advancePayment,
+      basePrice: basePrice.toLocaleString(),
+      advanceAmount: advanceAmount.toLocaleString(),
+      remainingAmount: remainingAmount.toLocaleString(),
+
+      // Additional Info
+      comments: orderData.formData.comments || "No comments",
+      cnicFrontImage: orderData.formData.cnicFrontImage
+        ? "Uploaded ✓"
+        : "Not uploaded ✗",
+      cnicBackImage: orderData.formData.cnicBackImage
+        ? "Uploaded ✓"
+        : "Not uploaded ✗",
+
+      // System Info
+      bookingId: bookingId,
+      bookingDate: currentDate,
+
+      // Email addresses for reply
+      supportEmail: "support@hrl-csm.com",
+      bookingEmail: "bookings@hrl-csm.com",
+    };
+
+    try {
+      console.log("Sending email with template params:", templateParams);
+
+      const response = await emailjs.send(
+        EMAIL_SERVICE_CONFIG.serviceId,
+        EMAIL_SERVICE_CONFIG.templateId,
+        templateParams,
+        EMAIL_SERVICE_CONFIG.publicKey
+      );
+
+      console.log("Email sent successfully:", response);
+      return { success: true, bookingId, response };
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      return { success: false, bookingId, error };
+    }
+  };
+
+  const handleSubmit = async () => {
     if (!selectedCar || !selectedExteriorColor || !selectedInteriorColor) {
       alert("Please select a car, exterior color, and interior color.");
       return;
@@ -286,6 +423,11 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
 
     if (!formData.firstName || !formData.lastName || !formData.primaryPhone) {
       alert("Please fill in all required fields.");
+      return;
+    }
+
+    if (!formData.email) {
+      alert("Please provide your email address.");
       return;
     }
 
@@ -299,13 +441,70 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
       return;
     }
 
-    onSubmit({
+    const orderData = {
       selectedCar,
       selectedExteriorColor,
       selectedInteriorColor,
       selectedBrand,
       formData,
-    });
+    };
+
+    // Send email first
+    setEmailStatus({ status: "sending" });
+    const emailResult = await sendVerificationEmail(orderData);
+
+    if (emailResult.success) {
+      setEmailStatus({ status: "sent", bookingId: emailResult.bookingId });
+      onSubmit(orderData);
+    } else {
+      setEmailStatus({ status: "failed", bookingId: emailResult.bookingId });
+      alert(
+        "Failed to send confirmation email. Please try again or contact support."
+      );
+    }
+  };
+
+  // Email Status Component
+  const EmailStatusIndicator: React.FC<{
+    status: string;
+    bookingId?: string;
+  }> = ({ status, bookingId }) => {
+    if (status === "idle") return null;
+
+    const statusConfig = {
+      sending: {
+        icon: Clock,
+        color: "text-blue-600",
+        bg: "bg-blue-50",
+        text: "Sending verification email...",
+      },
+      sent: {
+        icon: CheckCircle,
+        color: "text-green-600",
+        bg: "bg-green-50",
+        text: `Email sent successfully! Booking ID: ${bookingId}`,
+      },
+      failed: {
+        icon: AlertCircle,
+        color: "text-red-600",
+        bg: "bg-red-50",
+        text: "Email failed to send. Please contact support.",
+      },
+    };
+
+    const config = statusConfig[status as keyof typeof statusConfig];
+    if (!config) return null;
+
+    const IconComponent = config.icon;
+
+    return (
+      <div
+        className={`w-full p-4 mb-4 rounded-md ${config.bg} ${config.color} flex items-center`}
+      >
+        <IconComponent className="w-5 h-5 mr-2" />
+        <span>{config.text}</span>
+      </div>
+    );
   };
 
   // If showing terms and conditions, render it with back button overlay
@@ -351,6 +550,14 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
       {/* Form Section */}
       <div className="bg-gray-100 min-h-screen py-16">
         <div className="max-w-6xl mx-auto px-6">
+          {/* Email Status Indicator */}
+          {emailStatus.status !== "idle" && (
+            <EmailStatusIndicator
+              status={emailStatus.status}
+              bookingId={emailStatus.bookingId}
+            />
+          )}
+
           {/* Step 1: Choose Your Car */}
           <div className="bg-gray-200/50 p-8 rounded-lg mb-8 relative">
             <div className="ml-28 flex items-center justify-center mb-6">
@@ -604,6 +811,23 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
                         handleInputChange("dateOfBirth", e.target.value)
                       }
                       className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    />
+                  </div>
+
+                  {/* Email Field - Added Here */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      placeholder="example@email.com"
+                      required
                     />
                   </div>
 
@@ -935,7 +1159,6 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     </div>
   );
 };
-
 const OrderReview: React.FC<{
   orderData: OrderData;
   onBackToVehicle: () => void;
@@ -1176,6 +1399,14 @@ const OrderReview: React.FC<{
                 </span>
               </div>
 
+              {/* Email Information - Added to Order Review */}
+              <div className="flex items-center justify-between py-4 border-b border-gray-100">
+                <span className="text-gray-600">Email Address</span>
+                <span className="text-gray-800">
+                  {orderData.formData.email || "Not provided"}
+                </span>
+              </div>
+
               <div className="flex items-center justify-between py-4 border-b border-gray-100">
                 <span className="text-gray-600">Primary Phone</span>
                 <span className="text-gray-800">
@@ -1362,9 +1593,11 @@ const OrderReview: React.FC<{
                     alert(
                       `Order submitted successfully!\n\nOrder Summary:\n- Vehicle: ${
                         orderData.selectedBrand
-                      } ${
-                        selectedCarDetails?.name
-                      }\n- Total Price: ${basePrice.toLocaleString()} PKR\n- Advance Payment (${advancePaymentPercentage}%): ${advancePayment.toLocaleString()} PKR\n- Remaining: ${remainingAmount.toLocaleString()} PKR\n\nYou will receive a confirmation email shortly.`
+                      } ${selectedCarDetails?.name}\n- Email: ${
+                        orderData.formData.email
+                      }\n- Total Price: ${basePrice.toLocaleString()} PKR\n- Advance Payment (${advancePaymentPercentage}%): ${advancePayment.toLocaleString()} PKR\n- Remaining: ${remainingAmount.toLocaleString()} PKR\n\nYou will receive a confirmation email shortly at ${
+                        orderData.formData.email
+                      }.`
                     )
                   }
                   className="px-6 py-2 bg-black text-white rounded hover:bg-gray-800 transition-colors"
