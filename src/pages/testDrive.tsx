@@ -48,7 +48,7 @@ type ExteriorColor =
 type InteriorColor = "black" | "brown" | "green";
 
 type ExteriorRestrictions = {
-  [key in ExteriorColor]: InteriorColor[];
+  [key in ExteriorColor]?: InteriorColor[];
 };
 
 type ModelRestriction = {
@@ -258,7 +258,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     { id: "RD6-AWD-Ultra", name: "RD6 AWD Ultra", subtitle: "Body Type : Truck", image: car3, price: "8990000" },
   ];
 
-  // FIXED: "whiteB" consistent with restrictions
+  // UPDATED: Removed greenB and whiteB from exterior colors for RD6-2WD-Air
   const allExteriorColors = [
     { id: "greenB", name: "Green & Black Roof", image: img1 },
     { id: "blue", name: "Blue", image: img2 },
@@ -278,8 +278,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   const modelRestrictions: ModelRestrictions = {
     "RD6-2WD-Air": {
       exterior: {
-        greenB: [],
-        whiteB: [],
+        // REMOVED: greenB and whiteB are no longer available for RD6-2WD-Air
         blue: ["black", "brown"],
         grey: ["black", "brown"],
         green: ["green"],
