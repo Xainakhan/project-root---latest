@@ -581,105 +581,110 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
         </div>
       </div>
 
-      {/* Interior Features Section */}
-      <div className="bg-gray-50 py-8 sm:py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8 sm:mb-12">
-            <div className="flex items-center justify-center mb-6 sm:mb-8">
-              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
-              <h2 className="px-3 sm:px-6 text-sm sm:text-lg font-medium text-gray-800 tracking-wider">
-                INTERIOR FEATURES
-              </h2>
-              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
-            </div>
-          </div>
+{/* Interior Features Section */}
+<div className="bg-gray-50 py-8 sm:py-16 px-4">
+  <div className="max-w-7xl mx-auto">
+    <div className="mb-8 sm:mb-12">
+      <div className="flex items-center justify-center mb-6 sm:mb-8">
+        <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
+        <h2 className="px-3 sm:px-6 text-sm sm:text-lg font-medium text-gray-800 tracking-wider">
+          INTERIOR FEATURES
+        </h2>
+        <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
+      </div>
+    </div>
 
-          <div className="relative">
-            <div className="relative overflow-hidden">
-              <div
-                className="flex transition-transform duration-500 ease-in-out gap-3 sm:gap-6"
-                style={{
-                  transform: `translateX(-${
-                    currentSlideIndex2 * (isMobile ? 100 : 100 / 3)
-                  }%)`,
-                }}
-              >
-                {slides2.map((slide, index) => (
-                  <div
-                    key={index}
-                    className="w-full md:w-1/3 flex-shrink-0 px-1 sm:px-2"
-                  >
-                    <div className="bg-white rounded-lg overflow-hidden shadow-lg group cursor-pointer">
-                      <div className="relative overflow-hidden h-48 sm:h-96">
-                        <img
-                          src={slide.image}
-                          alt={slide.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      </div>
+    <div className="relative px-4 sm:px-8">
+      <div className="relative overflow-hidden">
+        <div
+          className="flex transition-transform duration-500 ease-in-out gap-3 sm:gap-6"
+          style={{
+            transform: `translateX(-${
+              currentSlideIndex2 * (isMobile ? (100 - 8) : (100 / 3))
+            }%)`,
+            paddingRight: isMobile ? '2rem' : '4rem', // Add right padding
+            paddingLeft: isMobile ? '0.5rem' : '1rem', // Add left padding
+          }}
+        >
+          {slides2.map((slide, index) => (
+            <div
+              key={index}
+              className="w-full md:w-1/3 flex-shrink-0 px-1 sm:px-2"
+              style={{
+                minWidth: isMobile ? 'calc(100% - 3rem)' : 'calc(33.333% - 1rem)' // Ensure proper width accounting for padding
+              }}
+            >
+              <div className="bg-white rounded-lg overflow-hidden shadow-lg group cursor-pointer">
+                <div className="relative overflow-hidden" style={{ minHeight: '200px' }}>
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
 
-                      <div className="p-3 sm:p-6 bg-gray-100 text-left">
-                        <div className="mb-2 sm:mb-3">
-                          <div className="w-6 sm:w-8 h-px bg-gray-400 mb-2 sm:mb-3"></div>
-                          <h3 className="text-sm sm:text-lg font-semibold text-gray-800">
-                            {slide.title}
-                          </h3>
-                        </div>
-                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                          {slide.description}
-                        </p>
-                      </div>
-                    </div>
+                <div className="p-3 sm:p-6 bg-gray-100 text-left">
+                  <div className="mb-2 sm:mb-3">
+                    <div className="w-6 sm:w-8 h-px bg-gray-400 mb-2 sm:mb-3"></div>
+                    <h3 className="text-sm sm:text-lg font-semibold text-gray-800">
+                      {slide.title}
+                    </h3>
                   </div>
-                ))}
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                    {slide.description}
+                  </p>
+                </div>
               </div>
             </div>
-
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevSlide2}
-              className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
-            >
-              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
-            </button>
-
-            <button
-              onClick={nextSlide2}
-              className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
-            >
-              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
-            </button>
-
-            {/* Slide Indicators */}
-            <div className="flex justify-center mt-4 sm:mt-8 space-x-2">
-              {Array.from(
-                { length: Math.max(1, slides2.length - (isMobile ? 0 : 2)) },
-                (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlideIndex2(index)}
-                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                      currentSlideIndex2 === index
-                        ? "bg-gray-800 w-4 sm:w-8"
-                        : "bg-gray-300 hover:bg-gray-400"
-                    }`}
-                  />
-                )
-              )}
-            </div>
-          </div>
-
-          {/* Brochure Button - Bottom Right */}
-          <div className="flex justify-center sm:justify-end mt-6 sm:mt-8">
-            <button
-              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-black text-white hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-              style={{ borderRadius: "4px" }}
-            >
-              BROCHURE
-            </button>
-          </div>
+          ))}
         </div>
       </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevSlide2}
+        className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+      >
+        <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
+      </button>
+
+      <button
+        onClick={nextSlide2}
+        className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+      >
+        <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
+      </button>
+
+      {/* Slide Indicators */}
+      <div className="flex justify-center mt-4 sm:mt-8 space-x-2">
+        {Array.from(
+          { length: Math.max(1, slides2.length - (isMobile ? 0 : 2)) },
+          (_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlideIndex2(index)}
+              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                currentSlideIndex2 === index
+                  ? "bg-gray-800 w-4 sm:w-8"
+                  : "bg-gray-300 hover:bg-gray-400"
+              }`}
+            />
+          )
+        )}
+      </div>
+    </div>
+
+    {/* Brochure Button - Bottom Right */}
+    <div className="flex justify-center sm:justify-end mt-6 sm:mt-8">
+      <button
+        className="px-6 sm:px-8 py-2.5 sm:py-3 bg-black text-white hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+        style={{ borderRadius: "4px" }}
+      >
+        BROCHURE
+      </button>
+    </div>
+  </div>
+</div>
 
       {/* Final Image Gallery Section */}
       <div className="bg-white py-4 sm:py-8 px-4">
