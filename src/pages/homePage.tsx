@@ -157,6 +157,7 @@ const Homepage = () => {
     {
       id: 1,
       title: "CSM & GEELY Signed MOU To Launch Zeekr In Pakistan",
+      text: "The MoU signing between Capital Smart Motors (CSM) and Geely marks a significant step toward transforming Pakistan’s mobility landscape...",
       image: CSMGeely,
       slug: "csm-geely-mou-zeekr-pakistan",
     },
@@ -164,12 +165,14 @@ const Homepage = () => {
       id: 2,
       title:
         "Dealer Meetup Organized By Capital Smart City At Serena Hotel, Islamabad",
+      text: "CSM Had The Privilege Of Participating In The Dealer Meetup Organized By Capital Smart City At Serena Hotel, Islamabad. The Event Was Graced...",
       image: sareena,
       slug: "dealer-meetup-serena-hotel-islamabad",
     },
     {
       id: 3,
       title: "Zeging Excellence For Pakistan's Automotive Future",
+      text: "The management at CSM envisages driving uncompromising standards, fine-tuning products, dealership network, and technical expertise well...",
       image: autoMob,
       slug: "pakistan-automotive-future-excellence",
     },
@@ -559,6 +562,7 @@ const Homepage = () => {
                   <h4 className="font-bold text-gray-900 mb-2 hover:text-blue-800 transition-colors duration-300">
                     {newsItem.title}
                   </h4>
+                  <p className="text-gray-600 text-sm mb-4">{newsItem.text}</p>
                 </div>
               </div>
             ))}

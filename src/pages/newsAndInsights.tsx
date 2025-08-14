@@ -70,7 +70,7 @@ const NewsPage: React.FC<NewsPageProps> = ({ onBack }) => {
               NEWS & INSIGHTS
             </h1>
           </div>
-          <div className="flex items-center space-x-4">
+          {/* <div className="flex items-center space-x-4">
             <span className="bg-transparent border border-black-300 rounded px-4 py-2 text-sm text-gray-700">
               Category
             </span>
@@ -80,7 +80,7 @@ const NewsPage: React.FC<NewsPageProps> = ({ onBack }) => {
             <button className="bg-black text-white px-6 py-2 text-sm font-medium rounded hover:bg-gray-800 transition-colors">
               SEARCH
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -100,7 +100,7 @@ const NewsPage: React.FC<NewsPageProps> = ({ onBack }) => {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 CSM & GEELY SIGNED MOU TO LAUNCH NEVs IN PAKISTAN
               </h2>
-              <ShowMoreText text="The MoU Signing Between Capital Smart Motors (CSM) And Geely Marks A Significant Step Toward Transforming Pakistan's Mobility Landscape. This Strategic Partnership Will Bring Cutting-Edge Electric Vehicles To The Pakistani Market, Revolutionizing The Automotive Industry With Sustainable And Innovative Transportation Solutions." />
+              <ShowMoreText text="The MoU signing between Capital Smart Motors (CSM) and Geely marks a significant step toward transforming Pakistan’s mobility landscape. Through this strategic partnership, we proudly introduce Zeekr, Riddara, and Farizon, Geely Group’s premium NEV brands, driving the future of smart, sustainable transportation in Pakistan." />
               <div className="text-sm text-gray-500 mt-6">22-06-2025</div>
             </div>
           </div>
@@ -136,7 +136,10 @@ const NewsPage: React.FC<NewsPageProps> = ({ onBack }) => {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">
                 FORGING EXCELLENCE FOR PAKISTAN'S AUTOMOTIVE FUTURE
               </h2>
-              <ShowMoreText text="The Management At CSM Envisages Driving Uncompromising Standards, Fine Tuning Products, Dealership Network, And Technical Expertise Well Ahead Of Launch. To Ensure Flawless Execution, CSM Has Engaged Their Teams For Intensive Training With Our Business Collaboration Partners Mastering Details Of New Energy Vehicle (NEV) Technologies And Customer Service Excellence." />
+              <ShowMoreText text="The management at CSM envisages driving uncompromising standards, fine-tuning products, dealership network, and technical expertise well ahead of launch. 
+To ensure flawless execution, CSM has engaged their teams for intensive training with our business collaboration partners mastering details of New Energy Vehicle (NEV) technologies.
+This isn't just learning - it's building competitive advantage. Every training session, every technical deep-dive, and every strategic refinement brings us closer to delivering an unmatched mobility experience for Pakistan. At Capital Smart Motors, we don't just prepare, we engineer success. 
+The future of smart mobility starts here - and it starts with us." />
               <div className="text-sm text-gray-500 mt-6">23-06-2025</div>
             </div>
           </div>

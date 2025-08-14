@@ -418,13 +418,14 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           >
             BOOK NOW
           </button>
-          <button
-            className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-            style={{ borderRadius: "8px" }}
-            type="button"
-          >
-            BROCHURE
-          </button>
+          <a
+                href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
+                download="JMEV-Elite-Brousher.pdf"
+                className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+                style={{ borderRadius: "8px", textDecoration: 'none', display: 'inline-block' }}
+              >
+                BROCHURE
+              </a>
         </div>
       </div>
 
@@ -688,12 +689,14 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           </div>
 
           <div className="flex justify-end mt-4">
-            <button
-              className="px-8 py-3 bg-black text-white hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 rounded"
-              type="button"
-            >
-              BROCHURE
-            </button>
+            <a
+                href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
+                download="JMEV-Elite-Brousher.pdf"
+                className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+                style={{ borderRadius: "8px", textDecoration: 'none', display: 'inline-block' }}
+              >
+                BROCHURE
+              </a>
           </div>
         </div>
       </div>
