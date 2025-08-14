@@ -36,11 +36,11 @@ const ContactForm: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-white flex">
+      <div className="min-h-screen bg-white flex flex-col lg:flex-row">
         {/* Left side - Contact Info */}
-        <div className="w-1/2 bg-white relative">
+        <div className="w-full lg:w-1/2 bg-white relative">
           {/* GET IN TOUCH WITH US strip - positioned at the right edge */}
-          <div className="absolute top-24 right-0 bg-black text-white py-2 px-16 z-10">
+          <div className="lg:absolute lg:top-24 lg:right-0 bg-black text-white py-2 px-4 lg:px-16 lg:z-10">
             <div className="text-xs font-light tracking-wider whitespace-nowrap">
               GET IN TOUCH WITH US • GET IN TOUCH WITH US • GET IN TOUCH WITH US
               • GET IN TOUCH WITH US • GET IN TOUCH WITH US • GET IN TOUCH WITH
@@ -49,59 +49,61 @@ const ContactForm: React.FC = () => {
           </div>
 
           {/* Contact Information - positioned much lower */}
-          <div className="pt-19 pl-12 pr-8" style={{ marginTop: "180px" }}>
-            {/* First Row - Email and Phone */}
-            <div className="grid grid-cols-2 gap-20 mb-16">
-              <div>
-                <h3 className="text-lg font-bold mb-1 uppercase flex items-center">
-                  <Mail size={16} className="mr-2" />
-                  EMAIL
-                </h3>
-                <p className="text-gray-600 text-sm">info@hrl-csm.com</p>
+          <div className="pt-8 lg:pt-19 px-4 lg:pl-12 lg:pr-8" style={{ marginTop: "0px" }}>
+            <div className="lg:mt-44">
+              {/* First Row - Email and Phone */}
+              <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-20 mb-8 lg:mb-16">
+                <div>
+                  <h3 className="text-lg font-bold mb-1 uppercase flex items-center">
+                    <Mail size={16} className="mr-2" />
+                    EMAIL
+                  </h3>
+                  <p className="text-gray-600 text-sm">info@hrl-csm.com</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-1 uppercase">PHONE</h3>
+                  <p className="text-gray-600 text-sm">111-457-276</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold mb-1 uppercase">PHONE</h3>
-                <p className="text-gray-600 text-sm">111-457-276</p>
-              </div>
-            </div>
 
-            {/* Second Row - Address and Social */}
-            <div className="grid grid-cols-2 gap-20">
-              <div>
-                <h3 className="text-lg font-bold mb-1 uppercase">ADDRESS</h3>
-                <p className="text-gray-600 text-sm">
-                  10th Floor, Tricon Corporate Centre, block H Gulberg II, Lahore, Pakistan.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-bold mb-1 uppercase">
-                  WE ARE SOCIAL
-                </h3>
-                <div className="flex space-x-2">
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61574102049787"
-                    className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
-                  >
-                    <Facebook size={16} className="text-gray-600" />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/hrl_csm/"
-                    className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
-                  >
-                    <Instagram size={16} className="text-gray-600" />
-                  </a>
-                  <a
-                    href="https://www.youtube.com/@CapitalSmartMotors"
-                    className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
-                  >
-                    <Youtube size={18} className="text-gray-600" />
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/capitalsmartmotors"
-                    className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
-                  >
-                    <Linkedin size={16} className="text-gray-600" />
-                  </a>
+              {/* Second Row - Address and Social */}
+              <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-20">
+                <div>
+                  <h3 className="text-lg font-bold mb-1 uppercase">ADDRESS</h3>
+                  <p className="text-gray-600 text-sm">
+                    10th Floor, Tricon Corporate Centre, block H Gulberg II, Lahore, Pakistan.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-1 uppercase">
+                    WE ARE SOCIAL
+                  </h3>
+                  <div className="flex space-x-2">
+                    <a
+                      href="https://www.facebook.com/profile.php?id=61574102049787"
+                      className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
+                    >
+                      <Facebook size={16} className="text-gray-600" />
+                    </a>
+                    <a
+                      href="https://www.instagram.com/hrl_csm/"
+                      className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
+                    >
+                      <Instagram size={16} className="text-gray-600" />
+                    </a>
+                    <a
+                      href="https://www.youtube.com/@CapitalSmartMotors"
+                      className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
+                    >
+                      <Youtube size={18} className="text-gray-600" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/company/capitalsmartmotors"
+                      className="w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100 transition-colors"
+                    >
+                      <Linkedin size={16} className="text-gray-600" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -109,8 +111,8 @@ const ContactForm: React.FC = () => {
         </div>
 
         {/* Right side - Form */}
-        <div className="w-1/2 bg-gray-200 p-12">
-          <div className="max-w-md pt-8">
+        <div className="w-full lg:w-1/2 bg-gray-200 p-4 lg:p-12">
+          <div className="max-w-md pt-4 lg:pt-8">
             <h2 className="text-2xl font-bold text-black mb-1">WE'D LOVE TO</h2>
             <h2 className="text-2xl font-bold text-black mb-8">
               HEAR FROM YOU.
