@@ -10,7 +10,7 @@ import TermsAndConditions from "../pages/termsAndConditions";
 import emailjs from "@emailjs/browser";
 
 // Mock image URLs
-import testDrive from "../assets/testDrive.png";
+import testDrive from "../assets/car_blue.webp";
 import car1 from "../assets/SelectModel.png";
 import car2 from "../assets/SelectModel.png";
 import car3 from "../assets/SelectModel.png";

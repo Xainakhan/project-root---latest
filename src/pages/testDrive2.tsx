@@ -10,7 +10,7 @@ import TermsAndConditions from "../pages/termsAndConditions";
 import emailjs from "@emailjs/browser";
 
 // Mock image URLs
-import testDrive from "../assets/testDrive.png";
+import testDrive from "../assets/Forthing/Grid/ForthingBig.png";
 import car1 from "../assets/Forthing/exterior/carBlack.png";
 import car2 from "../assets/Forthing/exterior/carBlue.png";
 import car3 from "../assets/Forthing/exterior/carGrey.png";
