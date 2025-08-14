@@ -118,13 +118,13 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
         {/* Render MainApp without onBack prop */}
         <MainApp />
 
-        {/* Transparent back button overlay */}
+        {/* Transparent back button overlay - Mobile responsive positioning */}
         <button
           onClick={handleBackFromTestDrive}
-          className="fixed top-24 left-6 z-[999] flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+          className="fixed top-20 md:top-24 left-4 md:left-6 z-[999] flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
         >
-          <ArrowLeft className="w-5 h-5 text-gray-700" />
-          <span className="text-sm font-medium text-gray-700">
+          <ArrowLeft className="w-4 md:w-5 h-4 md:h-5 text-gray-700" />
+          <span className="text-xs md:text-sm font-medium text-gray-700">
             Back to JMEV
           </span>
         </button>
@@ -139,13 +139,13 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
         {/* Render TestDrive component */}
         <TestDrive />
 
-        {/* Transparent back button overlay */}
+        {/* Transparent back button overlay - Mobile responsive positioning */}
         <button
           onClick={handleBackFromTestDrivePage}
-          className="fixed top-24 left-6 z-[999] flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+          className="fixed top-20 md:top-24 left-4 md:left-6 z-[999] flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
         >
-          <ArrowLeft className="w-5 h-5 text-gray-700" />
-          <span className="text-sm font-medium text-gray-700">
+          <ArrowLeft className="w-4 md:w-5 h-4 md:h-5 text-gray-700" />
+          <span className="text-xs md:text-sm font-medium text-gray-700">
             Back to JMEV
           </span>
         </button>
@@ -371,13 +371,13 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
 
   return (
     <div className="w-full">
-      {/* Back to Home Button - Fixed position moved down 3 inches (72px) */}
+      {/* Back to Home Button - Mobile responsive positioning */}
       <button
         onClick={onBack}
-        className="fixed top-24 left-6 z-50 flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+        className="fixed top-20 md:top-24 left-4 md:left-6 z-50 flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
       >
-        <ArrowLeft className="w-5 h-5 text-gray-700" />
-        <span className="text-sm font-medium text-gray-700">Back to Home</span>
+        <ArrowLeft className="w-4 md:w-5 h-4 md:h-5 text-gray-700" />
+        <span className="text-xs md:text-sm font-medium text-gray-700">Back to Home</span>
       </button>
 
       {/* Hero Banner Section */}
@@ -387,20 +387,20 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           alt="JMEV Hero Banner"
           className="w-full h-auto object-cover"
         />
-        {/* WhatsApp Button - Top Right */}
+        {/* WhatsApp Button - Mobile responsive positioning */}
         <button
           onClick={handleWhatsAppClick}
-          className="absolute top-8 right-8 flex items-center justify-center w-12 h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur  text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
+          className="absolute top-4 md:top-8 right-4 md:right-8 flex items-center justify-center w-10 md:w-12 h-10 md:h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
           title="Chat on WhatsApp"
         >
-          <MessageCircle className="w-6 h-6" />
+          <MessageCircle className="w-5 md:w-6 h-5 md:h-6" />
         </button>
 
-        {/* Test Drive Button positioned at bottom left */}
-        <div className="absolute bottom-8 left-8">
+        {/* Test Drive Button positioned at bottom left - Mobile responsive */}
+        <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8">
           <button
             onClick={handleTestDrive}
-            className="px-3 sm:px-5 py-2 sm:py-3 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="px-2 sm:px-3 md:px-5 py-2 md:py-3 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
             style={{ borderRadius: "8px" }}
             type="button"
           >
@@ -408,54 +408,56 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           </button>
         </div>
 
-        {/* Buttons positioned at bottom right */}
-        <div className="absolute bottom-8 right-8 flex space-x-4">
-          <button
-            onClick={handleBookNow}
-            className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-            style={{ borderRadius: "8px" }}
-            type="button"
-          >
-            BOOK NOW
-          </button>
-          <a
-                href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
-                download="JMEV-Elite-Brousher.pdf"
-                className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-                style={{ borderRadius: "8px", textDecoration: 'none', display: 'inline-block' }}
-              >
-                BROCHURE
-              </a>
+        {/* Buttons positioned at bottom right - Mobile responsive with better spacing */}
+        <div className="absolute bottom-4 md:bottom-8 right-4 md:right-8">
+          <div className="flex flex-col items-end gap-3 sm:flex-row sm:items-center sm:gap-3 md:gap-4">
+            <button
+              onClick={handleBookNow}
+              className="px-2 sm:px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
+              style={{ borderRadius: "8px" }}
+              type="button"
+            >
+              BOOK NOW
+            </button>
+            <a
+              href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
+              download="JMEV-Elite-Brousher.pdf"
+              className="px-2 sm:px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 text-center whitespace-nowrap block"
+              style={{ borderRadius: "8px", textDecoration: 'none' }}
+            >
+              BROCHURE
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Specifications Section */}
-      <div className="bg-white py-4 px-8">
+      {/* Specifications Section - Mobile responsive */}
+      <div className="bg-white py-4 px-4 md:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center items-center">
-            <div className="flex items-center bg-transparent rounded-lg p-4 shadow-sm">
-              <div className="flex flex-col items-center px-6">
+            <div className="flex flex-col sm:flex-row items-center bg-transparent rounded-lg p-2 md:p-4 shadow-sm w-full max-w-full">
+              <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 mb-4 sm:mb-0 min-w-0">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   UP TO
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
                   500 Km*
                 </h3>
-                <p className="text-gray-500 text-xs">Driving Range</p>
+                <p className="text-gray-500 text-xs text-center">Driving Range</p>
               </div>
-              <div className="flex flex-col items-center px-6 border-l border-r border-gray-300 mx-4">
+              <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 border-t sm:border-t-0 sm:border-l sm:border-r border-gray-300 py-4 sm:py-0 sm:mx-2 md:mx-4 mb-4 sm:mb-0 min-w-0 w-full sm:w-auto">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   Ultra Low
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">0.26</h3>
-                <p className="text-gray-500 text-xs">Wind Resistance</p>
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">0.26</h3>
+                <p className="text-gray-500 text-xs text-center">Wind Resistance</p>
               </div>
-              <div className="flex flex-col items-center px-6">
+              <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 border-t sm:border-t-0 border-gray-300 pt-4 sm:pt-0 min-w-0">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   Intelligent
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">L 2.5</h3>
-                <p className="text-gray-500 text-xs">Driving Assistant</p>
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">L 2.5</h3>
+                <p className="text-gray-500 text-xs text-center">Driving Assistant</p>
               </div>
             </div>
           </div>
