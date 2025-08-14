@@ -509,22 +509,26 @@ const Homepage = () => {
       </section>
 
       {/* Interior Banner Section */}
-      <section className="relative h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
-        {interiorBanners.map((banner, index) => (
-          <div
-            key={banner.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentInteriorBanner ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <img
-              src={banner.image}
-              alt={banner.title}
-              className="w-full h-full object-contain md:object-cover"
-            />
-            <div className="absolute inset-0 bg-black/10"></div>
+      <section className="py-16 bg-white">
+        <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative h-96 md:h-[500px] lg:h-[600px] rounded-lg overflow-hidden">
+            {interiorBanners.map((banner, index) => (
+              <div
+                key={banner.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  index === currentInteriorBanner ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <img
+                  src={banner.image}
+                  alt={banner.title}
+                  className="w-full h-full object-contain md:object-cover"
+                />
+                <div className="absolute inset-0 bg-black/10"></div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </section>
 
       {/* News & Insights - Updated with navigation */}
