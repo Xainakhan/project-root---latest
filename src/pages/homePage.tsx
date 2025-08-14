@@ -184,7 +184,7 @@ const Homepage = () => {
   };
 
   // Handle news card click navigation - Updated to use local state management
-  const handleNewsClick = (slug: string) => {
+  const handleNewsClick = () => {
     setCurrentPage("news");
     window.scrollTo(0, 0);
   };
@@ -552,7 +552,7 @@ const Homepage = () => {
               <div
                 key={newsItem.id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
-                onClick={() => handleNewsClick(newsItem.slug)}
+                onClick={handleNewsClick}
               >
                 <img
                   src={newsItem.image}
