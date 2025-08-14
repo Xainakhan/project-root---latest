@@ -105,13 +105,13 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
         {/* Render MainApp without onBack prop */}
         <MainApp />
 
-        {/* Transparent back button overlay */}
+        {/* Transparent back button overlay - Mobile responsive */}
         <button
           onClick={handleBackFromTestDrive}
-          className="fixed top-24 left-6 z-[999] flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+          className="fixed top-16 sm:top-24 left-3 sm:left-6 z-[999] flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
         >
-          <ArrowLeft className="w-5 h-5 text-gray-700" />
-          <span className="text-sm font-medium text-gray-700">
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+          <span className="text-xs sm:text-sm font-medium text-gray-700">
             Back to Forthing
           </span>
         </button>
@@ -126,13 +126,13 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
         {/* Render TestDrive component */}
         <TestDrive />
 
-        {/* Transparent back button overlay */}
+        {/* Transparent back button overlay - Mobile responsive */}
         <button
           onClick={handleBackFromTestDrivePage}
-          className="fixed top-24 left-6 z-[999] flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+          className="fixed top-16 sm:top-24 left-3 sm:left-6 z-[999] flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
         >
-          <ArrowLeft className="w-5 h-5 text-gray-700" />
-          <span className="text-sm font-medium text-gray-700">
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+          <span className="text-xs sm:text-sm font-medium text-gray-700">
             Back to Forthing
           </span>
         </button>
@@ -350,38 +350,38 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="w-full">
-      {/* Back to Home Button - Fixed position moved down 3 inches (72px) */}
+    <div className="w-full overflow-x-hidden">
+      {/* Back to Home Button - Mobile responsive positioning */}
       <button
         onClick={onBack}
-        className="fixed top-24 left-6 z-50 flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+        className="fixed top-16 sm:top-24 left-3 sm:left-6 z-50 flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
       >
-        <ArrowLeft className="w-5 h-5 text-gray-700" />
-        <span className="text-sm font-medium text-gray-700">Back to Home</span>
+        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
+        <span className="text-xs sm:text-sm font-medium text-gray-700">Back to Home</span>
       </button>
 
-      {/* Hero Banner Section */}
+      {/* Hero Banner Section - Mobile optimized */}
       <div className="relative w-full">
         <img
           src={ForthingBanner}
           alt="Forthing Hero Banner"
-          className="w-full h-auto object-cover"
+          className="w-full h-auto object-cover min-h-[300px] sm:min-h-[400px] md:min-h-[500px]"
         />
 
-        {/* WhatsApp Button - Top Right */}
+        {/* WhatsApp Button - Mobile responsive positioning */}
         <button
           onClick={handleWhatsAppClick}
-          className="absolute top-8 right-8 flex items-center justify-center w-12 h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur  text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
+          className="absolute top-4 sm:top-8 right-4 sm:right-8 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
           title="Chat on WhatsApp"
         >
-          <MessageCircle className="w-6 h-6" />
+          <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        {/* Test Drive Button positioned at bottom left */}
-        <div className="absolute bottom-8 left-8">
+        {/* Test Drive Button - Mobile responsive positioning */}
+        <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8">
           <button
             onClick={handleTestDrive}
-            className="px-3 sm:px-5 py-2 sm:py-3 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="px-2 sm:px-3 md:px-5 py-1.5 sm:py-2 md:py-3 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
             style={{ borderRadius: "8px" }}
             type="button"
           >
@@ -389,51 +389,52 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
           </button>
         </div>
 
-        {/* Buttons positioned at bottom right */}
-        <div className="absolute bottom-8 right-8 flex space-x-4">
+        {/* Action Buttons - Mobile responsive layout */}
+        <div className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
           <button
             onClick={handleBookNow}
-            className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="px-3 sm:px-4 md:px-8 py-2 sm:py-3 md:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
             style={{ borderRadius: "8px" }}
           >
             BOOK NOW
           </button>
           <button
-            className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black   transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+            className="px-3 sm:px-4 md:px-8 py-2 sm:py-3 md:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
             style={{ borderRadius: "8px" }}
           >
             BROCHURE
           </button>
         </div>
       </div>
-      {/* Specifications Section */}
-      <div className="bg-white py-4 px-8">
+
+      {/* Specifications Section - Mobile optimized */}
+      <div className="bg-white py-4 sm:py-6 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center items-center">
-            <div className="flex items-center bg-transparent rounded-lg p-4 shadow-sm">
-              <div className="flex flex-col items-center px-6">
+            <div className="flex flex-col sm:flex-row items-center bg-transparent rounded-lg p-2 sm:p-4 shadow-sm w-full sm:w-auto">
+              <div className="flex flex-col items-center px-3 sm:px-6 mb-4 sm:mb-0">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   UP TO
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">
+                <h3 className="text-lg sm:text-xl font-light text-gray-700 mb-1">
                   1100 Km*
                 </h3>
                 <p className="text-gray-500 text-xs">Driving Range</p>
               </div>
-              <div className="flex flex-col items-center px-6 border-l border-r border-gray-300 mx-4">
+              <div className="flex flex-col items-center px-3 sm:px-6 mb-4 sm:mb-0 border-t sm:border-t-0 sm:border-l sm:border-r border-gray-300 pt-4 sm:pt-0 sm:mx-4 w-full sm:w-auto">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   AS FAST AS
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">
+                <h3 className="text-lg sm:text-xl font-light text-gray-700 mb-1">
                   10.9 Sec*
                 </h3>
                 <p className="text-gray-500 text-xs">To Reach 100</p>
               </div>
-              <div className="flex flex-col items-center px-6">
+              <div className="flex flex-col items-center px-3 sm:px-6 border-t sm:border-t-0 border-gray-300 pt-4 sm:pt-0">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   UP TO
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">
+                <h3 className="text-lg sm:text-xl font-light text-gray-700 mb-1">
                   31.94 KWh*
                 </h3>
                 <p className="text-gray-500 text-xs">Capacity</p>
