@@ -157,7 +157,7 @@ const Homepage = () => {
     {
       id: 1,
       title: "CSM & GEELY Signed MOU To Launch Zeekr In Pakistan",
-      text: "The MoU signing between Capital Smart Motors (CSM) and Geely marks a significant step toward transforming Pakistan’s mobility landscape...",
+      text: "The MoU signing between Capital Smart Motors (CSM) and Geely marks a significant step toward transforming Pakistan's mobility landscape...",
       image: CSMGeely,
       slug: "csm-geely-mou-zeekr-pakistan",
     },
@@ -183,9 +183,10 @@ const Homepage = () => {
     navigate(`/${page}`);
   };
 
-  // Handle news card click navigation
+  // Handle news card click navigation - Updated to use local state management
   const handleNewsClick = (slug: string) => {
-    navigate(`/news/${slug}`);
+    setCurrentPage("news");
+    window.scrollTo(0, 0);
   };
 
   // Handle back to home
