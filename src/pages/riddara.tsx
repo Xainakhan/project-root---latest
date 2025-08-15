@@ -187,31 +187,31 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
   const slides = [
     {
       image: slidea,
-      title: "815mm Water-Wading Depth",
+      title: "815MM WATER-WADING DEPTH",
       description:
         "Easily navigates rivers and shallow waters with a class-leading wading depth of 815mm.",
     },
     {
       image: slideb,
-      title: "45° Incline Capability",
+      title: "43° INCLINE CAPABILITY",
       description:
-        "Effortlessly Tackles Steep Slopes and Rugged Terrain with A Powerful 45° Incline Climbing Ability for Supreme Off-Road Performance.",
+        "Effortlessly Tackles Steep Slopes and Rugged Terrain with A Powerful 43° Incline Climbing Ability for Supreme Off-Road Performance.",
     },
     {
       image: slidec,
-      title: "RIDDARA 360° Smart Turn",
+      title: "RIDDARA 360° SMART TURN",
       description:
         "Master Tight Corners and Confined Trails with Precision. The RIDDARA 360° Smart Turn Delivers Seamless Maneuverability for Unrivaled Control in Every Direction.",
     },
     {
       image: slided,
-      title: "RIDDARA 1030 kg Loading Capacity",
+      title: "RIDDARA 1030 KG LOADING CAPACITY",
       description:
         "Built to Haul More. With A Sturdy 1030 kg Payload Capacity, RIDDARA Handles Heavy Loads with Ease—Perfect for Work, Adventure, And Everything In Between.",
     },
     {
       image: slidee,
-      title: "RIDDARA SUV-Based Suspension",
+      title: "RIDDARA SUV-BASED SUSPENSION",
       description:
         "Experience Smooth Rides on Any Terrain. The Advanced SUV-Based Suspension System Delivers Exceptional Comfort, Stability, And Off-Road Confidence Wherever You Go.",
     },
@@ -220,18 +220,18 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
   const slides2 = [
     {
       image: slideA,
-      title: "Spacious Seat Interior",
+      title: "SPACIOUS SEAT INTERIOR",
       description:
         "Enjoy 5-seat comfort with pet-friendly, foldable rear seats for added versatility, exuding comfort and luxury.",
     },
     {
       image: slideB,
-      title: "NVH Silencet",
+      title: "NVH SILENCE  ",
       description: "Noise Cancellation for serene drive at any speed",
     },
     {
       image: slideC,
-      title: "Entertainment Eco-system",
+      title: "ENTERTAINMENT ECO-SYSTEM",
       description:
         "Access endless audio and video features to elevate every journey with immersive entertainment. highly interactive 14.6-inch digital display with smartphone connectivity.",
     },
@@ -243,7 +243,7 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
     },
     {
       image: slideE,
-      title: "Wireless Charging Pad",
+      title: "WIRELESS CHARGING PAD",
       description:
         "Stay powered effortlessly with an advanced wireless charging pad.",
     },

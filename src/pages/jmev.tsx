@@ -196,32 +196,32 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
   const slides: SlideData[] = [
     {
       image: slidea,
-      title: "Nearly 2m² large panoramic nano skylight",
+      title: "NEARLY 2M² LARGE PANORAMIC NANO SKYLIGHT",
       description:
         "Double-layer laminated silver-coated glass is used to filter up to 98% of ultraviolet rays, so you don't have to worry about being bothered by sunlight in the car.",
     },
     {
       image: slideb,
-      title: "70% High strength steel skeleton",
+      title: "70% HIGH-STRENGTH STEEL SKELETON",
       description:
         "The only one in its class that uses 44 hot-formed steel plates with a strength of up to 1500MPa, with a high-strength steel ratio of over 71%, to build a high-strength cage.",
     },
     {
       image: slidec,
-      title: "Galaxy platform pure electric base modular design",
+      title: "GALAXY PLATFORM PURE ELECTRIC BASE MODULAR DESIGN",
       description:
         "the new pure electric A-class vehicle platform is modularly designed, and the underlying logic is designed for comfortable living.",
     },
     {
       image: slided,
-      title: "3 Driving Modes",
+      title: "3 DRIVING MODES",
       description:
         "Three driving modes deal with the challenges of all road conditions in real time Economic mode: Better economic electric energy,Motion mode: More positive power response,Standard mode: Both economic power and electric energy.",
     },
     {
       image: slidee,
       title:
-        "Exterior Features: McPherson rear multi-link independent suspension",
+        "EXTERIOR FEATURES: MCPHERSON REAR MULTI-LINK INDEPENDENT SUSPENSION",
       description:
         "The design of the front McPherson rear multi-link independent suspension provides a comfortable driving experience. Drive forward in comfort with driving control at ease.",
     },
@@ -237,25 +237,25 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
     },
     {
       image: InteriorB,
-      title: "6-way Power Seat",
+      title: "6-Way Power Adjustable Seat",
       description:
         "The driver's seat is electrically adjustable in 6 directions and the driver can switch the comfortable driving and riding spaces at will to meet the space needs of the driver and passengers for free and pleasant travel.",
     },
     {
       image: InteriorC,
-      title: "14.6-inch multimedia touch screen ",
+      title: "14.6-Inch Multimedia Touch Screen ",
       description:
         "The central console features a 14.6-inch multimedia touchscreen that makes driving an easier and more pleasant experience.",
     },
     {
       image: InteriorD,
-      title: "Intelligent Thermal Management System",
+      title: "INTELLIGENT THERMAL MANAGEMENT SYSTEM",
       description:
         "Use the first waste heat A/C system for EV in China to effectively improve the energy consumption index and increase the endurance mileage by 30% compared with of ordinary RTC heating A/C (heat pump A/C optional).",
     },
     {
       image: InteriorE,
-      title: "360 AVM visual system",
+      title: "360° AVM VISUAL SYSTEM",
       description:
         "Accurate identification of the surrounding environment and support of 100+ parking scenarios, including incomplete parking lines and parking spaces on curves, with an all-around view enable the blind spot disappear and the field of vision return.",
     },
@@ -271,25 +271,25 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
     },
     {
       image: slideB,
-      title: "Comprehensive Airbag Protection",
+      title: "COMPREHENSIVE AIRBAG PROTECTION",
       description:
         "JMEV ElIgh offers full-range airbag coverage for driver and passengers.Enhanced safety from all angles ensures peace of mind on every journey.",
     },
     {
       image: slideC,
-      title: "Overcoming All-Scenario Challenges",
+      title: "OVERCOMING ALL-SCENARIO CHALLENGES",
       description:
         "JMEV ElIgh adapts to all road conditions with smart drive modes and efficient performance. Its advanced tech and lightweight body ensure confident, smooth driving anytime, anywhere.",
     },
     {
       image: slideD,
-      title: "Level 2.5 Intelligent Driving Assistance",
+      title: "LEVEL 2.5 INTELLIGENT DRIVING ASSISTANCE",
       description:
         "JMEV ELIgh features Level 2.5 intelligent driving for smarter, safer journeys.It supports lane keeping, adaptive cruise, and real-time road monitoring",
     },
     {
       image: slideE,
-      title: "Michelin tyre*",
+      title: "MICHELIN TYRE*",
       description:
         "Aluminum alloy wheels paired with Michelin high-performance tires deliver a perfect blend of grip, comfort, and a sleek, sporty look.",
     },

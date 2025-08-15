@@ -98,25 +98,24 @@ const Homepage = () => {
       id: 1,
       title: "Merchandise",
       description:
-        "A Capital Selection Of Premium Branded Merchandise That Embodies The Spirit Of Innovation And Style.",
+        "A capital selection of premium branded merchandise that embodies the spirit of innovation and style.",
       image: merchandise,
     },
     {
       id: 2,
       title: "Call Centre",
       description:
-        "A Dedicated Customer Care Service, Offering Personalized Support And Seamless Communication For All Inquiries.",
+        "A dedicated customer care service, offering personalized support and seamless communication for all inquiries.",
       image: call,
     },
     {
       id: 3,
       title: "Parts/Accessories",
       description:
-        "Authentic Parts And Refined Accessories, Engineered To Enhance Performance And Elevate Your Driving Experience.",
+        "Authentic parts and refined accessories, engineered to enhance performance and elevate your driving experience.",
       image: accessories,
     },
   ];
-
   const testimonials = [
     {
       id: 1,
