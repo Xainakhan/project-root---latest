@@ -11,7 +11,7 @@ const API_SAVE_ORDER = `${BASE_URL}/api/save_order.php`;           // server end
 // Mock image URLs
 import testDrive from "../assets/testDrive.png";
 import car1 from "../assets/JMEV_page/ColorSelector/black.png";
-// import car2 from "../assets/JMEV_page/ColorSelector/blue.png";
+import car2 from "../assets/JMEV_page/ColorSelector/black.png";
 // import car3 from "../assets/JMEV_page/ColorSelector/green.png";
 import img1 from "../assets/JMEV/exterior/black.png";
 import img2 from "../assets/JMEV/exterior/blue.png";
@@ -255,8 +255,8 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
   });
 
   const cars = [
-    { id: "RD6-2WD-Air", name: "Elite", subtitle: "Body Type : Sedan", image: car1, price: "7500000" },
-    // { id: "RD6-AWD-Pro", name: "RD6 AWD Pro", subtitle: "Body Type : Truck", image: car2, price: "8250000" },
+    { id: "RD6-2WD-Air", name: " ELIGHT Comfort", subtitle: "Body Type : Sedan", image: car1, price: "7500000" },
+    { id: "RD6-AWD-Pro", name: "ELIGHT  Premium", subtitle: "Body Type : Sedan", image: car2, price: "8250000" },
     // { id: "RD6-AWD-Ultra", name: "RD6 AWD Ultra", subtitle: "Body Type : Truck", image: car3, price: "8990000" },
   ];
 
@@ -276,6 +276,15 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
 
   const modelRestrictions: ModelRestrictions = {
     "RD6-2WD-Air": {
+      exterior: {
+        blue: ["black", "brown"],
+        purple: ["black", "brown"],
+        green: ["black", "brown"],
+        black: ["black", "brown"],
+        white: ["black", "brown"],
+      },
+    },
+    "RD6-AWD-Pro": {
       exterior: {
         blue: ["black", "brown"],
         purple: ["black", "brown"],

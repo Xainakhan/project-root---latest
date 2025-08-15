@@ -278,8 +278,8 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
       image: car1,
       price: "7500000",
     },
-    { id: "RD6-AWD-Pro", name: "Friday BEV (Luxury)", subtitle: "Body Type : Truck", image: car2, price: "8250000" },
-    { id: "RD6-AWD-Ultra", name: " Friday BEV (Exclusive)", subtitle: "Body Type : Truck", image: car3, price: "8990000" },
+    { id: "RD6-AWD-Pro", name: "Friday BEV (Luxury)", subtitle: "Body Type : SUV", image: car2, price: "8250000" },
+    { id: "RD6-AWD-Ultra", name: " Friday BEV (Exclusive)", subtitle: "Body Type : SUV", image: car3, price: "8990000" },
   ];
 
   // FIXED: "whiteB" consistent with restrictions
