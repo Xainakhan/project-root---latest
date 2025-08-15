@@ -586,6 +586,20 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
                     />
                   </div>
 
+                           {/* last Name */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Last Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.firstName}
+                      onChange={(e) => handleInputChange("lastName", e.target.value)}
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      required
+                    />
+                  </div>
+
                   {/* Gender */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
