@@ -17,9 +17,9 @@ const API_SAVE_ORDER = `${BASE_URL}/api/save_order.php`; // server endpoint
 // Mock image URLs
 import testDrive from "../assets/Forthing/Grid/ForthingBig.png";
 import car1 from "../assets/Forthing/exterior/carBlack.png";
-// import car2 from "../assets/Forthing/exterior/carBlue.png";
-// import car3 from "../assets/Forthing/exterior/carGrey.png";
-
+import car2 from "../assets/Forthing/exterior/carBlack.png";
+import car3 from "../assets/Forthing/exterior/carBlack.png";
+// 
 import img1 from "../assets/Forthing/exterior/carBlack.png";
 import img2 from "../assets/Forthing/exterior/carBlue.png";
 import img3 from "../assets/Forthing/exterior/carGreen.png";
@@ -86,8 +86,8 @@ const generateBookingId = () =>
 const calculateBasePrice = (carId: string): number => {
   const prices: Record<string, number> = {
     "RD6-2WD-Air": 7500000,
-    // "RD6-AWD-Pro": 8250000,
-    // "RD6-AWD-Ultra": 8990000,
+    "RD6-AWD-Pro": 8250000,
+    "RD6-AWD-Ultra": 8990000,
   };
   return prices[carId] ?? 8990000;
 };
@@ -95,8 +95,8 @@ const calculateBasePrice = (carId: string): number => {
 const getCarName = (carId: string): string => {
   const carNames: Record<string, string> = {
     "RD6-2WD-Air": "RD6 2WD Air",
-    // "RD6-AWD-Pro": "RD6 AWD Pro",
-    // "RD6-AWD-Ultra": "RD6 AWD Ultra",
+    "RD6-AWD-Pro": "RD6 AWD Pro",
+    "RD6-AWD-Ultra": "RD6 AWD Ultra",
   };
   return carNames[carId] || carId;
 };
@@ -273,13 +273,13 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   const cars = [
     {
       id: "RD6-2WD-Air",
-      name: "Friday",
+      name: "Friday REEV",
       subtitle: "Body Type : SUV",
       image: car1,
       price: "7500000",
     },
-    // { id: "RD6-AWD-Pro", name: "RD6 AWD Pro", subtitle: "Body Type : Truck", image: car2, price: "8250000" },
-    // { id: "RD6-AWD-Ultra", name: "RD6 AWD Ultra", subtitle: "Body Type : Truck", image: car3, price: "8990000" },
+    { id: "RD6-AWD-Pro", name: "Friday BEV (Luxury)", subtitle: "Body Type : Truck", image: car2, price: "8250000" },
+    { id: "RD6-AWD-Ultra", name: " Friday BEV (Exclusive)", subtitle: "Body Type : Truck", image: car3, price: "8990000" },
   ];
 
   // FIXED: "whiteB" consistent with restrictions
@@ -307,28 +307,24 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
         white: ["black", "brown"],
       },
     },
-    // "RD6-AWD-Pro": {
-    //   exterior: {
-    //     greenB: ["green"],
-    //     blue: ["brown"],
-    //     grey: ["brown"],
-    //     whiteB: ["brown"],
-    //     green: ["green"],
-    //     black: ["brown"],
-    //     white: ["brown"],
-    //   },
-    // },
-    // "RD6-AWD-Ultra": {
-    //   exterior: {
-    //     greenB: ["green"],
-    //     blue: ["brown"],
-    //     grey: ["brown"],
-    //     whiteB: ["brown"],
-    //     green: ["green"],
-    //     black: ["brown"],
-    //     white: ["brown"],
-    //   },
-    // },
+    "RD6-AWD-Pro": {
+      exterior: {
+       blue: ["black"],
+        grey: ["black", "brown"],
+        green: ["black"],
+        black: ["black", "brown"],
+        white: ["black", "brown"],
+      },
+    },
+    "RD6-AWD-Ultra": {
+      exterior: {
+        blue: ["black"],
+        grey: ["black", "brown"],
+        green: ["black"],
+        black: ["black", "brown"],
+        white: ["black", "brown"],
+      },
+    },
   };
 
   const getAvailableExteriorColors = () =>
