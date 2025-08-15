@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
+  Play,
+  Calendar,
+  Download,
   ArrowLeft,
   MessageCircle,
 } from "lucide-react";
@@ -360,91 +363,129 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
         <span className="text-xs sm:text-sm font-medium text-gray-700">Back to Home</span>
       </button>
 
-      {/* Hero Banner Section - Mobile optimized */}
-      <div className="relative w-full">
-        <img
-          src={ForthingBanner}
-          alt="Forthing Hero Banner"
-          className="w-full h-auto object-cover min-h-[300px] sm:min-h-[400px] md:min-h-[500px]"
-        />
-
-        {/* WhatsApp Button - Mobile responsive positioning */}
-        <button
-          onClick={handleWhatsAppClick}
-          className="absolute top-4 sm:top-8 right-4 sm:right-8 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
-          title="Chat on WhatsApp"
-        >
-          <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
-
-        {/* Test Drive Button - Mobile responsive positioning */}
-        <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8">
-          <button
-            onClick={handleTestDrive}
-            className="px-2 sm:px-3 md:px-5 py-1.5 sm:py-2 md:py-3 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-            style={{ borderRadius: "8px" }}
-            type="button"
-          >
-            TEST DRIVE
-          </button>
+{/* Hero Banner Section - Mobile responsive like Riddara */}
+      <div className="relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col">
+        <div className="absolute inset-0">
+          <img
+            src={ForthingBanner}
+            alt="Forthing Hero Banner"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/10"></div>
         </div>
-
-        {/* Action Buttons - Mobile responsive layout */}
-        <div className="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+        
+        <div className="relative z-10 h-full flex flex-col flex-1">
+          <div className="flex-1 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24">
+            <div className="text-white max-w-lg text-center ml-8 sm:ml-12 md:ml-16 lg:ml-20">
+              {/* You can add banner content here if needed */}
+            </div>
+          </div>
+          
+          {/* WhatsApp Button - Top Right */}
           <button
-            onClick={handleBookNow}
-            className="px-3 sm:px-4 md:px-8 py-2 sm:py-3 md:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
-            style={{ borderRadius: "8px" }}
+            onClick={handleWhatsAppClick}
+            className="absolute top-6 md:top-8 right-4 md:right-8 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
+            title="Chat on WhatsApp"
           >
-            BOOK NOW
+            <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
           </button>
-          <button
-            className="px-3 sm:px-4 md:px-8 py-2 sm:py-3 md:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-xs sm:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
-            style={{ borderRadius: "8px" }}
-          >
-            BROCHURE
-          </button>
-        </div>
-      </div>
 
-      {/* Specifications Section - Mobile optimized */}
-      <div className="bg-white py-4 sm:py-6 px-4 sm:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center items-center">
-            <div className="flex flex-col sm:flex-row items-center bg-transparent rounded-lg p-2 sm:p-4 shadow-sm w-full sm:w-auto">
-              <div className="flex flex-col items-center px-3 sm:px-6 mb-4 sm:mb-0">
-                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  UP TO
-                </p>
-                <h3 className="text-lg sm:text-xl font-light text-gray-700 mb-1">
-                  1100 Km*
-                </h3>
-                <p className="text-gray-500 text-xs">Driving Range</p>
-              </div>
-              <div className="flex flex-col items-center px-3 sm:px-6 mb-4 sm:mb-0 border-t sm:border-t-0 sm:border-l sm:border-r border-gray-300 pt-4 sm:pt-0 sm:mx-4 w-full sm:w-auto">
-                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  AS FAST AS
-                </p>
-                <h3 className="text-lg sm:text-xl font-light text-gray-700 mb-1">
-                  10.9 Sec*
-                </h3>
-                <p className="text-gray-500 text-xs">To Reach 100</p>
-              </div>
-              <div className="flex flex-col items-center px-3 sm:px-6 border-t sm:border-t-0 border-gray-300 pt-4 sm:pt-0">
-                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  UP TO
-                </p>
-                <h3 className="text-lg sm:text-xl font-light text-gray-700 mb-1">
-                  31.94 KWh*
-                </h3>
-                <p className="text-gray-500 text-xs">Capacity</p>
-              </div>
+          {/* Mobile Buttons positioned at bottom corners - icons only */}
+          <div className="md:hidden absolute bottom-4 left-4 right-4 flex justify-between items-end">
+            {/* Test Drive button - Bottom Left (Icon only) */}
+            <button
+              onClick={handleTestDrive}
+              className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+              title="Test Drive"
+            >
+              <Play className="w-5 h-5" />
+            </button>
+
+            {/* Book Now and Brochure buttons - Bottom Right (Icons only) */}
+            <div className="flex space-x-3">
+              <button
+                onClick={handleBookNow}
+                className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+                title="Book Now"
+              >
+                <Calendar className="w-5 h-5" />
+              </button>
+              <button
+                className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+                title="Download Brochure"
+              >
+                <Download className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop Buttons positioned at bottom corners */}
+          <div className="hidden md:flex absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 justify-between">
+            {/* Test Drive button - Bottom Left */}
+            <button
+              onClick={handleTestDrive}
+              className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+              style={{ borderRadius: "8px" }}
+            >
+              TEST DRIVE
+            </button>
+
+            {/* Book Now and Brochure buttons - Bottom Right */}
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+              <button
+                onClick={handleBookNow}
+                className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+                style={{ borderRadius: "8px" }}
+              >
+                BOOK NOW
+              </button>
+              <button
+                className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+                style={{ borderRadius: "8px" }}
+              >
+                BROCHURE
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Car Gallery Section with Color Selector */}
+      {/* Specifications Section - Mobile responsive like Riddara */}
+      <div className="bg-white py-6 md:py-8 px-4 sm:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex justify-center items-center">
+            <div className="flex flex-row items-center bg-transparent rounded-lg p-4 shadow-sm space-x-6 md:space-x-8">
+              <div className="flex flex-col items-center px-3 md:px-6">
+                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
+                  UP TO
+                </p>
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
+                  1100 Km*
+                </h3>
+                <p className="text-gray-500 text-xs text-center">Driving Range</p>
+              </div>
+              <div className="flex flex-col items-center px-3 md:px-6 border-l border-r border-gray-300 mx-4">
+                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
+                  AS FAST AS
+                </p>
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
+                  10.9 Sec*
+                </h3>
+                <p className="text-gray-500 text-xs text-center">To Reach 100</p>
+              </div>
+              <div className="flex flex-col items-center px-3 md:px-6">
+                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
+                  UP TO
+                </p>
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
+                  31.94 KWh*
+                </h3>
+                <p className="text-gray-500 text-xs text-center">Capacity</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>     {/* Car Gallery Section with Color Selector */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-8 px-4 relative min-h-[600px]">
         <div className="max-w-7xl mx-auto relative">
           {/* Color selector dots - positioned top right */}
