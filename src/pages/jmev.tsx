@@ -4,7 +4,7 @@ import {
   ChevronRight,
   ArrowLeft,
   MessageCircle,
-  Play,
+  CarIcon,
   Calendar,
   Download,
 } from "lucide-react";
@@ -373,16 +373,14 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="w-full">
-      {/* Back to Home Button - Mobile responsive positioning */}
+    <div className="w-full overflow-x-hidden">
+      {/* Back to Home Button - Same styling as Riddara */}
       <button
         onClick={onBack}
         className="fixed top-20 md:top-24 left-4 md:left-6 z-50 flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
       >
-        <ArrowLeft className="w-4 md:w-5 h-4 md:h-5 text-gray-700" />
-        <span className="text-xs md:text-sm font-medium text-gray-700">
-          Back to Home
-        </span>
+        <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+        <span className="text-xs md:text-sm font-medium text-gray-700 hidden sm:inline">Back to Home</span>
       </button>
 
       {/* Hero Banner Section */}
@@ -417,7 +415,7 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
               className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
               title="Test Drive"
             >
-              <Play className="w-5 h-5" />
+              <CarIcon className="w-5 h-5" />
             </button>
 
             {/* Book Now and Brochure buttons - Bottom Right (Icons only) */}

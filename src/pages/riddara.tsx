@@ -4,9 +4,9 @@ import {
   ChevronRight,
   ArrowLeft,
   MessageCircle,
-  Play,
   Calendar,
   Download,
+  CarIcon,
 } from "lucide-react";
 import whiteCar from "../assets/car_white.webp";
 import blueCar from "../assets/car_blue.webp";
@@ -349,7 +349,7 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
               className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
               title="Test Drive"
             >
-              <Play className="w-5 h-5" />
+              <CarIcon className="w-5 h-5" />
             </button>
 
             {/* Book Now and Brochure buttons - Bottom Right (Icons only) */}
