@@ -451,41 +451,54 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
       </div>
 
       {/* Specifications Section */}
-      <div className="bg-white py-6 md:py-8 px-4 sm:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex justify-center items-center">
-            <div className="flex flex-row items-center bg-transparent rounded-lg p-4 shadow-sm space-x-6 md:space-x-8">
-              <div className="flex flex-col items-center px-3 md:px-6">
-                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  UP TO
-                </p>
-                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
-                  1100 Km*
-                </h3>
-                <p className="text-gray-500 text-xs text-center">Driving Range</p>
-              </div>
-              <div className="flex flex-col items-center px-3 md:px-6 border-l border-r border-gray-300 mx-4">
-                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  AS FAST AS
-                </p>
-                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
-                  10.9 Sec*
-                </h3>
-                <p className="text-gray-500 text-xs text-center">To Reach 100</p>
-              </div>
-              <div className="flex flex-col items-center px-3 md:px-6">
-                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  UP TO
-                </p>
-                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
-                  31.94 KWh*
-                </h3>
-                <p className="text-gray-500 text-xs text-center">Capacity</p>
-              </div>
+       <div className="bg-white py-6 md:py-8 px-4 sm:px-8">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex justify-center items-center">
+          <div className="flex flex-row items-center bg-transparent rounded-lg p-2 sm:p-3 md:p-4 shadow-sm space-x-2 sm:space-x-4 md:space-x-6">
+            
+            {/* Driving Range */}
+            <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 min-w-0">
+              <p className="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mb-0.5 uppercase tracking-wide">
+                UP TO
+              </p>
+              <h3 className="text-sm sm:text-base md:text-lg font-light text-gray-700 mb-0.5">
+                1100 Km*
+              </h3>
+              <p className="text-gray-500 text-[9px] sm:text-[10px] md:text-xs text-center">
+                Driving Range
+              </p>
             </div>
+
+            {/* Acceleration - with borders */}
+            <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 border-l border-r border-gray-300 min-w-0">
+              <p className="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mb-0.5 uppercase tracking-wide">
+                AS FAST AS
+              </p>
+              <h3 className="text-sm sm:text-base md:text-lg font-light text-gray-700 mb-0.5">
+                10.9 Sec*
+              </h3>
+              <p className="text-gray-500 text-[9px] sm:text-[10px] md:text-xs text-center">
+                To Reach 100
+              </p>
+            </div>
+
+            {/* Capacity */}
+            <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 min-w-0">
+              <p className="text-[9px] sm:text-[10px] md:text-xs text-gray-400 mb-0.5 uppercase tracking-wide">
+                UP TO
+              </p>
+              <h3 className="text-sm sm:text-base md:text-lg font-light text-gray-700 mb-0.5">
+                31.94 KWh*
+              </h3>
+              <p className="text-gray-500 text-[9px] sm:text-[10px] md:text-xs text-center">
+                Capacity
+              </p>
+            </div>
+            
           </div>
         </div>
       </div>
+    </div>
 
       {/* Car Gallery Section with Color Selector */}
       <div className="bg-gradient-to-b from-gray-50 to-white py-6 sm:py-8 px-2 sm:px-4 relative min-h-[350px] sm:min-h-[600px]">
