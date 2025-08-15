@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
-  Play,
+  CarIcon,
   Calendar,
   Download,
   ArrowLeft,
@@ -54,20 +54,19 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [currentSlideIndex2, setCurrentSlideIndex2] = useState(0);
   const [currentSlideIndex3, setCurrentSlideIndex3] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [showTestDrive, setShowTestDrive] = useState(false);
   const [showTestDrivePage, setShowTestDrivePage] = useState(false);
 
   // Handle responsive design
   useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 768);
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
 
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+    return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
   // WhatsApp function
@@ -111,10 +110,10 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
         {/* Transparent back button overlay - Mobile responsive */}
         <button
           onClick={handleBackFromTestDrive}
-          className="fixed top-16 sm:top-24 left-3 sm:left-6 z-[999] flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+          className="fixed top-20 md:top-24 left-4 md:left-6 z-[999] flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
         >
-          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-          <span className="text-xs sm:text-sm font-medium text-gray-700">
+          <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+          <span className="text-xs md:text-sm font-medium text-gray-700 hidden sm:inline">
             Back to Forthing
           </span>
         </button>
@@ -132,10 +131,10 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
         {/* Transparent back button overlay - Mobile responsive */}
         <button
           onClick={handleBackFromTestDrivePage}
-          className="fixed top-16 sm:top-24 left-3 sm:left-6 z-[999] flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+          className="fixed top-20 md:top-24 left-4 md:left-6 z-[999] flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
         >
-          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-          <span className="text-xs sm:text-sm font-medium text-gray-700">
+          <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+          <span className="text-xs md:text-sm font-medium text-gray-700 hidden sm:inline">
             Back to Forthing
           </span>
         </button>
@@ -273,7 +272,8 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
       image: adasD,
       title: "⦁	Lane Keep Assist Adaptive Cruise Control",
       description:
-        "maintains a set speed while automatically adjusting to the flow of traffic, ensuring a smooth and safe driving experience.",},
+        "maintains a set speed while automatically adjusting to the flow of traffic, ensuring a smooth and safe driving experience.",
+    },
     {
       image: adasE,
       title: "C360° Surround View Camera",
@@ -284,7 +284,7 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
 
   // Helper function to get max slide index
   const getMaxIndex = (slidesLength: number) => {
-    return Math.max(0, slidesLength - (isDesktop ? 2 : 1));
+    return Math.max(0, slidesLength - (isMobile ? 1 : 3));
   };
 
   // Car navigation functions
@@ -354,16 +354,16 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
 
   return (
     <div className="w-full overflow-x-hidden">
-      {/* Back to Home Button - Mobile responsive positioning */}
+      {/* Back to Home Button - Same styling as Riddara */}
       <button
         onClick={onBack}
-        className="fixed top-16 sm:top-24 left-3 sm:left-6 z-50 flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+        className="fixed top-20 md:top-24 left-4 md:left-6 z-50 flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
       >
-        <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-700" />
-        <span className="text-xs sm:text-sm font-medium text-gray-700">Back to Home</span>
+        <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+        <span className="text-xs md:text-sm font-medium text-gray-700 hidden sm:inline">Back to Home</span>
       </button>
 
-{/* Hero Banner Section - Mobile responsive like Riddara */}
+      {/* Hero Banner Section */}
       <div className="relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col">
         <div className="absolute inset-0">
           <img
@@ -398,7 +398,7 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
               className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
               title="Test Drive"
             >
-              <Play className="w-5 h-5" />
+              <CarIcon className="w-5 h-5" />
             </button>
 
             {/* Book Now and Brochure buttons - Bottom Right (Icons only) */}
@@ -450,7 +450,7 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
         </div>
       </div>
 
-      {/* Specifications Section - Mobile responsive like Riddara */}
+      {/* Specifications Section */}
       <div className="bg-white py-6 md:py-8 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center items-center">
@@ -485,18 +485,20 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
             </div>
           </div>
         </div>
-      </div>     {/* Car Gallery Section with Color Selector */}
-      <div className="bg-gradient-to-b from-gray-50 to-white py-8 px-4 relative min-h-[600px]">
+      </div>
+
+      {/* Car Gallery Section with Color Selector */}
+      <div className="bg-gradient-to-b from-gray-50 to-white py-6 sm:py-8 px-2 sm:px-4 relative min-h-[350px] sm:min-h-[600px]">
         <div className="max-w-7xl mx-auto relative">
           {/* Color selector dots - positioned top right */}
-          <div className="absolute top-4 right-4 z-20 flex space-x-2">
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20 flex flex-wrap gap-1 sm:gap-2 max-w-16 sm:max-w-none justify-end">
             {cars.map((car, index) => (
               <button
                 key={index}
                 onClick={() => selectCar(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 border border-gray-300 ${
+                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 border border-gray-300 ${
                   currentCarIndex === index
-                    ? "ring-2 ring-gray-600 ring-offset-2"
+                    ? "ring-1 sm:ring-2 ring-gray-600 ring-offset-1 sm:ring-offset-2"
                     : ""
                 }`}
                 style={getColorStyle(index)}
@@ -508,21 +510,21 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
           {/* Navigation arrows on sides */}
           <button
             onClick={prevCar}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 transition-colors bg-white/50 rounded-full backdrop-blur-sm"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
 
           <button
             onClick={nextCar}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 transition-colors bg-white/50 rounded-full backdrop-blur-sm"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
 
           {/* Car image centered */}
-          <div className="flex justify-center items-center h-full py-12">
-            <div className="w-full max-w-4xl">
+          <div className="flex justify-center items-center h-full py-6 sm:py-12">
+            <div className="w-full max-w-xs sm:max-w-4xl px-4 sm:px-8">
               <img
                 src={cars[currentCarIndex].image}
                 alt={`Forthing ${cars[currentCarIndex].color} car`}
@@ -532,59 +534,67 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
           </div>
 
           {/* Gallery Bottom Line - Small decorative line */}
-          <div className="flex items-center justify-center mt-4 mb-8">
-            <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent rounded-full opacity-60"></div>
+          <div className="flex items-center justify-center mt-2 sm:mt-4 mb-4 sm:mb-8">
+            <div className="w-12 sm:w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent rounded-full opacity-60"></div>
           </div>
         </div>
       </div>
 
       {/* Advanced Driving Dynamics Section */}
-      <div className="bg-white py-16 px-4">
+      <div className="bg-white pt-2 pb-8 sm:py-16 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Title with Lines on Both Sides */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-8">
-              <div className="flex-1 h-px bg-gray-400 max-w-24"></div>
-              <h2 className="px-6 text-lg font-medium text-gray-800 tracking-wider">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-6 sm:mb-8">
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
+              <h2 className="px-3 sm:px-6 text-sm sm:text-lg font-medium text-gray-800 tracking-wider">
                 ADVANCED DRIVING DYNAMICS
               </h2>
-              <div className="flex-1 h-px bg-gray-400 max-w-24"></div>
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
             </div>
           </div>
 
           {/* Slider Container */}
-          <div className="relative">
-            {/* Main Slide Display - Show 2 at a time on desktop, 1 on mobile */}
+          <div className="relative px-4 sm:px-8">
+            {/* Main Slide Display */}
             <div className="relative overflow-hidden">
               <div
-                className="flex transition-transform duration-500 ease-in-out gap-6"
+                className="flex transition-transform duration-500 ease-in-out gap-3 sm:gap-6"
                 style={{
                   transform: `translateX(-${
-                    currentSlideIndex * (isDesktop ? 50 : 100)
+                    currentSlideIndex * (isMobile ? 100 : 100 / 3)
                   }%)`,
+                  paddingRight: isMobile ? '2rem' : '4rem',
+                  paddingLeft: isMobile ? '0.5rem' : '1rem',
                 }}
               >
                 {slides.map((slide, index) => (
                   <div
                     key={index}
-                    className="w-full md:w-1/2 flex-shrink-0 px-2"
+                    className="w-full md:w-1/3 flex-shrink-0 px-1 sm:px-2"
+                    style={{
+                      minWidth: isMobile ? 'calc(100% - 3rem)' : 'calc(33.333% - 1rem)'
+                    }}
                   >
-                    <div className="bg-white rounded-lg overflow-hidden group cursor-pointer">
+                    <div className="bg-white rounded-lg overflow-hidden group cursor-pointer shadow-lg">
                       {/* Image with hover zoom effect */}
-                      <div className="relative overflow-hidden">
+                      <div className="relative overflow-hidden h-48 sm:h-96">
                         <img
                           src={slide.image}
                           alt={slide.title}
-                          className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       </div>
 
                       {/* Text Content Below Image - Left Aligned with Gray Background */}
-                      <div className="p-4 md:p-6 text-left bg-gray-100">
-                        <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 md:mb-3">
-                          {slide.title}
-                        </h3>
-                        <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+                      <div className="p-3 sm:p-6 text-left bg-gray-100">
+                        <div className="mb-2 sm:mb-3">
+                          <div className="w-6 sm:w-8 h-px bg-gray-400 mb-2 sm:mb-3"></div>
+                          <h3 className="text-sm sm:text-lg font-semibold text-gray-800">
+                            {slide.title}
+                          </h3>
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                           {slide.description}
                         </p>
                       </div>
@@ -597,27 +607,45 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+              className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
 
             <button
               onClick={nextSlide}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+              className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
+
+            {/* Slide Indicators */}
+            <div className="flex justify-center mt-4 sm:mt-8 space-x-2">
+              {Array.from(
+                { length: Math.max(1, slides.length - (isMobile ? 0 : 2)) },
+                (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlideIndex(index)}
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                      currentSlideIndex === index
+                        ? "bg-gray-800 w-4 sm:w-8"
+                        : "bg-gray-300 hover:bg-gray-400"
+                    }`}
+                  />
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main Vehicle Gallery Section */}
-      <div className="bg-white py-8 px-4">
+      <div className="bg-white py-4 sm:py-8 px-2 sm:px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {/* Top - Large banner image spanning full width */}
-            <div className="w-full">
+            <div className="w-full rounded-lg overflow-hidden">
               <img
                 src={ForthingBig}
                 alt="Forthing Main Vehicle"
@@ -626,15 +654,15 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
             </div>
 
             {/* Bottom - Two smaller images side by side */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+              <div className="w-full rounded-lg overflow-hidden">
                 <img
                   src={ForthingLeft}
                   alt="Forthing Side View"
                   className="w-full h-auto object-contain"
                 />
               </div>
-              <div className="w-full">
+              <div className="w-full rounded-lg overflow-hidden">
                 <img
                   src={ForthingRight}
                   alt="Forthing Front View"
@@ -647,39 +675,44 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
       </div>
 
       {/* Interior Features Section */}
-      <div className="bg-gray-50 py-16 px-4">
+      <div className="bg-gray-50 py-8 sm:py-16 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Title with Lines on Both Sides */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-8">
-              <div className="flex-1 h-px bg-gray-400 max-w-24"></div>
-              <h2 className="px-6 text-lg font-medium text-gray-800 tracking-wider">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-6 sm:mb-8">
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
+              <h2 className="px-3 sm:px-6 text-sm sm:text-lg font-medium text-gray-800 tracking-wider">
                 INTERIOR FEATURES
               </h2>
-              <div className="flex-1 h-px bg-gray-400 max-w-24"></div>
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
             </div>
           </div>
 
           {/* Slider Container */}
-          <div className="relative">
-            {/* Main Slide Display - Show 2 at a time on desktop, 1 on mobile */}
+          <div className="relative px-4 sm:px-8">
+            {/* Main Slide Display */}
             <div className="relative overflow-hidden">
               <div
-                className="flex transition-transform duration-500 ease-in-out gap-6"
+                className="flex transition-transform duration-500 ease-in-out gap-3 sm:gap-6"
                 style={{
                   transform: `translateX(-${
-                    currentSlideIndex2 * (isDesktop ? 50 : 100)
+                    currentSlideIndex2 * (isMobile ? 100 : 100 / 3)
                   }%)`,
+                  paddingRight: isMobile ? '2rem' : '4rem',
+                  paddingLeft: isMobile ? '0.5rem' : '1rem',
                 }}
               >
                 {slides2.map((slide, index) => (
                   <div
                     key={index}
-                    className="w-full md:w-1/2 flex-shrink-0 px-2"
+                    className="w-full md:w-1/3 flex-shrink-0 px-1 sm:px-2"
+                    style={{
+                      minWidth: isMobile ? 'calc(100% - 3rem)' : 'calc(33.333% - 1rem)'
+                    }}
                   >
-                    <div className="bg-white rounded-lg overflow-hidden group cursor-pointer">
+                    <div className="bg-white rounded-lg overflow-hidden group cursor-pointer shadow-lg">
                       {/* Image with hover zoom effect */}
-                      <div className="relative overflow-hidden">
+                      <div className="relative overflow-hidden" style={{ minHeight: '200px' }}>
                         <img
                           src={slide.image}
                           alt={slide.title}
@@ -688,11 +721,14 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
                       </div>
 
                       {/* Text Content Below Image - Left Aligned with Gray Background */}
-                      <div className="p-4 md:p-6 text-left bg-gray-100">
-                        <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 md:mb-3">
-                          {slide.title}
-                        </h3>
-                        <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+                      <div className="p-3 sm:p-6 text-left bg-gray-100">
+                        <div className="mb-2 sm:mb-3">
+                          <div className="w-6 sm:w-8 h-px bg-gray-400 mb-2 sm:mb-3"></div>
+                          <h3 className="text-sm sm:text-lg font-semibold text-gray-800">
+                            {slide.title}
+                          </h3>
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                           {slide.description}
                         </p>
                       </div>
@@ -705,22 +741,40 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide2}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+              className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
 
             <button
               onClick={nextSlide2}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+              className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
+
+            {/* Slide Indicators */}
+            <div className="flex justify-center mt-4 sm:mt-8 space-x-2">
+              {Array.from(
+                { length: Math.max(1, slides2.length - (isMobile ? 0 : 2)) },
+                (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlideIndex2(index)}
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                      currentSlideIndex2 === index
+                        ? "bg-gray-800 w-4 sm:w-8"
+                        : "bg-gray-300 hover:bg-gray-400"
+                    }`}
+                  />
+                )
+              )}
+            </div>
           </div>
 
           {/* Brochure Button - Bottom Right */}
-          <div className="flex justify-end mt-4">
-            <button className="px-8 py-3 bg-black text-white hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 rounded">
+          <div className="flex justify-center sm:justify-end mt-6 sm:mt-8">
+            <button className="px-6 sm:px-8 py-2.5 sm:py-3 bg-black text-white hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 rounded">
               BROCHURE
             </button>
           </div>
@@ -728,39 +782,44 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
       </div>
 
       {/* Security Features Section */}
-      <div className="bg-white py-16 px-4">
+      <div className="bg-white py-8 sm:py-16 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Title with Lines on Both Sides */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-8">
-              <div className="flex-1 h-px bg-gray-400 max-w-24"></div>
-              <h2 className="px-6 text-lg font-medium text-gray-800 tracking-wider">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-6 sm:mb-8">
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
+              <h2 className="px-3 sm:px-6 text-sm sm:text-lg font-medium text-gray-800 tracking-wider">
                 SECURITY FEATURES
               </h2>
-              <div className="flex-1 h-px bg-gray-400 max-w-24"></div>
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
             </div>
           </div>
 
           {/* Slider Container */}
-          <div className="relative">
-            {/* Main Slide Display - Show 2 at a time on desktop, 1 on mobile */}
+          <div className="relative px-4 sm:px-8">
+            {/* Main Slide Display */}
             <div className="relative overflow-hidden">
               <div
-                className="flex transition-transform duration-500 ease-in-out gap-6"
+                className="flex transition-transform duration-500 ease-in-out gap-3 sm:gap-6"
                 style={{
                   transform: `translateX(-${
-                    currentSlideIndex3 * (isDesktop ? 50 : 100)
+                    currentSlideIndex3 * (isMobile ? 100 : 100 / 3)
                   }%)`,
+                  paddingRight: isMobile ? '2rem' : '4rem',
+                  paddingLeft: isMobile ? '0.5rem' : '1rem',
                 }}
               >
                 {securitySlides.map((slide, index) => (
                   <div
                     key={index}
-                    className="w-full md:w-1/2 flex-shrink-0 px-2"
+                    className="w-full md:w-1/3 flex-shrink-0 px-1 sm:px-2"
+                    style={{
+                      minWidth: isMobile ? 'calc(100% - 3rem)' : 'calc(33.333% - 1rem)'
+                    }}
                   >
-                    <div className="bg-white rounded-lg overflow-hidden group cursor-pointer">
+                    <div className="bg-white rounded-lg overflow-hidden group cursor-pointer shadow-lg">
                       {/* Image with hover zoom effect */}
-                      <div className="relative overflow-hidden">
+                      <div className="relative overflow-hidden" style={{ minHeight: '200px' }}>
                         <img
                           src={slide.image}
                           alt={slide.title}
@@ -769,11 +828,14 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
                       </div>
 
                       {/* Text Content Below Image - Left Aligned with Gray Background */}
-                      <div className="p-4 md:p-6 text-left bg-gray-100">
-                        <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 md:mb-3">
-                          {slide.title}
-                        </h3>
-                        <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
+                      <div className="p-3 sm:p-6 text-left bg-gray-100">
+                        <div className="mb-2 sm:mb-3">
+                          <div className="w-6 sm:w-8 h-px bg-gray-400 mb-2 sm:mb-3"></div>
+                          <h3 className="text-sm sm:text-lg font-semibold text-gray-800">
+                            {slide.title}
+                          </h3>
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                           {slide.description}
                         </p>
                       </div>
@@ -786,25 +848,43 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide3}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+              className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
 
             <button
               onClick={nextSlide3}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+              className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
             </button>
+
+            {/* Slide Indicators */}
+            <div className="flex justify-center mt-4 sm:mt-8 space-x-2">
+              {Array.from(
+                { length: Math.max(1, securitySlides.length - (isMobile ? 0 : 2)) },
+                (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlideIndex3(index)}
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                      currentSlideIndex3 === index
+                        ? "bg-gray-800 w-4 sm:w-8"
+                        : "bg-gray-300 hover:bg-gray-400"
+                    }`}
+                  />
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Final Specifications Section */}
-      <div className="bg-white py-8 px-4">
+      <div className="bg-white py-4 sm:py-8 px-2 sm:px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="w-full">
+          <div className="w-full rounded-lg overflow-hidden">
             <img
               src={ForthingSpec}
               alt="Forthing Specifications"
@@ -813,8 +893,8 @@ export const Forthing: React.FC<ForthingProps> = ({ onBack }) => {
           </div>
 
           {/* Final decorative line at the bottom */}
-          <div className="flex items-center justify-center pt-8">
-            <div className="w-20 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent rounded-full opacity-60"></div>
+          <div className="flex items-center justify-center pt-4 sm:pt-8">
+            <div className="w-16 sm:w-20 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent rounded-full opacity-60"></div>
           </div>
         </div>
       </div>
