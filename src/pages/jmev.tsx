@@ -392,6 +392,7 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           backgroundPosition: "75% center",
         }}
       >
+        
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10 h-full flex flex-col flex-1">
           <div className="flex-1 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24">
