@@ -4,6 +4,9 @@ import {
   ChevronRight,
   ArrowLeft,
   MessageCircle,
+  Play,
+  Calendar,
+  Download,
 } from "lucide-react";
 
 import JMEVBanner from "../assets/HeroBanner/JMEVBanner.png";
@@ -377,87 +380,136 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
         className="fixed top-20 md:top-24 left-4 md:left-6 z-50 flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
       >
         <ArrowLeft className="w-4 md:w-5 h-4 md:h-5 text-gray-700" />
-        <span className="text-xs md:text-sm font-medium text-gray-700">Back to Home</span>
+        <span className="text-xs md:text-sm font-medium text-gray-700">
+          Back to Home
+        </span>
       </button>
 
       {/* Hero Banner Section */}
-      <div className="relative w-full">
-        <img
-          src={JMEVBanner}
-          alt="JMEV Hero Banner"
-          className="w-full h-auto object-cover"
-        />
-        {/* WhatsApp Button - Mobile responsive positioning */}
-        <button
-          onClick={handleWhatsAppClick}
-          className="absolute top-4 md:top-8 right-4 md:right-8 flex items-center justify-center w-10 md:w-12 h-10 md:h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
-          title="Chat on WhatsApp"
-        >
-          <MessageCircle className="w-5 md:w-6 h-5 md:h-6" />
-        </button>
+      <div
+        className="relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col"
+        style={{
+          backgroundImage: `url(${JMEVBanner})`,
+          backgroundSize: "cover",
+          backgroundPosition: "75% center",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative z-10 h-full flex flex-col flex-1">
+          <div className="flex-1 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24">
+            <div className="text-white max-w-lg"></div>
+          </div>
 
-        {/* Test Drive Button positioned at bottom left - Mobile responsive */}
-        <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8">
+          {/* WhatsApp Button - Top Right */}
           <button
-            onClick={handleTestDrive}
-            className="px-2 sm:px-3 md:px-5 py-2 md:py-3 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-            style={{ borderRadius: "8px" }}
-            type="button"
+            onClick={handleWhatsAppClick}
+            className="absolute top-4 md:top-8 right-4 md:right-8 flex items-center justify-center w-10 md:w-12 h-10 md:h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
+            title="Chat on WhatsApp"
           >
-            TEST DRIVE
+            <MessageCircle className="w-5 md:w-6 h-5 md:h-6" />
           </button>
-        </div>
 
-        {/* Buttons positioned at bottom right - Mobile responsive with better spacing */}
-        <div className="absolute bottom-4 md:bottom-8 right-4 md:right-8">
-          <div className="flex flex-col items-end gap-3 sm:flex-row sm:items-center sm:gap-3 md:gap-4">
+          {/* Mobile Buttons positioned at bottom corners - icons only */}
+          <div className="md:hidden absolute bottom-4 left-4 right-4 flex justify-between items-end">
+            {/* Test Drive button - Bottom Left (Icon only) */}
             <button
-              onClick={handleBookNow}
-              className="px-2 sm:px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
+              onClick={handleTestDrive}
+              className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+              title="Test Drive"
+            >
+              <Play className="w-5 h-5" />
+            </button>
+
+            {/* Book Now and Brochure buttons - Bottom Right (Icons only) */}
+            <div className="flex space-x-3">
+              <button
+                onClick={handleBookNow}
+                className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+                title="Book Now"
+              >
+                <Calendar className="w-5 h-5" />
+              </button>
+              <a
+                href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
+                download="JMEV-Elite-Brousher.pdf"
+                className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+                style={{ textDecoration: "none" }}
+                title="Download Brochure"
+              >
+                <Download className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Desktop Buttons positioned at bottom corners */}
+          <div className="hidden md:flex absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 justify-between">
+            {/* Test Drive button - Bottom Left */}
+            <button
+              onClick={handleTestDrive}
+              className="px-2 sm:px-3 md:px-5 py-2 md:py-3 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
               style={{ borderRadius: "8px" }}
               type="button"
             >
-              BOOK NOW
+              TEST DRIVE
             </button>
-            <a
-              href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
-              download="JMEV-Elite-Brousher.pdf"
-              className="px-2 sm:px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 text-center whitespace-nowrap block"
-              style={{ borderRadius: "8px", textDecoration: 'none' }}
-            >
-              BROCHURE
-            </a>
+
+            {/* Book Now and Brochure buttons - Bottom Right */}
+            <div className="flex flex-col items-end gap-3 sm:flex-row sm:items-center sm:gap-3 md:gap-4">
+              <button
+                onClick={handleBookNow}
+                className="px-2 sm:px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 whitespace-nowrap"
+                style={{ borderRadius: "8px" }}
+                type="button"
+              >
+                BOOK NOW
+              </button>
+              <a
+                href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
+                download="JMEV-Elite-Brousher.pdf"
+                className="px-2 sm:px-3 md:px-4 lg:px-8 py-2 md:py-3 lg:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-xs md:text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105 text-center whitespace-nowrap block"
+                style={{ borderRadius: "8px", textDecoration: "none" }}
+              >
+                BROCHURE
+              </a>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Specifications Section - Mobile responsive */}
-      <div className="bg-white py-4 px-4 md:px-8">
+      {/* Specifications Section - Identical on mobile and desktop */}
+      <div className="bg-white py-6 md:py-8 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center items-center">
-            <div className="flex flex-col sm:flex-row items-center bg-transparent rounded-lg p-2 md:p-4 shadow-sm w-full max-w-full">
-              <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 mb-4 sm:mb-0 min-w-0">
+            <div className="flex flex-row items-center bg-transparent rounded-lg p-4 shadow-sm space-x-6 md:space-x-8">
+              <div className="flex flex-col items-center px-3 md:px-6">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   UP TO
                 </p>
                 <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
-                  500 Km*
+                  632 Km*
                 </h3>
-                <p className="text-gray-500 text-xs text-center">Driving Range</p>
-              </div>
-              <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 border-t sm:border-t-0 sm:border-l sm:border-r border-gray-300 py-4 sm:py-0 sm:mx-2 md:mx-4 mb-4 sm:mb-0 min-w-0 w-full sm:w-auto">
-                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  Ultra Low
+                <p className="text-gray-500 text-xs text-center">
+                  Driving Range
                 </p>
-                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">0.26</h3>
-                <p className="text-gray-500 text-xs text-center">Wind Resistance</p>
               </div>
-              <div className="flex flex-col items-center px-3 sm:px-4 md:px-6 border-t sm:border-t-0 border-gray-300 pt-4 sm:pt-0 min-w-0">
+              <div className="flex flex-col items-center px-3 md:px-6 border-l border-r border-gray-300 mx-4">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
-                  Intelligent
+                  AS FAST AS
                 </p>
-                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">L 2.5</h3>
-                <p className="text-gray-500 text-xs text-center">Driving Assistant</p>
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
+                  4.5 Sec*
+                </h3>
+                <p className="text-gray-500 text-xs text-center">
+                  To Reach 100
+                </p>
+              </div>
+              <div className="flex flex-col items-center px-3 md:px-6">
+                <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
+                  UP TO
+                </p>
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
+                  86.56 KWh*
+                </h3>
+                <p className="text-gray-500 text-xs text-center">Capacity</p>
               </div>
             </div>
           </div>
@@ -692,13 +744,17 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
 
           <div className="flex justify-end mt-4">
             <a
-                href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
-                download="JMEV-Elite-Brousher.pdf"
-                className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-                style={{ borderRadius: "8px", textDecoration: 'none', display: 'inline-block' }}
-              >
-                BROCHURE
-              </a>
+              href="https://hrl-csm.com/old-files/Elight%20Brochure%20v16.pdf"
+              download="JMEV-Elite-Brousher.pdf"
+              className="px-4 sm:px-8 py-3 sm:py-4 border-2 border-white text-white bg-black transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+              style={{
+                borderRadius: "8px",
+                textDecoration: "none",
+                display: "inline-block",
+              }}
+            >
+              BROCHURE
+            </a>
           </div>
         </div>
       </div>
