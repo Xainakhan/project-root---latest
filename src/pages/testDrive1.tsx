@@ -375,78 +375,102 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
     );
   }
 
-  return (
+   return (
     <div className="w-full">
-      {/* Hero */}
+      {/* Hero Section */}
       <div className="relative w-full h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${testDrive})` }} />
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+          style={{ backgroundImage: `url(${testDrive})` }} 
+        />
         <div className="absolute inset-0 bg-black/40 z-10"></div>
-        <div className="relative z-20 flex items-center justify-center h-full">
-          <div className="text-center text-white max-w-2xl px-6">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-wider mb-8 drop-shadow-lg">BOOK YOUR DREAM CAR</h1>
-            <p className="text-lg md:text-xl leading-relaxed mb-12 opacity-90 drop-shadow-md max-w-lg mx-auto">
+        <div className="relative z-20 flex items-center justify-center h-full px-4">
+          <div className="text-center text-white max-w-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-wider mb-4 sm:mb-6 lg:mb-8 drop-shadow-lg">
+              BOOK YOUR DREAM CAR
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-12 opacity-90 drop-shadow-md max-w-lg mx-auto px-4">
               Pick your favorite EV and make it yours with proper convenience and ease.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Form */}
-      <div className="bg-gray-100 min-h-screen py-16">
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Step 1 */}
-          <div className="bg-gray-200/50 p-8 rounded-lg mb-8 relative">
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
+      {/* Form Section */}
+      <div className="bg-gray-100 min-h-screen py-8 sm:py-12 lg:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          
+          {/* Step 1: Choose Your Car */}
+          <div className="bg-gray-200/50 p-4 sm:p-6 lg:p-8 rounded-lg mb-6 sm:mb-8 relative overflow-hidden">
+            {/* Step indicator - adjusted for mobile */}
+            <div className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 -rotate-90 hidden sm:block">
               <div className="flex items-center">
-                <span className="text-gray-500/40 text-2xl font-bold tracking-widest mr-2">STEP</span>
-                <span className="text-gray-500/40 text-5xl font-bold">1</span>
+                <span className="text-gray-500/40 text-xl lg:text-2xl font-bold tracking-widest mr-1 lg:mr-2">STEP</span>
+                <span className="text-gray-500/40 text-3xl lg:text-5xl font-bold">1</span>
               </div>
             </div>
-            <div className="ml-28 flex items-center justify-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">CHOOSE YOUR CAR</h2>
+            
+            {/* Mobile step indicator */}
+            <div className="sm:hidden text-center mb-4">
+              <span className="text-gray-500 text-sm font-bold">STEP 1</span>
             </div>
-            <div className="ml-28 flex justify-center">
-              <button className="px-8 py-3 text-sm font-semibold rounded-md bg-black text-white cursor-default">RIDDARA</button>
-            </div>
-            <div className="ml-28 mt-12">
-              <h3 className="text-xl font-bold text-gray-800 text-center mb-6">
-                SELECT VARIANT <span className="text-red-500">*</span>
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {cars.map((car) => (
-                  <div
-                    key={car.id}
-                    className={`bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
-                      (selectedCar === car.id) ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
-                    }`}
-                    onClick={() => handleCarSelection(car.id)}
-                  >
-                    <div className="mb-4">
-                      <img src={car.image} alt={car.name} className="w-full h-24 object-contain" />
+
+            <div className="sm:ml-16 lg:ml-28">
+              <div className="flex items-center justify-center mb-4 sm:mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 text-center">CHOOSE YOUR CAR</h2>
+              </div>
+              <div className="flex justify-center mb-6 sm:mb-8">
+                <button className="px-6 sm:px-8 py-2 sm:py-3 text-sm font-semibold rounded-md bg-black text-white cursor-default">
+                  RIDDARA
+                </button>
+              </div>
+              <div className="mt-8 sm:mt-12">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
+                  SELECT VARIANT <span className="text-red-500">*</span>
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                  {cars.map((car) => (
+                    <div
+                      key={car.id}
+                      className={`bg-white p-3 sm:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
+                        (selectedCar === car.id) ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
+                      }`}
+                      onClick={() => handleCarSelection(car.id)}
+                    >
+                      <div className="mb-3 sm:mb-4">
+                        <img src={car.image} alt={car.name} className="w-full h-20 sm:h-24 object-contain" />
+                      </div>
+                      <h4 className="font-bold text-gray-800 text-center text-base sm:text-lg mb-1 sm:mb-2">
+                        {car.name}
+                      </h4>
+                      <p className="text-gray-600 text-xs sm:text-sm text-center">{car.subtitle}</p>
                     </div>
-                    <h4 className="font-bold text-gray-800 text-center text-lg mb-2">{car.name}</h4>
-                    <p className="text-gray-600 text-sm text-center">{car.subtitle}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Step 2 */}
+          {/* Step 2: Exterior Color */}
           {selectedCar && (
-            <div className="bg-gray-200/50 p-8 rounded-lg mb-8 relative">
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
+            <div className="bg-gray-200/50 p-4 sm:p-6 lg:p-8 rounded-lg mb-6 sm:mb-8 relative overflow-hidden">
+              <div className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 -rotate-90 hidden sm:block">
                 <div className="flex items-center">
-                  <span className="text-gray-500/40 text-2xl font-bold tracking-widest mr-2">STEP</span>
-                  <span className="text-gray-500/40 text-5xl font-bold">2</span>
+                  <span className="text-gray-500/40 text-xl lg:text-2xl font-bold tracking-widest mr-1 lg:mr-2">STEP</span>
+                  <span className="text-gray-500/40 text-3xl lg:text-5xl font-bold">2</span>
                 </div>
               </div>
-              <div className="ml-28">
-                <h3 className="text-xl font-bold text-gray-800 text-center mb-6">
+              
+              <div className="sm:hidden text-center mb-4">
+                <span className="text-gray-500 text-sm font-bold">STEP 2</span>
+              </div>
+
+              <div className="sm:ml-16 lg:ml-28">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
                   EXTERIOR COLOR <span className="text-red-500">*</span>
                 </h3>
                 <div className="relative w-full">
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2 sm:gap-4">
                     <button
                       onClick={prevColor}
                       className={`p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
@@ -454,22 +478,26 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
                       }`}
                       disabled={colorSliderIndex === 0}
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
-                    <div className="flex-1 mx-4 overflow-hidden">
+                    
+                    <div className="flex-1 overflow-hidden">
                       <div
-                        className="flex gap-4 transition-transform duration-300 ease-in-out"
-                        style={{ transform: `translateX(-${colorSliderIndex * getItemWidth()}px)` }}
+                        className="flex gap-2 sm:gap-4 transition-transform duration-300 ease-in-out"
+                        style={{ 
+                          transform: `translateX(-${colorSliderIndex * (getItemWidth() + (window.innerWidth < 640 ? 8 : 16))}px)` 
+                        }}
                       >
                         {getAvailableExteriorColors().map((color) => (
                           <div
                             key={color.id}
-                            className={`bg-white p-3 sm:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 flex-shrink-0 w-32 sm:w-36 md:w-40 ${
+                            className={`bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 flex-shrink-0 ${
                               (selectedExteriorColor === color.id) ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
                             }`}
+                            style={{ width: `${getItemWidth()}px` }}
                             onClick={() => handleExteriorColorSelection(color.id)}
                           >
-                            <div className="mb-3 h-20 sm:h-24 flex items-center justify-center overflow-hidden rounded">
+                            <div className="mb-2 sm:mb-3 h-16 sm:h-20 lg:h-24 flex items-center justify-center overflow-hidden rounded">
                               <img src={color.image} alt={color.name} className="w-full h-full object-contain" />
                             </div>
                             <p className="text-gray-800 text-center font-semibold text-xs sm:text-sm">{color.name}</p>
@@ -477,6 +505,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
                         ))}
                       </div>
                     </div>
+                    
                     <button
                       onClick={nextColor}
                       className={`p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
@@ -486,7 +515,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
                       }`}
                       disabled={colorSliderIndex >= getAvailableExteriorColors().length - getVisibleItemsCount()}
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                   </div>
                 </div>
@@ -494,26 +523,30 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
             </div>
           )}
 
-          {/* Step 3: Interior */}
+          {/* Step 3: Interior Color */}
           {selectedCar && selectedExteriorColor && (
-            <div className="bg-gray-200/50 p-8 rounded-lg mb-8 relative">
-              <div className="ml-28">
-                <h3 className="text-xl font-bold text-gray-800 text-center mb-6">
+            <div className="bg-gray-200/50 p-4 sm:p-6 lg:p-8 rounded-lg mb-6 sm:mb-8 relative overflow-hidden">
+              <div className="sm:hidden text-center mb-4">
+                <span className="text-gray-500 text-sm font-bold">INTERIOR COLOR</span>
+              </div>
+
+              <div className="sm:ml-16 lg:ml-28">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
                   INTERIOR COLOR <span className="text-red-500">*</span>
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   {getAvailableInteriorColors().map((color) => (
                     <div
                       key={color.id}
-                      className={`bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
+                      className={`bg-white p-3 sm:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
                         (selectedInteriorColor === color.id) ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
                       }`}
                       onClick={() => setSelectedInteriorColor(color.id)}
                     >
-                      <div className="mb-4 overflow-hidden rounded">
-                        <img src={color.image} alt={color.name} className="w-full h-32 object-contain" />
+                      <div className="mb-3 sm:mb-4 overflow-hidden rounded">
+                        <img src={color.image} alt={color.name} className="w-full h-24 sm:h-32 object-contain" />
                       </div>
-                      <p className="text-gray-800 text-center font-semibold">{color.name}</p>
+                      <p className="text-gray-800 text-center font-semibold text-sm sm:text-base">{color.name}</p>
                     </div>
                   ))}
                 </div>
@@ -866,8 +899,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({ onSubm
     </div>
   );
 };
-// over view
-
+// Order Review Component
 const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void }> = ({ orderData, onBackToVehicle }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -880,8 +912,6 @@ const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void 
 
   const cars = [
     { id: "RD6-2WD-Air", name: "Elite", subtitle: "Body Type : Sedan", image: car1, price: "7500000" },
-    // { id: "RD6-AWD-Pro", name: "RD6 AWD Pro", subtitle: "Body Type : Truck", image: car2, price: "8250000" },
-    // { id: "RD6-AWD-Ultra", name: "RD6 AWD Ultra", subtitle: "Body Type : Truck", image: car3, price: "8990000" },
   ];
 
   const exteriorColors = [
@@ -906,99 +936,135 @@ const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void 
   const advancePayment = Math.floor(basePrice * (advancePaymentPercentage / 100));
   const remainingAmount = basePrice - advancePayment;
 
+  const handleSubmitOrder = async () => {
+    if (submitting) return;
+    setSubmitting(true);
+    
+    try {
+      const bookingId = generateBookingId();
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      alert(`Order submitted successfully!
+Booking ID: ${bookingId}
+Email will be sent to: ${orderData.formData.email}
+
+Order Summary:
+- Vehicle: ${orderData.selectedBrand} ${selectedCarDetails?.name}
+- Total Price: ${basePrice.toLocaleString()} PKR
+- Advance Payment (${advancePaymentPercentage}%): ${advancePayment.toLocaleString()} PKR
+- Remaining: ${remainingAmount.toLocaleString()} PKR`);
+      
+    } catch (error) {
+      alert('Error submitting order. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {/* Back */}
-        <button onClick={onBackToVehicle} className="flex items-center text-gray-600 hover:text-gray-800 mb-6 sm:mb-8 transition-colors">
-          <ChevronLeft className="w-4 h-4 mr-2" /> Back to Vehicle
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
+        {/* Back Button */}
+        <button 
+          onClick={onBackToVehicle} 
+          className="flex items-center text-gray-600 hover:text-gray-800 mb-4 sm:mb-8 transition-colors touch-target"
+        >
+          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" /> 
+          <span className="text-sm sm:text-base">Back to Vehicle</span>
         </button>
 
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <div className="p-4 sm:p-8">
-            <h1 className="text-2xl sm:text-3xl font-light text-gray-800 mb-6 sm:mb-8">Review Your Order</h1>
+          <div className="p-4 sm:p-6 lg:p-8">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-light text-gray-800 mb-4 sm:mb-6 lg:mb-8">
+              Review Your Order
+            </h1>
 
-            <div className="flex flex-col lg:flex-row items-center justify-between mb-6 sm:mb-8">
-              <div className="w-full lg:w-1/2 mb-6 lg:mb-0">
+            {/* Vehicle Overview */}
+            <div className="flex flex-col lg:flex-row items-center justify-between mb-6 sm:mb-8 space-y-6 lg:space-y-0">
+              <div className="w-full lg:w-1/2 text-center lg:text-left">
                 <h2 className="text-lg sm:text-xl text-gray-700 mb-4 sm:mb-6">
                   {orderData.selectedBrand} {selectedCarDetails?.name || "Selected Vehicle"}
                 </h2>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 text-sm">
-                  <div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 text-xs sm:text-sm">
+                  <div className="text-center lg:text-left">
                     <div className="text-gray-500 mb-1">UP TO</div>
-                    <div className="text-lg sm:text-xl font-semibold text-gray-800">632 Km*</div>
+                    <div className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">632 Km*</div>
                     <div className="text-gray-500">Driving Range</div>
                   </div>
-                  <div>
+                  <div className="text-center lg:text-left">
                     <div className="text-gray-500 mb-1">AS FAST AS</div>
-                    <div className="text-lg sm:text-xl font-semibold text-gray-800">4.5 sec*</div>
+                    <div className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">4.5 sec*</div>
                     <div className="text-gray-500">To Reach 100</div>
                   </div>
-                  <div className="col-span-2 sm:col-span-1">
+                  <div className="col-span-2 sm:col-span-1 text-center lg:text-left">
                     <div className="text-gray-500 mb-1">UP TO</div>
-                    <div className="text-lg sm:text-xl font-semibold text-gray-800">86.56 KWh*</div>
+                    <div className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800">86.56 KWh*</div>
                     <div className="text-gray-500">Capacity</div>
                   </div>
                 </div>
               </div>
 
-              <div className="w-full lg:w-1/2 flex justify-center mt-4 sm:mt-0">
+              <div className="w-full lg:w-1/2 flex justify-center">
                 <img
                   src={selectedExteriorColorDetails?.image || img1}
                   alt={selectedExteriorColorDetails?.name || "Selected exterior color"}
-                  className="w-full max-w-xs sm:max-w-md h-auto object-contain"
+                  className="w-full max-w-xs sm:max-w-sm lg:max-w-md h-auto object-contain"
                 />
               </div>
             </div>
 
-            <button className="flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors w-full sm:w-auto justify-center">
+            <button className="flex items-center px-4 py-2 sm:py-3 border border-gray-300 rounded hover:bg-gray-50 transition-colors w-full sm:w-auto justify-center sm:justify-start text-sm sm:text-base">
               <Download className="w-4 h-4 mr-2" />
               Download Specs
             </button>
           </div>
 
-          <div className="border-t border-gray-200 p-4 sm:p-8">
+          {/* Order Details */}
+          <div className="border-t border-gray-200 p-4 sm:p-6 lg:p-8">
             <h3 className="text-lg sm:text-xl text-gray-700 mb-4 sm:mb-6">Order Details</h3>
 
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+              {/* Vehicle Details */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-1 sm:mb-0">Variant</span>
-                <div className="flex flex-col sm:flex-row sm:items-center">
-                  <span className="text-gray-800 sm:mr-4">{selectedCarDetails?.name || "Selected Variant"}</span>
-                  <span className="text-gray-800 font-semibold">{basePrice.toLocaleString()} PKR</span>
+                <span className="text-gray-600 mb-1 sm:mb-0 text-sm sm:text-base">Variant</span>
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4">
+                  <span className="text-gray-800 text-sm sm:text-base">{selectedCarDetails?.name || "Selected Variant"}</span>
+                  <span className="text-gray-800 font-semibold text-sm sm:text-base">{basePrice.toLocaleString()} PKR</span>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-1 sm:mb-0">Exterior color</span>
-                <div className="flex flex-col sm:flex-row sm:items-center">
-                  <span className="text-gray-800 sm:mr-4 capitalize">{selectedExteriorColorDetails?.name || "Selected Color"}</span>
-                  <div className="w-12 h-8 rounded mt-1 sm:mt-0">
+                <span className="text-gray-600 mb-1 sm:mb-0 text-sm sm:text-base">Exterior color</span>
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4">
+                  <span className="text-gray-800 capitalize text-sm sm:text-base">{selectedExteriorColorDetails?.name || "Selected Color"}</span>
+                  <div className="w-12 h-8 rounded overflow-hidden">
                     <img
                       src={selectedExteriorColorDetails?.image || img1}
                       alt={selectedExteriorColorDetails?.name || "Selected exterior color"}
-                      className="w-full h-full object-cover rounded"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-1 sm:mb-0">Interior color</span>
-                <div className="flex flex-col sm:flex-row sm:items-center">
-                  <span className="text-gray-800 sm:mr-4 capitalize">{selectedInteriorColorDetails?.name || "Selected Color"}</span>
-                  <div className="w-12 h-8 rounded mt-1 sm:mt-0">
+                <span className="text-gray-600 mb-1 sm:mb-0 text-sm sm:text-base">Interior color</span>
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4">
+                  <span className="text-gray-800 capitalize text-sm sm:text-base">{selectedInteriorColorDetails?.name || "Selected Color"}</span>
+                  <div className="w-12 h-8 rounded overflow-hidden">
                     <img
                       src={selectedInteriorColorDetails?.image || interiorblack}
                       alt={selectedInteriorColorDetails?.name || "Selected interior color"}
-                      className="w-full h-full object-cover rounded"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Rest of the order details fields */}
+              {/* Customer Information */}
               {[
                 { label: "Customer Name", value: `${orderData.formData.firstName} ${orderData.formData.lastName}` },
                 { label: "Father/Husband Name", value: orderData.formData.fatherHusbandName || "Not provided" },
@@ -1028,55 +1094,65 @@ const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void 
                 if (!field) return null;
                 return (
                   <div key={index} className={`flex flex-col sm:flex-row ${field.isTextArea ? '' : 'sm:items-center'} justify-between py-3 sm:py-4 border-b border-gray-100`}>
-                    <span className="text-gray-600 mb-1 sm:mb-0">{field.label}</span>
+                    <span className="text-gray-600 mb-1 sm:mb-0 text-sm sm:text-base font-medium sm:font-normal">{field.label}</span>
                     {field.isTextArea ? (
-                      <span className="text-gray-800 text-sm bg-gray-50 p-3 rounded">{field.value}</span>
+                      <div className="text-gray-800 text-xs sm:text-sm bg-gray-50 p-3 rounded max-w-full sm:max-w-md">
+                        {field.value}
+                      </div>
                     ) : (
-                      <span className="text-gray-800 text-right sm:text-left">{field.value}</span>
+                      <span className="text-gray-800 text-sm sm:text-base break-words">{field.value}</span>
                     )}
                   </div>
                 );
               })}
             </div>
 
-            {/* Pricing */}
-            <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-              <div className="flex justify-between py-2">
+            {/* Pricing Summary */}
+            <div className="mt-6 sm:mt-8 space-y-2 sm:space-y-4">
+              <div className="flex justify-between py-2 text-sm sm:text-base">
                 <span className="text-gray-600">Company Price</span>
-                <span className="text-gray-800">{basePrice.toLocaleString()} PKR</span>
+                <span className="text-gray-800 font-medium">{basePrice.toLocaleString()} PKR</span>
               </div>
-              <div className="flex justify-between py-2">
+              <div className="flex justify-between py-2 text-sm sm:text-base">
                 <span className="text-gray-600">Freight / Insurance Charges</span>
                 <span className="text-gray-800">0 PKR</span>
               </div>
-              <div className="flex justify-between py-2 border-t border-gray-200 pt-3 sm:pt-4">
+              <div className="flex justify-between py-2 border-t border-gray-200 pt-3 sm:pt-4 text-sm sm:text-base">
                 <span className="text-gray-700 font-medium">Gross Price</span>
                 <span className="text-gray-800 font-semibold">{basePrice.toLocaleString()} PKR</span>
               </div>
-              <div className="flex justify-between py-2 bg-blue-50 px-3 sm:px-4 rounded">
+              <div className="flex justify-between py-2 sm:py-3 bg-blue-50 px-3 sm:px-4 rounded text-sm sm:text-base">
                 <span className="text-gray-700 font-medium">Advance Payment ({advancePaymentPercentage}%)</span>
                 <span className="text-blue-600 font-semibold sm:text-lg">{advancePayment.toLocaleString()} PKR</span>
               </div>
-              <div className="flex justify-between py-2 border-b border-gray-200 pb-3 sm:pb-4">
+              <div className="flex justify-between py-2 border-b border-gray-200 pb-3 sm:pb-4 text-sm sm:text-base">
                 <span className="text-gray-700 font-medium">Remaining Amount</span>
                 <span className="text-gray-800 font-semibold">{remainingAmount.toLocaleString()} PKR</span>
               </div>
             </div>
 
-            <div className="mt-4 sm:mt-6 text-xs text-gray-500 space-y-1 sm:space-y-2">
+            {/* Disclaimers */}
+            <div className="mt-4 sm:mt-6 text-xs sm:text-sm text-gray-500 space-y-1 sm:space-y-2 leading-relaxed">
               <p>*Performance related metrics are based on controlled conditions. Actual performance will vary depending on driving behaviour, environment and other influencing factors.</p>
               <p><strong>Note:</strong> Bank charges may apply. The remaining amount of {remainingAmount.toLocaleString()} PKR will be due upon delivery.</p>
             </div>
 
-            {/* Actions */}
-            <div className="flex flex-col sm:flex-row sm:justify-between items-center mt-6 sm:mt-8 border-t border-gray-200 pt-4 sm:pt-6 gap-3 sm:gap-4">
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center mt-6 sm:mt-8 border-t border-gray-200 pt-4 sm:pt-6 gap-3 sm:gap-4">
               {/* Upload Pay Order */}
-              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-                <button onClick={handleUploadClick} className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+                <button 
+                  onClick={handleUploadClick} 
+                  className="flex items-center justify-center px-4 py-2 sm:py-3 border border-gray-300 rounded hover:bg-gray-50 transition-colors w-full sm:w-auto text-sm sm:text-base"
+                >
                   <Upload className="w-4 h-4 mr-2" />
-                  Upload Pay order Slip
+                  Upload Pay Order Slip
                 </button>
-                {uploadedFile && <span className="text-sm text-gray-600 text-center sm:text-left w-full sm:w-auto">{uploadedFile.name}</span>}
+                {uploadedFile && (
+                  <span className="text-xs sm:text-sm text-gray-600 text-center sm:text-left w-full sm:w-auto truncate px-2 sm:px-0">
+                    {uploadedFile.name}
+                  </span>
+                )}
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -1086,99 +1162,15 @@ const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void 
                 />
               </div>
 
-              {/* Save & Submit */}
-              <div className="flex gap-3 sm:gap-4 w-full sm:w-auto justify-center sm:justify-end">
+              {/* Save & Submit Button */}
+              <div className="flex justify-center sm:justify-end w-full sm:w-auto">
                 <button
-                  onClick={async () => {
-                    if (submitting) return;
-                    setSubmitting(true);
-                    try {
-                      const bookingId =
-                        "CSM-" +
-                        Date.now().toString().slice(-8) +
-                        Math.random().toString(36).substr(2, 4).toUpperCase();
-
-                      const fd = new FormData();
-                      fd.append("bookingId", bookingId);
-                      fd.append("selectedBrand", orderData.selectedBrand);
-                      fd.append("selectedCar", orderData.selectedCar);
-                      fd.append("selectedCarName", selectedCarDetails?.name || "");
-                      fd.append("selectedExteriorColor", orderData.selectedExteriorColor);
-                      fd.append("selectedInteriorColor", orderData.selectedInteriorColor);
-
-                      const f = orderData.formData;
-                      fd.append("firstName", f.firstName);
-                      fd.append("lastName", f.lastName);
-                      fd.append("fatherHusbandName", f.fatherHusbandName);
-                      fd.append("gender", f.gender);
-                      fd.append("dateOfBirth", f.dateOfBirth);
-                      fd.append("email", f.email);
-                      fd.append("primaryPhone", f.primaryPhone);
-                      fd.append("secondaryPhone", f.secondaryPhone || "");
-                      fd.append("state", f.state);
-                      fd.append("city", f.city);
-                      fd.append("addressCNIC", f.addressCNIC);
-                      fd.append("individualCorporate", f.individualCorporate);
-                      fd.append("cnic", f.cnic);
-                      fd.append("statusFilter", f.statusFilter);
-                      fd.append("salesTaxRegistration", f.salesTaxRegistration);
-                      fd.append("ntnNumber", f.ntnNumber);
-                      fd.append("advancePayment", f.advancePayment);
-                      fd.append("comments", f.comments || "");
-
-                      fd.append("basePrice", String(basePrice));
-                      fd.append("advanceAmount", String(advancePayment));
-                      fd.append("remainingAmount", String(remainingAmount));
-
-                      if (f.cnicFrontImage) fd.append("cnicFrontImage", f.cnicFrontImage);
-                      if (f.cnicBackImage) fd.append("cnicBackImage", f.cnicBackImage);
-                      if (uploadedFile) fd.append("payOrderSlip", uploadedFile);
-
-                      const res = await fetch(API_SAVE_ORDER, { method: "POST", body: fd });
-                      const json = await res.json();
-                      if (!res.ok || !json.success) throw new Error(json.error || "Failed to save order on server.");
-
-                      const frontUrl = ensureAbsoluteUrl(json.cnicFrontUrl);
-                      const backUrl  = ensureAbsoluteUrl(json.cnicBackUrl);
-                      const slipUrl  = ensureAbsoluteUrl(json.payOrderUrl);
-
-                      const emailResult = await sendVerificationEmail(orderData, {
-                        cnicFrontUrl: frontUrl,
-                        cnicBackUrl: backUrl,
-                        payOrderUrl: slipUrl,
-                        bookingId,
-                      });
-
-                      if (!emailResult || emailResult.success) {
-                        alert(
-                          `Order saved & email sent!
-Booking ID: ${bookingId}
-Email sent to: ${f.email}
-
-Order Summary:
-- Vehicle: ${orderData.selectedBrand} ${selectedCarDetails?.name}
-- Total Price: ${basePrice.toLocaleString()} PKR
-- Advance Payment (${advancePaymentPercentage}%): ${advancePayment.toLocaleString()} PKR
-- Remaining: ${remainingAmount.toLocaleString()} PKR`
-                        );
-                      } else {
-                        alert(
-                          `Order saved, but email failed to send.
-Booking ID: ${bookingId}
-Please try again later or contact support.`
-                        );
-                        console.error("Email error:", emailResult.error);
-                      }
-                    } catch (e: any) {
-                      console.error(e);
-                      alert(`Error: ${e?.message || e}`);
-                    } finally {
-                      setSubmitting(false);
-                    }
-                  }}
+                  onClick={handleSubmitOrder}
                   disabled={submitting}
-                  className={`px-6 py-2 rounded transition-colors w-full sm:w-auto ${
-                    submitting ? "bg-gray-400 text-white cursor-not-allowed" : "bg-black text-white hover:bg-gray-800"
+                  className={`w-full sm:w-auto px-6 sm:px-8 py-2 sm:py-3 rounded transition-colors text-sm sm:text-base font-semibold shadow-lg hover:shadow-xl ${
+                    submitting 
+                      ? "bg-gray-400 text-white cursor-not-allowed" 
+                      : "bg-black text-white hover:bg-gray-800"
                   }`}
                 >
                   {submitting ? "Submitting..." : "Save & Submit"}
@@ -1191,7 +1183,8 @@ Please try again later or contact support.`
     </div>
   );
 };
-// ---------- APP ----------
+
+// Main App Component
 const MainApp: React.FC = () => {
   const [currentView, setCurrentView] = useState<"testdrive" | "review">("testdrive");
   const [orderData, setOrderData] = useState<OrderData | null>(null);
@@ -1204,10 +1197,11 @@ const MainApp: React.FC = () => {
   const handleBackToVehicle = () => setCurrentView("testdrive");
 
   return (
-    <div>
+    <div className="min-h-screen">
       {currentView === "testdrive" && <EVTestDrive onSubmit={handleTestDriveSubmit} />}
-      {currentView === "review" && orderData && <OrderReview orderData={orderData} onBackToVehicle={handleBackToVehicle} />}
-      <div className="border-t border-gray-300" />
+      {currentView === "review" && orderData && (
+        <OrderReview orderData={orderData} onBackToVehicle={handleBackToVehicle} />
+      )}
     </div>
   );
 };
