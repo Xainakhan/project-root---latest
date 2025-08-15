@@ -4,6 +4,9 @@ import {
   ChevronRight,
   ArrowLeft,
   MessageCircle,
+  Play,
+  Calendar,
+  Download,
 } from "lucide-react";
 import whiteCar from "../assets/car_white.webp";
 import blueCar from "../assets/car_blue.webp";
@@ -308,33 +311,70 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
       {/* Back to Home Button - Fixed position moved down 3 inches (72px) */}
       <button
         onClick={onBack}
-        className="fixed top-24 left-6 z-50 flex items-center space-x-2 px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
+        className="fixed top-20 md:top-24 left-4 md:left-6 z-50 flex items-center space-x-2 px-3 md:px-4 py-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-lg hover:shadow-xl rounded-lg transition-all duration-300 border border-gray-200"
       >
-        <ArrowLeft className="w-5 h-5 text-gray-700" />
-        <span className="text-sm font-medium text-gray-700">Back to Home</span>
+        <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+        <span className="text-xs md:text-sm font-medium text-gray-700 hidden sm:inline">Back to Home</span>
       </button>
 
       {/* Hero Banner Section */}
       <div
-        className="relative h-screen bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${FrameRD})` }}
+        className="relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col"
+        style={{ 
+          backgroundImage: `url(${FrameRD})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center'
+        }}
       >
-        <div className="absolute inset-0"></div>
-        <div className="relative z-10 h-full flex flex-col">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative z-10 h-full flex flex-col flex-1">
           <div className="flex-1 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24">
             <div className="text-white max-w-lg"></div>
           </div>
+          
           {/* WhatsApp Button - Top Right */}
           <button
             onClick={handleWhatsAppClick}
-                     className="absolute top-8 right-8 flex items-center justify-center w-12 h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur  text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
+            className="absolute top-6 md:top-8 right-4 md:right-8 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black/20 hover:bg-black-900 border border-white backdrop-blur text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 z-30"
             title="Chat on WhatsApp"
           >
-            <MessageCircle className="w-6 h-6" />
+            <MessageCircle className="w-5 h-5 md:w-6 md:h-6" />
           </button>
 
-          {/* Buttons positioned at bottom corners */}
-          <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 flex justify-between">
+          {/* Mobile Buttons positioned at bottom corners - icons only */}
+          <div className="md:hidden absolute bottom-4 left-4 right-4 flex justify-between items-end">
+            {/* Test Drive button - Bottom Left (Icon only) */}
+            <button
+              onClick={handleTestDrive}
+              className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+              title="Test Drive"
+            >
+              <Play className="w-5 h-5" />
+            </button>
+
+            {/* Book Now and Brochure buttons - Bottom Right (Icons only) */}
+            <div className="flex space-x-3">
+              <button
+                onClick={handleBookNow}
+                className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-transparent hover:bg-white hover:text-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+                title="Book Now"
+              >
+                <Calendar className="w-5 h-5" />
+              </button>
+              <a
+                href="https://hrl-csm.com/old-files/Riddara%20RD6%20Brousher.pdf"
+                download="Riddara-RD6-Brousher.pdf"
+                className="flex items-center justify-center w-12 h-12 border-2 border-white text-white bg-black transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 rounded-lg backdrop-blur-sm"
+                style={{ textDecoration: 'none' }}
+                title="Download Brochure"
+              >
+                <Download className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Desktop Buttons positioned at bottom corners */}
+          <div className="hidden md:flex absolute bottom-4 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 justify-between">
             {/* Test Drive button - Bottom Left */}
             <button
               onClick={handleTestDrive}
@@ -361,43 +401,42 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
               >
                 BROCHURE
               </a>
-              
             </div>
           </div>
         </div>
       </div>
 
-      {/* Specifications Section */}
-      <div className="bg-white py-4 px-4 sm:px-8">
+      {/* Specifications Section - Identical on mobile and desktop */}
+      <div className="bg-white py-6 md:py-8 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center items-center">
-            <div className="flex flex-col sm:flex-row items-center bg-transparent rounded-lg p-4 shadow-sm space-y-4 sm:space-y-0">
-              <div className="flex flex-col items-center px-3 sm:px-6">
+            <div className="flex flex-row items-center bg-transparent rounded-lg p-4 shadow-sm space-x-6 md:space-x-8">
+              <div className="flex flex-col items-center px-3 md:px-6">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   UP TO
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
                   632 Km*
                 </h3>
-                <p className="text-gray-500 text-xs">Driving Range</p>
+                <p className="text-gray-500 text-xs text-center">Driving Range</p>
               </div>
-              <div className="flex flex-col items-center px-3 sm:px-6 sm:border-l sm:border-r border-gray-300 sm:mx-4">
+              <div className="flex flex-col items-center px-3 md:px-6 border-l border-r border-gray-300 mx-4">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   AS FAST AS
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
                   4.5 Sec*
                 </h3>
-                <p className="text-gray-500 text-xs">To Reach 100</p>
+                <p className="text-gray-500 text-xs text-center">To Reach 100</p>
               </div>
-              <div className="flex flex-col items-center px-3 sm:px-6">
+              <div className="flex flex-col items-center px-3 md:px-6">
                 <p className="text-xs text-gray-400 mb-1 uppercase tracking-wider">
                   UP TO
                 </p>
-                <h3 className="text-xl font-light text-gray-700 mb-1">
+                <h3 className="text-lg md:text-xl font-light text-gray-700 mb-1">
                   86.56 KWh*
                 </h3>
-                <p className="text-gray-500 text-xs">Capacity</p>
+                <p className="text-gray-500 text-xs text-center">Capacity</p>
               </div>
             </div>
           </div>
@@ -405,10 +444,10 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
       </div>
 
       {/* Car Gallery Section */}
-      <div className="bg-gradient-to-b from-gray-50 to-white py-6 sm:py-8 px-4 relative min-h-[400px] sm:min-h-[600px]">
+      <div className="bg-gradient-to-b from-gray-50 to-white py-6 sm:py-8 px-2 sm:px-4 relative min-h-[350px] sm:min-h-[600px]">
         <div className="max-w-7xl mx-auto relative">
           {/* Color selector dots */}
-          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20 flex flex-wrap gap-1 sm:gap-2 max-w-20 sm:max-w-none">
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 z-20 flex flex-wrap gap-1 sm:gap-2 max-w-16 sm:max-w-none justify-end">
             {cars.map((car, index) => (
               <button
                 key={index}
@@ -427,21 +466,21 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
           {/* Navigation arrows */}
           <button
             onClick={prevCar}
-            className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 transition-colors bg-white/50 rounded-full backdrop-blur-sm"
           >
-            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
 
           <button
             onClick={nextCar}
-            className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 transition-colors"
+            className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-1.5 sm:p-2 text-gray-400 hover:text-gray-600 transition-colors bg-white/50 rounded-full backdrop-blur-sm"
           >
-            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
           </button>
 
           {/* Car image centered */}
           <div className="flex justify-center items-center h-full py-6 sm:py-12">
-            <div className="w-full max-w-xs sm:max-w-4xl">
+            <div className="w-full max-w-xs sm:max-w-4xl px-4 sm:px-8">
               <img
                 src={cars[currentCarIndex].image}
                 alt={`Riddara ${cars[currentCarIndex].color} car`}
@@ -458,7 +497,7 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
       </div>
 
       {/* Advanced Driving Dynamics Section */}
-      <div className="bg-white py-8 sm:py-16 px-4">
+      <div className="bg-white pt-2 pb-8 sm:py-16 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Title with Lines on Both Sides */}
           <div className="text-center mb-8 sm:mb-12">
@@ -550,7 +589,7 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
       </div>
 
       {/* Banner and Images Section */}
-      <div className="bg-white py-4 sm:py-8 px-4">
+      <div className="bg-white py-4 sm:py-8 px-2 sm:px-4">
         <div className="max-w-7xl mx-auto">
           <div className="space-y-3 sm:space-y-4">
             <div className="rounded-lg overflow-hidden">
@@ -581,113 +620,115 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
         </div>
       </div>
 
-{/* Interior Features Section */}
-<div className="bg-gray-50 py-8 sm:py-16 px-4">
-  <div className="max-w-7xl mx-auto">
-    <div className="mb-8 sm:mb-12">
-      <div className="flex items-center justify-center mb-6 sm:mb-8">
-        <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
-        <h2 className="px-3 sm:px-6 text-sm sm:text-lg font-medium text-gray-800 tracking-wider">
-          INTERIOR FEATURES
-        </h2>
-        <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
-      </div>
-    </div>
+      {/* Interior Features Section */}
+      <div className="bg-gray-50 py-8 sm:py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8 sm:mb-12">
+            <div className="flex items-center justify-center mb-6 sm:mb-8">
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
+              <h2 className="px-3 sm:px-6 text-sm sm:text-lg font-medium text-gray-800 tracking-wider">
+                INTERIOR FEATURES
+              </h2>
+              <div className="flex-1 h-px bg-gray-400 max-w-8 sm:max-w-24"></div>
+            </div>
+          </div>
 
-    <div className="relative px-4 sm:px-8">
-      <div className="relative overflow-hidden">
-        <div
-          className="flex transition-transform duration-500 ease-in-out gap-3 sm:gap-6"
-          style={{
-            transform: `translateX(-${
-              currentSlideIndex2 * (isMobile ? (100 - 8) : (100 / 3))
-            }%)`,
-            paddingRight: isMobile ? '2rem' : '4rem', // Add right padding
-            paddingLeft: isMobile ? '0.5rem' : '1rem', // Add left padding
-          }}
-        >
-          {slides2.map((slide, index) => (
-            <div
-              key={index}
-              className="w-full md:w-1/3 flex-shrink-0 px-1 sm:px-2"
-              style={{
-                minWidth: isMobile ? 'calc(100% - 3rem)' : 'calc(33.333% - 1rem)' // Ensure proper width accounting for padding
-              }}
-            >
-              <div className="bg-white rounded-lg overflow-hidden shadow-lg group cursor-pointer">
-                <div className="relative overflow-hidden" style={{ minHeight: '200px' }}>
-                  <img
-                    src={slide.image}
-                    alt={slide.title}
-                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
+          <div className="relative px-4 sm:px-8">
+            <div className="relative overflow-hidden">
+              <div
+                className="flex transition-transform duration-500 ease-in-out gap-3 sm:gap-6"
+                style={{
+                  transform: `translateX(-${
+                    currentSlideIndex2 * (isMobile ? (100 - 8) : (100 / 3))
+                  }%)`,
+                  paddingRight: isMobile ? '2rem' : '4rem', // Add right padding
+                  paddingLeft: isMobile ? '0.5rem' : '1rem', // Add left padding
+                }}
+              >
+                {slides2.map((slide, index) => (
+                  <div
+                    key={index}
+                    className="w-full md:w-1/3 flex-shrink-0 px-1 sm:px-2"
+                    style={{
+                      minWidth: isMobile ? 'calc(100% - 3rem)' : 'calc(33.333% - 1rem)' // Ensure proper width accounting for padding
+                    }}
+                  >
+                    <div className="bg-white rounded-lg overflow-hidden shadow-lg group cursor-pointer">
+                      <div className="relative overflow-hidden" style={{ minHeight: '200px' }}>
+                        <img
+                          src={slide.image}
+                          alt={slide.title}
+                          className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
 
-                <div className="p-3 sm:p-6 bg-gray-100 text-left">
-                  <div className="mb-2 sm:mb-3">
-                    <div className="w-6 sm:w-8 h-px bg-gray-400 mb-2 sm:mb-3"></div>
-                    <h3 className="text-sm sm:text-lg font-semibold text-gray-800">
-                      {slide.title}
-                    </h3>
+                      <div className="p-3 sm:p-6 bg-gray-100 text-left">
+                        <div className="mb-2 sm:mb-3">
+                          <div className="w-6 sm:w-8 h-px bg-gray-400 mb-2 sm:mb-3"></div>
+                          <h3 className="text-sm sm:text-lg font-semibold text-gray-800">
+                            {slide.title}
+                          </h3>
+                        </div>
+                        <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                          {slide.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
-                    {slide.description}
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
-          ))}
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevSlide2}
+              className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+            >
+              <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
+            </button>
+
+            <button
+              onClick={nextSlide2}
+              className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
+            >
+              <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
+            </button>
+
+            {/* Slide Indicators */}
+            <div className="flex justify-center mt-4 sm:mt-8 space-x-2">
+              {Array.from(
+                { length: Math.max(1, slides2.length - (isMobile ? 0 : 2)) },
+                (_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlideIndex2(index)}
+                    className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                      currentSlideIndex2 === index
+                        ? "bg-gray-800 w-4 sm:w-8"
+                        : "bg-gray-300 hover:bg-gray-400"
+                    }`}
+                  />
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Brochure Button - Bottom Right */}
+          <div className="flex justify-center sm:justify-end mt-6 sm:mt-8">
+            <a
+              href="https://hrl-csm.com/old-files/Riddara%20RD6%20Brousher.pdf"
+              download="Riddara-RD6-Brousher.pdf"
+              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-black text-white hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
+              style={{ borderRadius: "4px", textDecoration: 'none', display: 'inline-block' }}
+            >
+              BROCHURE
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide2}
-        className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
-      >
-        <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
-      </button>
-
-      <button
-        onClick={nextSlide2}
-        className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 z-10 p-2 sm:p-3 bg-white rounded-full shadow-lg text-gray-600 hover:text-gray-800 hover:shadow-xl transition-all duration-300"
-      >
-        <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
-      </button>
-
-      {/* Slide Indicators */}
-      <div className="flex justify-center mt-4 sm:mt-8 space-x-2">
-        {Array.from(
-          { length: Math.max(1, slides2.length - (isMobile ? 0 : 2)) },
-          (_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlideIndex2(index)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                currentSlideIndex2 === index
-                  ? "bg-gray-800 w-4 sm:w-8"
-                  : "bg-gray-300 hover:bg-gray-400"
-              }`}
-            />
-          )
-        )}
-      </div>
-    </div>
-
-    {/* Brochure Button - Bottom Right */}
-    <div className="flex justify-center sm:justify-end mt-6 sm:mt-8">
-      <button
-        className="px-6 sm:px-8 py-2.5 sm:py-3 bg-black text-white hover:bg-gray-800 transition-all duration-300 text-sm font-semibold tracking-wide shadow-lg hover:shadow-xl transform hover:scale-105"
-        style={{ borderRadius: "4px" }}
-      >
-        BROCHURE
-      </button>
-    </div>
-  </div>
-</div>
-
       {/* Final Image Gallery Section */}
-      <div className="bg-white py-4 sm:py-8 px-4">
+      <div className="bg-white py-4 sm:py-8 px-2 sm:px-4">
         <div className="max-w-7xl mx-auto">
           <div className="space-y-3 sm:space-y-4">
             <div className="rounded-lg overflow-hidden">
@@ -753,6 +794,7 @@ export const RiddaraShowcase: React.FC<RiddaraProps> = ({ onBack }) => {
           </div>
         </div>
       </div>
+      
       {/* Newsletter Section */}
       <Newsletter />
       <div className="border-t border-gray-300" />
