@@ -17,7 +17,8 @@ import StoreLocation from "./pages/location";
 import CombinedCareer from "./pages/career";
 import TermsAndConditions from "./pages/termsAndConditions";
 import FAQPage from "./pages/faqs";
-
+import Vision from "./pages/vision"
+import Mission from "./pages/mission"
 // Component that handles navigation logic
 const AppContent = () => {
   const navigate = useNavigate();
@@ -104,8 +105,8 @@ const AppContent = () => {
           <Route path="/faqs" element={<FAQPage />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           {/* Vision and Mission routes - you can add actual components later */}
-          <Route path="/vision" element={<AboutPage />} />
-          <Route path="/mission" element={<AboutPage />} />
+          <Route path="/vision" element={<Vision />} />
+          <Route path="/mission" element={<Mission />} />
           {/* Catch all route - redirect to home */}
           <Route path="*" element={<HomePage />} />
         </Routes>

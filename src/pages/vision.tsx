@@ -12,7 +12,7 @@ import Newsletter from "../pages/newsLetter";
 
 // Reusable heading with lines
 
-export const AboutUs: React.FC = () => {
+export const Vision: React.FC = () => {
    
 
   return (
@@ -64,4 +64,4 @@ export const AboutUs: React.FC = () => {
   );
 };
 
-export default AboutUs;
+export default Vision;
