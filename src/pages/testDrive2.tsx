@@ -19,7 +19,9 @@ import testDrive from "../assets/Forthing/Grid/ForthingBig.png";
 import car1 from "../assets/Forthing/exterior/carBlack.png";
 import car2 from "../assets/Forthing/exterior/carBlack.png";
 import car3 from "../assets/Forthing/exterior/carBlack.png";
-// 
+// import car2 from "../assets/Forthing/exterior/carBlue.png";
+// import car3 from "../assets/Forthing/exterior/carGrey.png";
+
 import img1 from "../assets/Forthing/exterior/carBlack.png";
 import img2 from "../assets/Forthing/exterior/carBlue.png";
 import img3 from "../assets/Forthing/exterior/carGreen.png";
@@ -85,18 +87,18 @@ const generateBookingId = () =>
 
 const calculateBasePrice = (carId: string): number => {
   const prices: Record<string, number> = {
-    "RD6-2WD-Air": 7500000,
-    "RD6-AWD-Pro": 8250000,
-    "RD6-AWD-Ultra": 8990000,
+    "Friday-REEV": 7500000,
+    "Friday-BEV-Comfort": 8250000,
+    "Friday-BEV-Exclusive": 8990000,
   };
   return prices[carId] ?? 8990000;
 };
 
 const getCarName = (carId: string): string => {
   const carNames: Record<string, string> = {
-    "RD6-2WD-Air": "RD6 2WD Air",
-    "RD6-AWD-Pro": "RD6 AWD Pro",
-    "RD6-AWD-Ultra": "RD6 AWD Ultra",
+    "Friday-REEV": "Friday REEV",
+    "Friday-BEV-Comfort": "Friday BEV Comfort",
+    "Friday-BEV-Exclusive": "Friday BEV Exclusive",
   };
   return carNames[carId] || carId;
 };
@@ -224,7 +226,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     useState<string>("");
   const [selectedInteriorColor, setSelectedInteriorColor] =
     useState<string>("");
-  const [selectedBrand] = useState<string>("RIDDARA");
+  const [selectedBrand] = useState<string>("FORTHING");
   const [colorSliderIndex, setColorSliderIndex] = useState<number>(0);
   const [showTermsAndConditions, setShowTermsAndConditions] = useState(false);
 
@@ -272,14 +274,26 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
 
   const cars = [
     {
-      id: "RD6-2WD-Air",
+      id: "Friday-REEV",
       name: "Friday REEV",
       subtitle: "Body Type : SUV",
       image: car1,
       price: "7500000",
     },
-    { id: "RD6-AWD-Pro", name: "Friday BEV (Luxury)", subtitle: "Body Type : SUV", image: car2, price: "8250000" },
-    { id: "RD6-AWD-Ultra", name: " Friday BEV (Exclusive)", subtitle: "Body Type : SUV", image: car3, price: "8990000" },
+    {
+      id: "Friday-BEV-Comfort",
+      name: "Friday BEV Comfort",
+      subtitle: "Body Type : SUV",
+      image: car2,
+      price: "8250000",
+    },
+    {
+      id: "Friday-BEV-Exclusive",
+      name: "Friday BEV Exclusive",
+      subtitle: "Body Type : SUV",
+      image: car3,
+      price: "8990000",
+    },
   ];
 
   // FIXED: "whiteB" consistent with restrictions
@@ -298,7 +312,7 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
   ];
 
   const modelRestrictions: ModelRestrictions = {
-    "RD6-2WD-Air": {
+    "Friday-REEV": {
       exterior: {
         blue: ["black"],
         grey: ["black", "brown"],
@@ -307,16 +321,16 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
         white: ["black", "brown"],
       },
     },
-    "RD6-AWD-Pro": {
+    "Friday-BEV-Comfort": {
       exterior: {
-       blue: ["black"],
+        blue: ["black"],
         grey: ["black", "brown"],
         green: ["black"],
         black: ["black", "brown"],
         white: ["black", "brown"],
       },
     },
-    "RD6-AWD-Ultra": {
+    "Friday-BEV-Exclusive": {
       exterior: {
         blue: ["black"],
         grey: ["black", "brown"],
@@ -427,17 +441,23 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
     );
   }
 
-return (
+  return (
     <div className="w-full">
       {/* Hero */}
       <div className="relative w-full h-screen overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${testDrive})` }} />
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${testDrive})` }}
+        />
         <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="relative z-20 flex items-center justify-center h-full px-4">
           <div className="text-center text-white max-w-2xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wider mb-6 sm:mb-8 drop-shadow-lg">BOOK YOUR DREAM CAR</h1>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wider mb-6 sm:mb-8 drop-shadow-lg">
+              BOOK YOUR DREAM CAR
+            </h1>
             <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-12 opacity-90 drop-shadow-md max-w-lg mx-auto px-4">
-              Pick your favorite EV and make it yours with proper convenience and ease.
+              Pick your favorite EV and make it yours with proper convenience
+              and ease.
             </p>
           </div>
         </div>
@@ -448,40 +468,61 @@ return (
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Step 1 */}
           <div className="bg-gray-200/50 p-4 sm:p-8 rounded-lg mb-6 sm:mb-8 relative">
+            {/* Mobile Step Indicator */}
+            <div className="block sm:hidden text-center mb-4">
+              <span className="text-gray-500/60 text-lg font-bold">STEP 1</span>
+            </div>
+            {/* Desktop Step Indicator */}
             <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
               <div className="flex items-center">
-                <span className="text-gray-500/40 text-2xl font-bold tracking-widest mr-2">STEP</span>
-                <span className="text-gray-500/40 text-5xl font-bold">1</span>
+                <span className="text-gray-500/40 text-xl md:text-2xl font-bold tracking-widest mr-2">
+                  STEP
+                </span>
+                <span className="text-gray-500/40 text-4xl md:text-5xl font-bold">
+                  1
+                </span>
               </div>
             </div>
-            <div className="sm:ml-28">
-              <div className="flex items-center justify-center mb-4 sm:mb-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-800">CHOOSE YOUR CAR</h2>
-              </div>
-              <div className="flex justify-center mb-8 sm:mb-0">
-                <button className="px-6 sm:px-8 py-2 sm:py-3 text-sm font-semibold rounded-md bg-black text-white cursor-default">FORTHING</button>
-              </div>
-              <div className="mt-8 sm:mt-12">
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
-                  SELECT VARIANT <span className="text-red-500">*</span>
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {cars.map((car) => (
-                    <div
-                      key={car.id}
-                      className={`bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
-                        (selectedCar === car.id) ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
-                      }`}
-                      onClick={() => handleCarSelection(car.id)}
-                    >
-                      <div className="mb-4">
-                        <img src={car.image} alt={car.name} className="w-full h-20 sm:h-24 object-contain" />
-                      </div>
-                      <h4 className="font-bold text-gray-800 text-center text-base sm:text-lg mb-2">{car.name}</h4>
-                      <p className="text-gray-600 text-sm text-center">{car.subtitle}</p>
+            <div className="sm:ml-28 flex items-center justify-center mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+                CHOOSE YOUR CAR
+              </h2>
+            </div>
+            <div className="sm:ml-28 flex justify-center mb-6 sm:mb-0">
+              <button className="px-6 sm:px-8 py-2 sm:py-3 text-xs sm:text-sm font-semibold rounded-md bg-black text-white cursor-default">
+                FORTHING
+              </button>
+            </div>
+            <div className="sm:ml-28 mt-8 sm:mt-12">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
+                SELECT VARIANT <span className="text-red-500">*</span>
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+                {cars.map((car) => (
+                  <div
+                    key={car.id}
+                    className={`bg-white p-3 sm:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
+                      selectedCar === car.id
+                        ? "ring-2 ring-blue-500 bg-blue-50"
+                        : "hover:shadow-lg"
+                    }`}
+                    onClick={() => handleCarSelection(car.id)}
+                  >
+                    <div className="mb-3 sm:mb-4">
+                      <img
+                        src={car.image}
+                        alt={car.name}
+                        className="w-full h-20 sm:h-24 object-contain"
+                      />
                     </div>
-                  ))}
-                </div>
+                    <h4 className="font-bold text-gray-800 text-center text-base sm:text-lg mb-1 sm:mb-2">
+                      {car.name}
+                    </h4>
+                    <p className="text-gray-600 text-xs sm:text-sm text-center">
+                      {car.subtitle}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -489,10 +530,21 @@ return (
           {/* Step 2 */}
           {selectedCar && (
             <div className="bg-gray-200/50 p-4 sm:p-8 rounded-lg mb-6 sm:mb-8 relative">
+              {/* Mobile Step Indicator */}
+              <div className="block sm:hidden text-center mb-4">
+                <span className="text-gray-500/60 text-lg font-bold">
+                  STEP 2
+                </span>
+              </div>
+              {/* Desktop Step Indicator */}
               <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
                 <div className="flex items-center">
-                  <span className="text-gray-500/40 text-2xl font-bold tracking-widest mr-2">STEP</span>
-                  <span className="text-gray-500/40 text-5xl font-bold">2</span>
+                  <span className="text-gray-500/40 text-xl md:text-2xl font-bold tracking-widest mr-2">
+                    STEP
+                  </span>
+                  <span className="text-gray-500/40 text-4xl md:text-5xl font-bold">
+                    2
+                  </span>
                 </div>
               </div>
               <div className="sm:ml-28">
@@ -503,8 +555,10 @@ return (
                   <div className="flex items-center">
                     <button
                       onClick={prevColor}
-                      className={`p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
-                        colorSliderIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+                      className={`p-1.5 sm:p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
+                        colorSliderIndex === 0
+                          ? "opacity-50 cursor-not-allowed"
+                          : ""
                       }`}
                       disabled={colorSliderIndex === 0}
                     >
@@ -513,34 +567,52 @@ return (
                     <div className="flex-1 mx-2 sm:mx-4 overflow-hidden">
                       <div
                         className="flex gap-2 sm:gap-4 transition-transform duration-300 ease-in-out"
-                        style={{ transform: `translateX(-${colorSliderIndex * getItemWidth()}px)` }}
+                        style={{
+                          transform: `translateX(-${
+                            colorSliderIndex * getItemWidth()
+                          }px)`,
+                        }}
                       >
                         {getAvailableExteriorColors().map((color) => (
                           <div
                             key={color.id}
-                            className={`bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 flex-shrink-0 ${
-                              window.innerWidth < 640 ? 'w-full' : 'w-32 sm:w-36 md:w-40'
-                            } ${
-                              (selectedExteriorColor === color.id) ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
+                            className={`bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 flex-shrink-0 w-28 sm:w-32 md:w-36 lg:w-40 ${
+                              selectedExteriorColor === color.id
+                                ? "ring-2 ring-blue-500 bg-blue-50"
+                                : "hover:shadow-lg"
                             }`}
-                            onClick={() => handleExteriorColorSelection(color.id)}
+                            onClick={() =>
+                              handleExteriorColorSelection(color.id)
+                            }
                           >
                             <div className="mb-2 sm:mb-3 h-16 sm:h-20 md:h-24 flex items-center justify-center overflow-hidden rounded">
-                              <img src={color.image} alt={color.name} className="w-full h-full object-contain" />
+                              <img
+                                src={color.image}
+                                alt={color.name}
+                                className="w-full h-full object-contain"
+                              />
                             </div>
-                            <p className="text-gray-800 text-center font-semibold text-xs sm:text-sm">{color.name}</p>
+                            <p className="text-gray-800 text-center font-semibold text-[10px] sm:text-xs md:text-sm">
+                              {color.name}
+                            </p>
                           </div>
                         ))}
                       </div>
                     </div>
                     <button
                       onClick={nextColor}
-                      className={`p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
-                        colorSliderIndex >= getAvailableExteriorColors().length - getVisibleItemsCount()
+                      className={`p-1.5 sm:p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors flex-shrink-0 z-10 ${
+                        colorSliderIndex >=
+                        getAvailableExteriorColors().length -
+                          getVisibleItemsCount()
                           ? "opacity-50 cursor-not-allowed"
                           : ""
                       }`}
-                      disabled={colorSliderIndex >= getAvailableExteriorColors().length - getVisibleItemsCount()}
+                      disabled={
+                        colorSliderIndex >=
+                        getAvailableExteriorColors().length -
+                          getVisibleItemsCount()
+                      }
                     >
                       <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
@@ -553,23 +625,37 @@ return (
           {/* Step 3: Interior */}
           {selectedCar && selectedExteriorColor && (
             <div className="bg-gray-200/50 p-4 sm:p-8 rounded-lg mb-6 sm:mb-8 relative">
+              {/* Mobile Step Indicator */}
+              <div className="block sm:hidden text-center mb-4">
+                <span className="text-gray-500/60 text-lg font-bold">
+                  STEP 3 - INTERIOR
+                </span>
+              </div>
               <div className="sm:ml-28">
                 <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
                   INTERIOR COLOR <span className="text-red-500">*</span>
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                   {getAvailableInteriorColors().map((color) => (
                     <div
                       key={color.id}
-                      className={`bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
-                        (selectedInteriorColor === color.id) ? "ring-2 ring-blue-500 bg-blue-50" : "hover:shadow-lg"
+                      className={`bg-white p-3 sm:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 ${
+                        selectedInteriorColor === color.id
+                          ? "ring-2 ring-blue-500 bg-blue-50"
+                          : "hover:shadow-lg"
                       }`}
                       onClick={() => setSelectedInteriorColor(color.id)}
                     >
-                      <div className="mb-4 overflow-hidden rounded">
-                        <img src={color.image} alt={color.name} className="w-full h-24 sm:h-32 object-contain" />
+                      <div className="mb-3 sm:mb-4 overflow-hidden rounded">
+                        <img
+                          src={color.image}
+                          alt={color.name}
+                          className="w-full h-24 sm:h-32 object-contain"
+                        />
                       </div>
-                      <p className="text-gray-800 text-center font-semibold">{color.name}</p>
+                      <p className="text-gray-800 text-center font-semibold text-sm sm:text-base">
+                        {color.name}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -577,31 +663,28 @@ return (
             </div>
           )}
 
-
           {/* Step 4: Form */}
-          <div className="bg-gray-200/50 p-4 sm:p-6 md:p-8 rounded-lg relative">
-            {/* Step indicator - hidden on mobile */}
-            <div className="hidden sm:block absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
+          <div className="bg-gray-200/50 p-4 sm:p-8 rounded-lg relative">
+            {/* Mobile Step Indicator */}
+            <div className="block sm:hidden text-center mb-4">
+              <span className="text-gray-500/60 text-lg font-bold">
+                STEP 4 - DETAILS
+              </span>
+            </div>
+            {/* Desktop Step Indicator */}
+            <div className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
               <div className="flex items-center">
-                <span className="text-gray-500/40 text-lg md:text-2xl font-bold tracking-widest mr-1 md:mr-2">
+                <span className="text-gray-500/40 text-xl md:text-2xl font-bold tracking-widest mr-2">
                   STEP
                 </span>
-                <span className="text-gray-500/40 text-3xl md:text-5xl font-bold">
+                <span className="text-gray-500/40 text-4xl md:text-5xl font-bold">
                   3
                 </span>
               </div>
             </div>
-
-            {/* Mobile step indicator */}
-            <div className="sm:hidden text-center mb-4">
-              <span className="text-gray-500 text-lg font-bold">
-                STEP 3 - YOUR DETAILS
-              </span>
-            </div>
-
-            <div className="sm:ml-16 md:ml-28">
-              <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+            <div className="sm:ml-28">
+              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                   {/* First Name */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -613,10 +696,11 @@ return (
                       onChange={(e) =>
                         handleInputChange("firstName", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       required
                     />
                   </div>
+
                   {/* Last Name */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -624,14 +708,32 @@ return (
                     </label>
                     <input
                       type="text"
-                      value={formData.firstName}
+                      value={formData.lastName}
                       onChange={(e) =>
                         handleInputChange("lastName", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       required
                     />
                   </div>
+
+                  {/* Father/Husband Name */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Father/Husband Name{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.fatherHusbandName}
+                      onChange={(e) =>
+                        handleInputChange("fatherHusbandName", e.target.value)
+                      }
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      required
+                    />
+                  </div>
+
                   {/* Gender */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -642,7 +744,7 @@ return (
                       onChange={(e) =>
                         handleInputChange("gender", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
                     >
                       <option value="">Select</option>
                       <option value="Male">Male</option>
@@ -662,7 +764,7 @@ return (
                       onChange={(e) =>
                         handleInputChange("dateOfBirth", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                     />
                   </div>
 
@@ -677,19 +779,19 @@ return (
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       placeholder="example@email.com"
                       required
                     />
                   </div>
 
-                  {/* Primary Phone */}
+                  {/* Phones */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Primary Phone <span className="text-red-500">*</span>
                     </label>
                     <div className="flex">
-                      <select className="w-16 md:w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                      <select className="w-16 sm:w-20 p-2.5 sm:p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
                         <option>+92</option>
                       </select>
                       <input
@@ -698,19 +800,18 @@ return (
                         onChange={(e) =>
                           handleInputChange("primaryPhone", e.target.value)
                         }
-                        className="flex-1 p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                        className="flex-1 p-2.5 sm:p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                         required
                       />
                     </div>
                   </div>
 
-                  {/* Secondary Phone */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Secondary Phone
                     </label>
                     <div className="flex">
-                      <select className="w-16 md:w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                      <select className="w-16 sm:w-20 p-2.5 sm:p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
                         <option>+92</option>
                       </select>
                       <input
@@ -719,7 +820,7 @@ return (
                         onChange={(e) =>
                           handleInputChange("secondaryPhone", e.target.value)
                         }
-                        className="flex-1 p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                        className="flex-1 p-2.5 sm:p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       />
                     </div>
                   </div>
@@ -734,7 +835,7 @@ return (
                       onChange={(e) =>
                         handleInputChange("state", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
                       required
                     >
                       <option value="" disabled>
@@ -760,13 +861,13 @@ return (
                       onChange={(e) =>
                         handleInputChange("city", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       required
                     />
                   </div>
 
                   {/* Address per CNIC */}
-                  <div className="lg:col-span-2">
+                  <div className="md:col-span-2">
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Address As Per CNIC{" "}
                       <span className="text-red-500">*</span>
@@ -777,7 +878,7 @@ return (
                       onChange={(e) =>
                         handleInputChange("addressCNIC", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       placeholder="Address as per CNIC"
                       required
                     />
@@ -794,7 +895,7 @@ return (
                       onChange={(e) =>
                         handleInputChange("individualCorporate", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
                     >
                       <option value="" disabled>
                         Select
@@ -815,13 +916,13 @@ return (
                       onChange={(e) =>
                         handleInputChange("cnic", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                       placeholder="e.g. 12345-1234567-1"
                       required
                     />
                   </div>
 
-                  {/* CNIC Front Image */}
+                  {/* CNIC images */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       CNIC Front Image <span className="text-red-500">*</span>
@@ -836,7 +937,7 @@ return (
                       />
                       <label
                         htmlFor="cnicFrontImage"
-                        className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+                        className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
                       >
                         <span className="truncate pr-2">
                           {formData.cnicFrontImage
@@ -848,7 +949,6 @@ return (
                     </div>
                   </div>
 
-                  {/* CNIC Back Image */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       CNIC Back Image <span className="text-red-500">*</span>
@@ -863,7 +963,7 @@ return (
                       />
                       <label
                         htmlFor="cnicBackImage"
-                        className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+                        className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
                       >
                         <span className="truncate pr-2">
                           {formData.cnicBackImage
@@ -875,7 +975,7 @@ return (
                     </div>
                   </div>
 
-                  {/* Status */}
+                  {/* Status / tax */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Status (filler non-filler)
@@ -885,7 +985,7 @@ return (
                       onChange={(e) =>
                         handleInputChange("statusFilter", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
                     >
                       <option value="" disabled>
                         Select yes or no
@@ -895,7 +995,6 @@ return (
                     </select>
                   </div>
 
-                  {/* Sales Tax Registration */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Sales Tax Registration
@@ -910,11 +1009,10 @@ return (
                         )
                       }
                       disabled={formData.statusFilter === "No"}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
                     />
                   </div>
 
-                  {/* NTN Number */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       NTN Number
@@ -926,11 +1024,11 @@ return (
                         handleInputChange("ntnNumber", e.target.value)
                       }
                       disabled={formData.statusFilter === "No"}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
                     />
                   </div>
 
-                  {/* Advance Payment */}
+                  {/* Advance */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
                       Advance Payment <span className="text-red-500">*</span>
@@ -940,7 +1038,7 @@ return (
                       onChange={(e) =>
                         handleInputChange("advancePayment", e.target.value)
                       }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white disabled:bg-gray-100"
+                      className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white disabled:bg-gray-100"
                     >
                       <option value="">Select</option>
                       <option value="10">10%</option>
@@ -953,8 +1051,8 @@ return (
                   </div>
                 </div>
 
-                {/* Comments - Full Width */}
-                <div className="mt-6">
+                {/* Comments */}
+                <div className="mt-4 sm:mt-6">
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Comments
                   </label>
@@ -964,13 +1062,13 @@ return (
                       handleInputChange("comments", e.target.value)
                     }
                     rows={4}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                    className="w-full p-2.5 sm:p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                     placeholder="Enter your comments here..."
                   />
                 </div>
 
-                {/* Terms & Conditions */}
-                <div className="mt-6">
+                {/* T&C */}
+                <div className="mt-4 sm:mt-6">
                   <label className="flex items-start">
                     <input
                       type="checkbox"
@@ -993,11 +1091,11 @@ return (
                   </label>
                 </div>
 
-                {/* Submit Button */}
-                <div className="mt-8 flex justify-center sm:justify-start">
+                {/* Submit */}
+                <div className="mt-6 sm:mt-8 flex justify-start">
                   <button
                     onClick={handleSubmit}
-                    className="w-full sm:w-auto bg-black text-white px-8 md:px-12 py-3 md:py-4 rounded-md font-semibold hover:bg-gray-800 transition-colors duration-300 text-sm"
+                    className="w-full sm:w-auto bg-black text-white px-8 sm:px-12 py-3 sm:py-4 rounded-md font-semibold hover:bg-gray-800 transition-colors duration-300 text-sm"
                   >
                     Submit
                   </button>
@@ -1010,21 +1108,47 @@ return (
     </div>
   );
 };
-// ---------- ORDER REVIEW ----------
-const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void }> = ({ orderData, onBackToVehicle }) => {
+
+// ---------- REVIEW ----------
+const OrderReview: React.FC<{
+  orderData: OrderData;
+  onBackToVehicle: () => void;
+}> = ({ orderData, onBackToVehicle }) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const handleUploadClick = () => fileInputRef.current?.click();
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) setUploadedFile(event.target.files[0]);
+    if (event.target.files && event.target.files.length > 0)
+      setUploadedFile(event.target.files[0]);
   };
 
   const cars = [
-    { id: "RD6-2WD-Air", name: "Friday", subtitle: "Body Type : SUV", image: car1, price: "7500000" },
+    {
+      id: "Friday-REEV",
+      name: "Friday REEV",
+      subtitle: "Body Type : SUV",
+      image: car1,
+      price: "7500000",
+    },
+    {
+      id: "Friday-BEV-Luxury",
+      name: "Friday BEV Luxury",
+      subtitle: "Body Type : Truck",
+      image: car2,
+      price: "8250000",
+    },
+    {
+      id: "Friday-BEV-Exclusive",
+      name: "friday BEV Exclusive",
+      subtitle: "Body Type : Truck",
+      image: car3,
+      price: "8990000",
+    },
   ];
 
+  // FIXED: "whiteB" consistent with restrictions
   const exteriorColors = [
     { id: "blue", name: "Blue", image: img2 },
     { id: "grey", name: "Grey", image: img4 },
@@ -1036,54 +1160,86 @@ const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void 
   const interiorColors = [
     { id: "black", name: "Black", image: interiorblack },
     { id: "brown", name: "Brown", image: interiorbrown },
+    // { id: "green", name: "Green", image: interiorgreen },
   ];
 
-  const selectedCarDetails = cars.find((car) => car.id === orderData.selectedCar);
-  const selectedExteriorColorDetails = exteriorColors.find((color) => color.id === orderData.selectedExteriorColor);
-  const selectedInteriorColorDetails = interiorColors.find((color) => color.id === orderData.selectedInteriorColor);
+  const selectedCarDetails = cars.find(
+    (car) => car.id === orderData.selectedCar
+  );
+  const selectedExteriorColorDetails = exteriorColors.find(
+    (color) => color.id === orderData.selectedExteriorColor
+  );
+  const selectedInteriorColorDetails = interiorColors.find(
+    (color) => color.id === orderData.selectedInteriorColor
+  );
 
-  const basePrice = selectedCarDetails?.price ? parseInt(selectedCarDetails.price) : 8990000;
-  const advancePaymentPercentage = orderData.formData.advancePayment ? parseInt(orderData.formData.advancePayment) : 20;
-  const advancePayment = Math.floor(basePrice * (advancePaymentPercentage / 100));
+  const basePrice = selectedCarDetails?.price
+    ? parseInt(selectedCarDetails.price)
+    : 8990000;
+  const advancePaymentPercentage = orderData.formData.advancePayment
+    ? parseInt(orderData.formData.advancePayment)
+    : 20;
+  const advancePayment = Math.floor(
+    basePrice * (advancePaymentPercentage / 100)
+  );
   const remainingAmount = basePrice - advancePayment;
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {/* Back Button */}
-        <button 
-          onClick={onBackToVehicle} 
+        {/* Back */}
+        <button
+          onClick={onBackToVehicle}
           className="flex items-center text-gray-600 hover:text-gray-800 mb-6 sm:mb-8 transition-colors"
         >
           <ChevronLeft className="w-4 h-4 mr-2" /> Back to Vehicle
         </button>
 
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <div className="p-4 sm:p-6 lg:p-8">
-            <h1 className="text-2xl sm:text-3xl font-light text-gray-800 mb-6 sm:mb-8">Review Your Order</h1>
+          <div className="p-4 sm:p-8">
+            <h1 className="text-2xl sm:text-3xl font-light text-gray-800 mb-6 sm:mb-8">
+              Review Your Order
+            </h1>
 
-            {/* Vehicle Display */}
-            <div className="flex flex-col lg:flex-row items-center justify-between mb-6 sm:mb-8 space-y-6 lg:space-y-0">
-              <div className="w-full lg:w-1/2">
+            <div className="flex flex-col lg:flex-row items-center justify-between mb-6 sm:mb-8">
+              <div className="w-full lg:w-1/2 mb-6 lg:mb-0">
                 <h2 className="text-lg sm:text-xl text-gray-700 mb-4 sm:mb-6 text-center lg:text-left">
-                  {orderData.selectedBrand} {selectedCarDetails?.name || "Selected Vehicle"}
+                  {orderData.selectedBrand} {selectedCarDetails?.name || ""}
                 </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 text-sm">
-                  <div className="text-center lg:text-left">
-                    <div className="text-gray-500 mb-1">UP TO</div>
-                    <div className="text-xl font-semibold text-gray-800">632 Km*</div>
-                    <div className="text-gray-500">Driving Range</div>
+                <div className="grid grid-cols-3 gap-4 sm:gap-8 text-sm">
+                  <div className="text-center">
+                    <div className="text-gray-500 mb-1 text-xs sm:text-sm">
+                      UP TO
+                    </div>
+                    <div className="text-lg sm:text-xl font-semibold text-gray-800">
+                      632 Km*
+                    </div>
+                    <div className="text-gray-500 text-xs sm:text-sm">
+                      Driving Range
+                    </div>
                   </div>
-                  <div className="text-center lg:text-left">
-                    <div className="text-gray-500 mb-1">AS FAST AS</div>
-                    <div className="text-xl font-semibold text-gray-800">4.5 sec*</div>
-                    <div className="text-gray-500">To Reach 100</div>
+                  <div className="text-center">
+                    <div className="text-gray-500 mb-1 text-xs sm:text-sm">
+                      AS FAST AS
+                    </div>
+                    <div className="text-lg sm:text-xl font-semibold text-gray-800">
+                      4.5 sec*
+                    </div>
+                    <div className="text-gray-500 text-xs sm:text-sm">
+                      To Reach 100
+                    </div>
                   </div>
-                  <div className="text-center lg:text-left">
-                    <div className="text-gray-500 mb-1">UP TO</div>
-                    <div className="text-xl font-semibold text-gray-800">86.56 KWh*</div>
-                    <div className="text-gray-500">Capacity</div>
+                  <div className="text-center">
+                    <div className="text-gray-500 mb-1 text-xs sm:text-sm">
+                      UP TO
+                    </div>
+                    <div className="text-lg sm:text-xl font-semibold text-gray-800">
+                      86.56 KWh*
+                    </div>
+                    <div className="text-gray-500 text-xs sm:text-sm">
+                      Capacity
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1091,145 +1247,247 @@ const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void 
               <div className="w-full lg:w-1/2 flex justify-center">
                 <img
                   src={selectedExteriorColorDetails?.image || img1}
-                  alt={selectedExteriorColorDetails?.name || "Selected exterior color"}
-                  className="w-full max-w-md h-auto object-contain"
+                  alt={
+                    selectedExteriorColorDetails?.name ||
+                    "Selected exterior color"
+                  }
+                  className="w-full max-w-sm lg:max-w-md h-auto object-contain"
                 />
               </div>
             </div>
 
-            <button className="flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors mb-6 sm:mb-0">
+            <button className="flex items-center px-3 sm:px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors text-sm">
               <Download className="w-4 h-4 mr-2" />
               Download Specs
             </button>
           </div>
 
-          {/* Order Details */}
-          <div className="border-t border-gray-200 p-4 sm:p-6 lg:p-8">
-            <h3 className="text-lg sm:text-xl text-gray-700 mb-4 sm:mb-6">Order Details</h3>
+          <div className="border-t border-gray-200 p-4 sm:p-8">
+            <h3 className="text-lg sm:text-xl text-gray-700 mb-4 sm:mb-6">
+              Order Details
+            </h3>
 
             <div className="space-y-4 sm:space-y-6">
-              {/* Vehicle Details */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Variant</span>
-                <div className="flex flex-col sm:flex-row sm:items-center text-right">
-                  <span className="text-gray-800 sm:mr-4 mb-1 sm:mb-0">{selectedCarDetails?.name || "Selected Variant"}</span>
-                  <span className="text-gray-800 font-semibold">{basePrice.toLocaleString()} PKR</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Variant
+                </span>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                  <span className="text-gray-800 text-sm sm:text-base">
+                    {selectedCarDetails?.name || "Selected Variant"}
+                  </span>
+                  <span className="text-gray-800 font-semibold text-sm sm:text-base">
+                    {basePrice.toLocaleString()} PKR
+                  </span>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Exterior color</span>
-                <div className="flex items-center justify-end">
-                  <span className="text-gray-800 mr-4 capitalize">{selectedExteriorColorDetails?.name || "Selected Color"}</span>
-                  <div className="w-12 h-8 rounded flex-shrink-0">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Exterior color
+                </span>
+                <div className="flex items-center gap-2 sm:gap-4">
+                  <span className="text-gray-800 capitalize text-sm sm:text-base">
+                    {selectedExteriorColorDetails?.name || "Selected Color"}
+                  </span>
+                  <div className="w-10 h-6 sm:w-12 sm:h-8 rounded flex-shrink-0">
                     <img
                       src={selectedExteriorColorDetails?.image || img1}
-                      alt={selectedExteriorColorDetails?.name || "Selected exterior color"}
+                      alt={
+                        selectedExteriorColorDetails?.name ||
+                        "Selected exterior color"
+                      }
                       className="w-full h-full object-cover rounded"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Interior color</span>
-                <div className="flex items-center justify-end">
-                  <span className="text-gray-800 mr-4 capitalize">{selectedInteriorColorDetails?.name || "Selected Color"}</span>
-                  <div className="w-12 h-8 rounded flex-shrink-0">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Interior color
+                </span>
+                <div className="flex items-center gap-2 sm:gap-4">
+                  <span className="text-gray-800 capitalize text-sm sm:text-base">
+                    {selectedInteriorColorDetails?.name || "Selected Color"}
+                  </span>
+                  <div className="w-10 h-6 sm:w-12 sm:h-8 rounded flex-shrink-0">
                     <img
                       src={selectedInteriorColorDetails?.image || interiorblack}
-                      alt={selectedInteriorColorDetails?.name || "Selected interior color"}
+                      alt={
+                        selectedInteriorColorDetails?.name ||
+                        "Selected interior color"
+                      }
                       className="w-full h-full object-cover rounded"
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Customer Details */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Customer Name</span>
-                <span className="text-gray-800 text-right">{orderData.formData.firstName} {orderData.formData.lastName}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Customer Name
+                </span>
+                <span className="text-gray-800 text-sm sm:text-base">
+                  {orderData.formData.firstName} {orderData.formData.lastName}
+                </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Father/Husband Name</span>
-                <span className="text-gray-800 text-right">{orderData.formData.fatherHusbandName || "Not provided"}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Father/Husband Name
+                </span>
+                <span className="text-gray-800 text-sm sm:text-base">
+                  {orderData.formData.fatherHusbandName || "Not provided"}
+                </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Email Address</span>
-                <span className="text-gray-800 text-right break-all">{orderData.formData.email || "Not provided"}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Email Address
+                </span>
+                <span className="text-gray-800 text-sm sm:text-base break-all">
+                  {orderData.formData.email || "Not provided"}
+                </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Primary Phone</span>
-                <span className="text-gray-800 text-right">+92 {orderData.formData.primaryPhone}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Primary Phone
+                </span>
+                <span className="text-gray-800 text-sm sm:text-base">
+                  +92 {orderData.formData.primaryPhone}
+                </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Location</span>
-                <span className="text-gray-800 text-right">{orderData.formData.city}, {orderData.formData.state}</span>
+              {orderData.formData.secondaryPhone && (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                  <span className="text-gray-600 text-sm sm:text-base">
+                    Secondary Phone
+                  </span>
+                  <span className="text-gray-800 text-sm sm:text-base">
+                    +92 {orderData.formData.secondaryPhone}
+                  </span>
+                </div>
+              )}
+
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Location
+                </span>
+                <span className="text-gray-800 text-sm sm:text-base">
+                  {orderData.formData.city}, {orderData.formData.state}
+                </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">CNIC</span>
-                <span className="text-gray-800 text-right">{orderData.formData.cnic || "Not provided"}</span>
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Address as per CNIC
+                </span>
+                <span className="text-gray-800 text-sm sm:text-base break-words sm:text-right max-w-xs">
+                  {orderData.formData.addressCNIC || "Not provided"}
+                </span>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 sm:py-4 border-b border-gray-100">
-                <span className="text-gray-600 mb-2 sm:mb-0">Selected Advance Payment</span>
-                <span className="text-gray-800 font-semibold text-right">{advancePaymentPercentage}%</span>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  CNIC Images
+                </span>
+                <span className="text-gray-800 text-sm sm:text-base">
+                  {orderData.formData.cnicFrontImage ? "Front: ✓" : "Front: ✗"}
+                  {" | "}
+                  {orderData.formData.cnicBackImage ? "Back: ✓" : "Back: ✗"}
+                </span>
+              </div>
+
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-4 border-b border-gray-100 gap-2">
+                <span className="text-gray-600 text-sm sm:text-base">
+                  Selected Advance Payment
+                </span>
+                <span className="text-gray-800 font-semibold text-sm sm:text-base">
+                  {advancePaymentPercentage}%
+                </span>
               </div>
 
               {orderData.formData.comments && (
-                <div className="flex flex-col py-3 sm:py-4 border-b border-gray-100">
-                  <span className="text-gray-600 mb-2">Comments</span>
-                  <span className="text-gray-800 text-sm bg-gray-50 p-3 rounded">{orderData.formData.comments}</span>
+                <div className="flex flex-col py-3 sm:py-4 border-b border-gray-100 gap-2">
+                  <span className="text-gray-600 text-sm sm:text-base">
+                    Comments
+                  </span>
+                  <span className="text-gray-800 text-sm bg-gray-50 p-2 sm:p-3 rounded">
+                    {orderData.formData.comments}
+                  </span>
                 </div>
               )}
             </div>
 
-            {/* Pricing Summary */}
+            {/* Pricing */}
             <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-              <div className="flex justify-between py-2">
+              <div className="flex justify-between py-2 text-sm sm:text-base">
                 <span className="text-gray-600">Company Price</span>
-                <span className="text-gray-800">{basePrice.toLocaleString()} PKR</span>
+                <span className="text-gray-800">
+                  {basePrice.toLocaleString()} PKR
+                </span>
               </div>
-              <div className="flex justify-between py-2">
-                <span className="text-gray-600">Freight / Insurance Charges</span>
+              <div className="flex justify-between py-2 text-sm sm:text-base">
+                <span className="text-gray-600">
+                  Freight / Insurance Charges
+                </span>
                 <span className="text-gray-800">0 PKR</span>
               </div>
-              <div className="flex justify-between py-2 border-t border-gray-200 pt-4">
+              <div className="flex justify-between py-2 border-t border-gray-200 pt-4 text-sm sm:text-base">
                 <span className="text-gray-700 font-medium">Gross Price</span>
-                <span className="text-gray-800 font-semibold">{basePrice.toLocaleString()} PKR</span>
+                <span className="text-gray-800 font-semibold">
+                  {basePrice.toLocaleString()} PKR
+                </span>
               </div>
-              <div className="flex justify-between py-2 bg-blue-50 px-4 rounded">
-                <span className="text-gray-700 font-medium">Advance Payment ({advancePaymentPercentage}%)</span>
-                <span className="text-blue-600 font-semibold text-lg">{advancePayment.toLocaleString()} PKR</span>
+              <div className="flex justify-between py-3 bg-blue-50 px-3 sm:px-4 rounded">
+                <span className="text-gray-700 font-medium text-sm sm:text-base">
+                  Advance Payment ({advancePaymentPercentage}%)
+                </span>
+                <span className="text-blue-600 font-semibold text-base sm:text-lg">
+                  {advancePayment.toLocaleString()} PKR
+                </span>
               </div>
-              <div className="flex justify-between py-2 border-b border-gray-200 pb-4">
-                <span className="text-gray-700 font-medium">Remaining Amount</span>
-                <span className="text-gray-800 font-semibold">{remainingAmount.toLocaleString()} PKR</span>
+              <div className="flex justify-between py-2 border-b border-gray-200 pb-4 text-sm sm:text-base">
+                <span className="text-gray-700 font-medium">
+                  Remaining Amount
+                </span>
+                <span className="text-gray-800 font-semibold">
+                  {remainingAmount.toLocaleString()} PKR
+                </span>
               </div>
             </div>
 
             <div className="mt-4 sm:mt-6 text-xs text-gray-500 space-y-2">
-              <p>*Performance related metrics are based on controlled conditions. Actual performance will vary depending on driving behaviour, environment and other influencing factors.</p>
-              <p><strong>Note:</strong> Bank charges may apply. The remaining amount of {remainingAmount.toLocaleString()} PKR will be due upon delivery.</p>
+              <p>
+                *Performance related metrics are based on controlled conditions.
+                Actual performance will vary depending on driving behaviour,
+                environment and other influencing factors.
+              </p>
+              <p>
+                <strong>Note:</strong> Bank charges may apply. The remaining
+                amount of {remainingAmount.toLocaleString()} PKR will be due
+                upon delivery.
+              </p>
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center mt-6 sm:mt-8 border-t border-gray-200 pt-6 gap-4">
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row sm:justify-between items-center mt-8 border-t border-gray-200 pt-6 gap-4">
               {/* Upload Pay Order */}
-              <div className="flex flex-col sm:flex-row items-center gap-3">
-                <button 
-                  onClick={handleUploadClick} 
-                  className="w-full sm:w-auto flex items-center justify-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleUploadClick}
+                  className="flex items-center px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors"
                 >
                   <Upload className="w-4 h-4 mr-2" />
                   Upload Pay order Slip
                 </button>
-                {uploadedFile && <span className="text-sm text-gray-600 truncate">{uploadedFile.name}</span>}
+                {uploadedFile && (
+                  <span className="text-sm text-gray-600">
+                    {uploadedFile.name}
+                  </span>
+                )}
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -1239,31 +1497,115 @@ const OrderReview: React.FC<{ orderData: OrderData; onBackToVehicle: () => void 
                 />
               </div>
 
-              {/* Submit Button */}
-              <div>
+              {/* Save & Submit */}
+              <div className="flex gap-4">
                 <button
                   onClick={async () => {
                     if (submitting) return;
                     setSubmitting(true);
                     try {
-                      const bookingId = generateBookingId();
-                      
-                      // Mock API call
-                      await new Promise(resolve => setTimeout(resolve, 2000));
-                      
-                      const emailResult = await sendVerificationEmail(orderData, { bookingId });
-                      
-                      alert(
-                        `Order saved & email sent!
+                      // single booking ID used in DB + email
+                      const bookingId =
+                        "CSM-" +
+                        Date.now().toString().slice(-8) +
+                        Math.random().toString(36).substr(2, 4).toUpperCase();
+
+                      // build form data
+                      const fd = new FormData();
+                      fd.append("bookingId", bookingId);
+                      fd.append("selectedBrand", orderData.selectedBrand);
+                      fd.append("selectedCar", orderData.selectedCar);
+                      fd.append(
+                        "selectedCarName",
+                        selectedCarDetails?.name || ""
+                      );
+                      fd.append(
+                        "selectedExteriorColor",
+                        orderData.selectedExteriorColor
+                      );
+                      fd.append(
+                        "selectedInteriorColor",
+                        orderData.selectedInteriorColor
+                      );
+
+                      const f = orderData.formData;
+                      fd.append("firstName", f.firstName);
+                      fd.append("lastName", f.lastName);
+                      fd.append("fatherHusbandName", f.fatherHusbandName);
+                      fd.append("gender", f.gender);
+                      fd.append("dateOfBirth", f.dateOfBirth);
+                      fd.append("email", f.email);
+                      fd.append("primaryPhone", f.primaryPhone);
+                      fd.append("secondaryPhone", f.secondaryPhone || "");
+                      fd.append("state", f.state);
+                      fd.append("city", f.city);
+                      fd.append("addressCNIC", f.addressCNIC);
+                      fd.append("individualCorporate", f.individualCorporate);
+                      fd.append("cnic", f.cnic);
+                      fd.append("statusFilter", f.statusFilter);
+                      fd.append("salesTaxRegistration", f.salesTaxRegistration);
+                      fd.append("ntnNumber", f.ntnNumber);
+                      fd.append("advancePayment", f.advancePayment);
+                      fd.append("comments", f.comments || "");
+
+                      fd.append("basePrice", String(basePrice));
+                      fd.append("advanceAmount", String(advancePayment));
+                      fd.append("remainingAmount", String(remainingAmount));
+
+                      if (f.cnicFrontImage)
+                        fd.append("cnicFrontImage", f.cnicFrontImage);
+                      if (f.cnicBackImage)
+                        fd.append("cnicBackImage", f.cnicBackImage);
+                      if (uploadedFile) fd.append("payOrderSlip", uploadedFile);
+
+                      // save to server
+                      const res = await fetch(API_SAVE_ORDER, {
+                        method: "POST",
+                        body: fd,
+                      });
+                      const json = await res.json();
+                      if (!res.ok || !json.success)
+                        throw new Error(
+                          json.error || "Failed to save order on server."
+                        );
+
+                      // normalize (absolute) URLs for email
+                      const frontUrl = ensureAbsoluteUrl(json.cnicFrontUrl);
+                      const backUrl = ensureAbsoluteUrl(json.cnicBackUrl);
+                      const slipUrl = ensureAbsoluteUrl(json.payOrderUrl);
+
+                      // send email
+                      const emailResult = await sendVerificationEmail(
+                        orderData,
+                        {
+                          cnicFrontUrl: frontUrl,
+                          cnicBackUrl: backUrl,
+                          payOrderUrl: slipUrl,
+                          bookingId,
+                        }
+                      );
+
+                      if (!emailResult || emailResult.success) {
+                        alert(
+                          `Order saved & email sent!
 Booking ID: ${bookingId}
-Email sent to: ${orderData.formData.email}
+Email sent to: ${f.email}
+
 
 Order Summary:
 - Vehicle: ${orderData.selectedBrand} ${selectedCarDetails?.name}
 - Total Price: ${basePrice.toLocaleString()} PKR
 - Advance Payment (${advancePaymentPercentage}%): ${advancePayment.toLocaleString()} PKR
 - Remaining: ${remainingAmount.toLocaleString()} PKR`
-                      );
+                        );
+                      } else {
+                        alert(
+                          `Order saved, but email failed to send.
+Booking ID: ${bookingId}
+Please try again later or contact support.`
+                        );
+                        console.error("Email error:", emailResult.error);
+                      }
                     } catch (e: any) {
                       console.error(e);
                       alert(`Error: ${e?.message || e}`);
@@ -1272,8 +1614,10 @@ Order Summary:
                     }
                   }}
                   disabled={submitting}
-                  className={`w-full sm:w-auto px-6 py-2 rounded transition-colors ${
-                    submitting ? "bg-gray-400 text-white cursor-not-allowed" : "bg-black text-white hover:bg-gray-800"
+                  className={`px-6 py-2 rounded transition-colors ${
+                    submitting
+                      ? "bg-gray-400 text-white cursor-not-allowed"
+                      : "bg-black text-white hover:bg-gray-800"
                   }`}
                 >
                   {submitting ? "Submitting..." : "Save & Submit"}
@@ -1286,7 +1630,6 @@ Order Summary:
     </div>
   );
 };
-
 
 // ---------- APP ----------
 const MainApp: React.FC = () => {
