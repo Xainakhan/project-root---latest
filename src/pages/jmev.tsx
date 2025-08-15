@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import JMEVBanner from "../assets/HeroBanner/JMEVBanner.png";
+import jmevMobile from "../assets/JMEV_page/HeroBanner/jmevMobile.png";
 // Car color variants
 import blackCar from "../assets/JMEV_page/ColorSelector/black.png";
 import blueCar from "../assets/JMEV_page/ColorSelector/blue.png";
@@ -373,7 +374,7 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full ">
       {/* Back to Home Button - Same styling as Riddara */}
       <button
         onClick={onBack}
@@ -383,22 +384,28 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
         <span className="text-xs md:text-sm font-medium text-gray-700 hidden sm:inline">Back to Home</span>
       </button>
 
-      {/* Hero Banner Section */}
-      <div
-        className="relative min-h-screen bg-cover bg-center bg-no-repeat flex flex-col"
-        style={{
-          backgroundImage: `url(${JMEVBanner})`,
-          backgroundSize: "cover",
-          backgroundPosition: "75% center",
-        }}
-      >
+      {/* Hero Banner Section - Using original image dimensions */}
+      <div className="relative">
+        {/* Desktop Banner - Full image without cropping */}
+        <div className="hidden md:block">
+          <img
+            src={JMEVBanner}
+            alt="JMEV Hero Banner"
+            className="w-full h-auto object-contain"
+          />
+        </div>
         
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative z-10 h-full flex flex-col flex-1">
-          <div className="flex-1 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24">
-            <div className="text-white max-w-lg"></div>
-          </div>
+        {/* Mobile Banner */}
+        <div className="block md:hidden">
+          <img
+            src={jmevMobile}
+            alt="JMEV Mobile Hero Banner"
+            className="w-full h-auto object-contain"
+          />
+        </div>
 
+        {/* Content overlay */}
+        <div className="absolute inset-0 flex flex-col">
           {/* WhatsApp Button - Top Right */}
           <button
             onClick={handleWhatsAppClick}
@@ -474,8 +481,9 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           </div>
         </div>
       </div>
-      {/* Specifications Section - Identical on mobile and desktop */}
-      <div className="bg-white py-6 md:py-8 px-4 sm:px-8">
+
+      {/* Specifications Section - Minimal spacing for mobile */}
+      <div className="bg-white py-2 md:py-8 px-4 sm:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex justify-center items-center">
             <div className="flex flex-row items-center bg-transparent rounded-lg p-4 shadow-sm space-x-6 md:space-x-8">
@@ -515,8 +523,8 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
         </div>
       </div>
 
-      {/* Car Gallery Section */}
-      <div className="bg-gradient-to-b from-gray-50 to-white py-8 px-4 relative min-h-[600px]">
+      {/* Car Gallery Section - Minimal spacing for mobile */}
+      <div className="bg-gradient-to-b from-gray-50 to-white py-2 md:py-8 px-4 relative min-h-[300px] md:min-h-[600px]">
         <div className="max-w-7xl mx-auto relative">
           {/* Color selector dots - positioned top right */}
           <div className="absolute top-4 right-4 z-20 flex space-x-2">
@@ -554,7 +562,7 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           </button>
 
           {/* Car image centered */}
-          <div className="flex justify-center items-center h-full py-12">
+          <div className="flex justify-center items-center h-full py-4 md:py-12">
             <div className="w-full max-w-4xl">
               <img
                 src={cars[currentCarIndex].image}
@@ -565,18 +573,18 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           </div>
 
           {/* Gallery Bottom Line - Small decorative line */}
-          <div className="flex items-center justify-center mt-4 mb-8">
+          <div className="flex items-center justify-center mt-1 md:mt-4 mb-2 md:mb-8">
             <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent rounded-full opacity-60"></div>
           </div>
         </div>
       </div>
 
-      {/* Advanced Driving Dynamics Section */}
-      <div className="bg-white py-16 px-4">
+      {/* Advanced Driving Dynamics Section - Minimal spacing for mobile */}
+      <div className="bg-white py-4 md:py-16 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Section Title with Lines on Both Sides */}
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-8">
+          <div className="text-center mb-4 md:mb-12">
+            <div className="flex items-center justify-center mb-4 md:mb-8">
               <div className="flex-1 h-px bg-gray-400 max-w-24"></div>
               <h2 className="px-6 text-lg font-medium text-gray-800 tracking-wider">
                 ADVANCED DRIVING DYNAMICS
@@ -641,6 +649,7 @@ const JMEV: React.FC<JMEVProps> = ({ onBack }) => {
           </div>
         </div>
       </div>
+
 
       {/* Main Vehicle Gallery Section */}
       <div className="bg-white py-8 px-4">
