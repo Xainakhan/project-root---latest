@@ -615,443 +615,352 @@ const EVTestDrive: React.FC<{ onSubmit: (data: OrderData) => void }> = ({
             </div>
           )}
 
-          {/* Step 3: Complete Form */}
-          <div className="bg-gray-200/50 p-8 rounded-lg relative">
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
-              <div className="flex items-center">
-                <span className="text-gray-500/40 text-2xl font-bold tracking-widest mr-2">
-                  STEP
-                </span>
-                <span className="text-gray-500/40 text-5xl font-bold">3</span>
-              </div>
-            </div>
-            <div className="ml-28">
-              <div className="bg-white p-6 rounded-lg shadow-md">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* First Name */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      First Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.firstName}
-                      onChange={(e) =>
-                        handleInputChange("firstName", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      required
-                    />
-                  </div>
-
-                  {/* Last Name */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Last Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.lastName}
-                      onChange={(e) =>
-                        handleInputChange("lastName", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      required
-                    />
-                  </div>
-
-                  {/* Father/Husband Name */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Father/Husband Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.fatherHusbandName}
-                      onChange={(e) =>
-                        handleInputChange("fatherHusbandName", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      required
-                    />
-                  </div>
-
-                  {/* Gender */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Gender <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      value={formData.gender}
-                      onChange={(e) =>
-                        handleInputChange("gender", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
-                    >
-                      <option value="">Select</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
-                    </select>
-                  </div>
-
-                  {/* Date of Birth */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Date of Birth <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.dateOfBirth}
-                      onChange={(e) =>
-                        handleInputChange("dateOfBirth", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email Address <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) =>
-                        handleInputChange("email", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      placeholder="example@email.com"
-                      required
-                    />
-                  </div>
-
-                  {/* Primary Phone */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Primary Phone <span className="text-red-500">*</span>
-                    </label>
-                    <div className="flex">
-                      <select className="w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
-                        <option>+92</option>
-                      </select>
-                      <input
-                        type="tel"
-                        value={formData.primaryPhone}
-                        onChange={(e) =>
-                          handleInputChange("primaryPhone", e.target.value)
-                        }
-                        className="flex-1 p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  {/* Secondary Phone */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Secondary Phone
-                    </label>
-                    <div className="flex">
-                      <select className="w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
-                        <option>+92</option>
-                      </select>
-                      <input
-                        type="tel"
-                        value={formData.secondaryPhone}
-                        onChange={(e) =>
-                          handleInputChange("secondaryPhone", e.target.value)
-                        }
-                        className="flex-1 p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Province */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Province <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      value={formData.state}
-                      onChange={(e) =>
-                        handleInputChange("state", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
-                      required
-                    >
-                      <option value="" disabled>
-                        Select Province
-                      </option>
-                      <option value="Punjab">Punjab</option>
-                      <option value="Sindh">Sindh</option>
-                      <option value="Balochistan">Balochistan</option>
-                      <option value="KPK">KPK</option>
-                      <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
-                      <option value="Azad Kashmir">Azad Kashmir</option>
-                    </select>
-                  </div>
-
-                  {/* City */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      City <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.city}
-                      onChange={(e) =>
-                        handleInputChange("city", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      required
-                    />
-                  </div>
-
-                  {/* Address as per CNIC (FIXED binding) */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Address As Per CNIC <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.addressCNIC}
-                      onChange={(e) =>
-                        handleInputChange("addressCNIC", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      placeholder="Address as per CNIC"
-                      required
-                    />
-                  </div>
-
-                  {/* Individual/Corporate */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Individual/Corporate <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      value={formData.individualCorporate}
-                      onChange={(e) =>
-                        handleInputChange("individualCorporate", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
-                    >
-                      <option value="" disabled>
-                        Select
-                      </option>
-                      <option value="Individual">Individual</option>
-                      <option value="Corporate">Corporate</option>
-                    </select>
-                  </div>
-
-                  {/* CNIC */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      CNIC <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.cnic}
-                      onChange={(e) =>
-                        handleInputChange("cnic", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                      placeholder="e.g. 12345-1234567-1"
-                      required
-                    />
-                  </div>
-
-                  {/* CNIC Front Image */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      CNIC Front Image <span className="text-red-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleFileUpload("cnicFrontImage", e)}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                        id="cnicFrontImage"
-                      />
-                      <label
-                        htmlFor="cnicFrontImage"
-                        className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
-                      >
-                        <span>
-                          {formData.cnicFrontImage
-                            ? formData.cnicFrontImage.name
-                            : "Upload/ Select"}
-                        </span>
-                        <Upload className="w-4 h-4" />
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* CNIC Back Image */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      CNIC Back Image <span className="text-red-500">*</span>
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleFileUpload("cnicBackImage", e)}
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                        id="cnicBackImage"
-                      />
-                      <label
-                        htmlFor="cnicBackImage"
-                        className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
-                      >
-                        <span>
-                          {formData.cnicBackImage
-                            ? formData.cnicBackImage.name
-                            : "Upload/ Select"}
-                        </span>
-                        <Upload className="w-4 h-4" />
-                      </label>
-                    </div>
-                  </div>
-
-                  {/* Status (filler non-filler) */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Status (filler non-filler)
-                    </label>
-                    <select
-                      value={formData.statusFilter}
-                      onChange={(e) =>
-                        handleInputChange("statusFilter", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
-                    >
-                      <option value="" disabled>
-                        Select yes or no
-                      </option>
-                      <option value="Yes">Yes</option>
-                      <option value="No">No</option>
-                    </select>
-                  </div>
-
-                  {/* Sales Tax Registration */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Sales Tax Registration
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.salesTaxRegistration}
-                      onChange={(e) =>
-                        handleInputChange(
-                          "salesTaxRegistration",
-                          e.target.value
-                        )
-                      }
-                      disabled={formData.statusFilter === "No"}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
-                    />
-                  </div>
-
-                  {/* NTN Number */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      NTN Number
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.ntnNumber}
-                      onChange={(e) =>
-                        handleInputChange("ntnNumber", e.target.value)
-                      }
-                      disabled={formData.statusFilter === "No"}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
-                    />
-                  </div>
-
-                  {/* Advance Payment */}
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Advance Payment <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      value={formData.advancePayment}
-                      onChange={(e) =>
-                        handleInputChange("advancePayment", e.target.value)
-                      }
-                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white disabled:bg-gray-100"
-                    >
-                      <option value="">Select</option>
-                      <option value="10">10%</option>
-                      <option value="20">20%</option>
-                      <option value="30">30%</option>
-                      <option value="40">40%</option>
-                      <option value="50">50%</option>
-                      <option value="60">60%</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Comments */}
-                <div className="mt-6">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Comments
-                  </label>
-                  <textarea
-                    value={formData.comments}
-                    onChange={(e) =>
-                      handleInputChange("comments", e.target.value)
-                    }
-                    rows={4}
-                    className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-                    placeholder="Enter your comments here..."
-                  />
-                </div>
-
-                {/* Terms and Conditions */}
-                <div className="mt-6">
-                  <label className="flex items-start">
-                    <input
-                      type="checkbox"
-                      checked={formData.termsAccepted}
-                      onChange={(e) =>
-                        handleInputChange("termsAccepted", e.target.checked)
-                      }
-                      className="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
-                    />
-                    <span className="text-sm text-gray-700">
-                      I have read and accept{" "}
-                      <button
-                        type="button"
-                        onClick={handleTermsClick}
-                        className="text-blue-500 underline hover:text-blue-600"
-                      >
-                        Terms & Conditions
-                      </button>
-                    </span>
-                  </label>
-                </div>
-
-                {/* Submit Button */}
-                <div className="mt-8 flex justify-start">
-                  <button
-                    onClick={handleSubmit}
-                    className="bg-black text-white px-12 py-4 rounded-md font-semibold hover:bg-gray-800 transition-colors duration-300 text-sm"
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+                   {/* Step 4: Form */}
+                   <div className="bg-gray-200/50 p-4 sm:p-6 md:p-8 rounded-lg relative">
+                     {/* Step indicator - hidden on mobile */}
+                     <div className="hidden sm:block absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 -rotate-90">
+                       <div className="flex items-center">
+                         <span className="text-gray-500/40 text-lg md:text-2xl font-bold tracking-widest mr-1 md:mr-2">STEP</span>
+                         <span className="text-gray-500/40 text-3xl md:text-5xl font-bold">3</span>
+                       </div>
+                     </div>
+                     
+                     {/* Mobile step indicator */}
+                     <div className="sm:hidden text-center mb-4">
+                       <span className="text-gray-500 text-lg font-bold">STEP 3 - YOUR DETAILS</span>
+                     </div>
+         
+                     <div className="sm:ml-16 md:ml-28">
+                       <div className="bg-white p-4 md:p-6 rounded-lg shadow-md">
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+                           {/* First Name */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               First Name <span className="text-red-500">*</span>
+                             </label>
+                             <input
+                               type="text"
+                               value={formData.firstName}
+                               onChange={(e) => handleInputChange("firstName", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                               required
+                             />
+                           </div>
+         
+                           {/* Gender */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Gender <span className="text-red-500">*</span>
+                             </label>
+                             <select
+                               value={formData.gender}
+                               onChange={(e) => handleInputChange("gender", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                             >
+                               <option value="">Select</option>
+                               <option value="Male">Male</option>
+                               <option value="Female">Female</option>
+                               <option value="Other">Other</option>
+                             </select>
+                           </div>
+         
+                           {/* DOB */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Date of Birth <span className="text-red-500">*</span>
+                             </label>
+                             <input
+                               type="date"
+                               value={formData.dateOfBirth}
+                               onChange={(e) => handleInputChange("dateOfBirth", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                             />
+                           </div>
+         
+                           {/* Email */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Email Address <span className="text-red-500">*</span>
+                             </label>
+                             <input
+                               type="email"
+                               value={formData.email}
+                               onChange={(e) => handleInputChange("email", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                               placeholder="example@email.com"
+                               required
+                             />
+                           </div>
+         
+                           {/* Primary Phone */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Primary Phone <span className="text-red-500">*</span>
+                             </label>
+                             <div className="flex">
+                               <select className="w-16 md:w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                                 <option>+92</option>
+                               </select>
+                               <input
+                                 type="tel"
+                                 value={formData.primaryPhone}
+                                 onChange={(e) => handleInputChange("primaryPhone", e.target.value)}
+                                 className="flex-1 p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                                 required
+                               />
+                             </div>
+                           </div>
+         
+                           {/* Secondary Phone */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">Secondary Phone</label>
+                             <div className="flex">
+                               <select className="w-16 md:w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                                 <option>+92</option>
+                               </select>
+                               <input
+                                 type="tel"
+                                 value={formData.secondaryPhone}
+                                 onChange={(e) => handleInputChange("secondaryPhone", e.target.value)}
+                                 className="flex-1 p-3 border border-l-0 border-gray-300 rounded-r-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                               />
+                             </div>
+                           </div>
+         
+                           {/* Province */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Province <span className="text-red-500">*</span>
+                             </label>
+                             <select
+                               value={formData.state}
+                               onChange={(e) => handleInputChange("state", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                               required
+                             >
+                               <option value="" disabled>Select Province</option>
+                               <option value="Punjab">Punjab</option>
+                               <option value="Sindh">Sindh</option>
+                               <option value="Balochistan">Balochistan</option>
+                               <option value="KPK">KPK</option>
+                               <option value="Gilgit-Baltistan">Gilgit-Baltistan</option>
+                               <option value="Azad Kashmir">Azad Kashmir</option>
+                             </select>
+                           </div>
+         
+                           {/* City */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               City <span className="text-red-500">*</span>
+                             </label>
+                             <input
+                               type="text"
+                               value={formData.city}
+                               onChange={(e) => handleInputChange("city", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                               required
+                             />
+                           </div>
+         
+                           {/* Address per CNIC */}
+                           <div className="lg:col-span-2">
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Address As Per CNIC <span className="text-red-500">*</span>
+                             </label>
+                             <input
+                               type="text"
+                               value={formData.addressCNIC}
+                               onChange={(e) => handleInputChange("addressCNIC", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                               placeholder="Address as per CNIC"
+                               required
+                             />
+                           </div>
+         
+                           {/* Individual/Corporate */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Individual/Corporate <span className="text-red-500">*</span>
+                             </label>
+                             <select
+                               value={formData.individualCorporate}
+                               onChange={(e) => handleInputChange("individualCorporate", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                             >
+                               <option value="" disabled>Select</option>
+                               <option value="Individual">Individual</option>
+                               <option value="Corporate">Corporate</option>
+                             </select>
+                           </div>
+         
+                           {/* CNIC */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               CNIC <span className="text-red-500">*</span>
+                             </label>
+                             <input
+                               type="text"
+                               value={formData.cnic}
+                               onChange={(e) => handleInputChange("cnic", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                               placeholder="e.g. 12345-1234567-1"
+                               required
+                             />
+                           </div>
+         
+                           {/* CNIC Front Image */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               CNIC Front Image <span className="text-red-500">*</span>
+                             </label>
+                             <div className="relative">
+                               <input
+                                 type="file"
+                                 accept="image/*"
+                                 onChange={(e) => handleFileUpload("cnicFrontImage", e)}
+                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                 id="cnicFrontImage"
+                               />
+                               <label
+                                 htmlFor="cnicFrontImage"
+                                 className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+                               >
+                                 <span className="truncate pr-2">{formData.cnicFrontImage ? formData.cnicFrontImage.name : "Upload/ Select"}</span>
+                                 <Upload className="w-4 h-4 flex-shrink-0" />
+                               </label>
+                             </div>
+                           </div>
+         
+                           {/* CNIC Back Image */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               CNIC Back Image <span className="text-red-500">*</span>
+                             </label>
+                             <div className="relative">
+                               <input
+                                 type="file"
+                                 accept="image/*"
+                                 onChange={(e) => handleFileUpload("cnicBackImage", e)}
+                                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                 id="cnicBackImage"
+                               />
+                               <label
+                                 htmlFor="cnicBackImage"
+                                 className="w-full p-3 border border-gray-300 rounded-md bg-gray-50 text-gray-500 focus-within:ring-2 focus-within:ring-blue-500 text-sm hover:bg-gray-100 cursor-pointer flex items-center justify-between"
+                               >
+                                 <span className="truncate pr-2">{formData.cnicBackImage ? formData.cnicBackImage.name : "Upload/ Select"}</span>
+                                 <Upload className="w-4 h-4 flex-shrink-0" />
+                               </label>
+                             </div>
+                           </div>
+         
+                           {/* Status */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">Status (filler non-filler)</label>
+                             <select
+                               value={formData.statusFilter}
+                               onChange={(e) => handleInputChange("statusFilter", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white"
+                             >
+                               <option value="" disabled>Select yes or no</option>
+                               <option value="Yes">Yes</option>
+                               <option value="No">No</option>
+                             </select>
+                           </div>
+         
+                           {/* Sales Tax Registration */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">Sales Tax Registration</label>
+                             <input
+                               type="text"
+                               value={formData.salesTaxRegistration}
+                               onChange={(e) => handleInputChange("salesTaxRegistration", e.target.value)}
+                               disabled={formData.statusFilter === "No"}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
+                             />
+                           </div>
+         
+                           {/* NTN Number */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">NTN Number</label>
+                             <input
+                               type="text"
+                               value={formData.ntnNumber}
+                               onChange={(e) => handleInputChange("ntnNumber", e.target.value)}
+                               disabled={formData.statusFilter === "No"}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm disabled:bg-gray-100"
+                             />
+                           </div>
+         
+                           {/* Advance Payment */}
+                           <div>
+                             <label className="block text-sm font-semibold text-gray-700 mb-2">
+                               Advance Payment <span className="text-red-500">*</span>
+                             </label>
+                             <select
+                               value={formData.advancePayment}
+                               onChange={(e) => handleInputChange("advancePayment", e.target.value)}
+                               className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white disabled:bg-gray-100"
+                             >
+                               <option value="">Select</option>
+                               <option value="10">10%</option>
+                               <option value="20">20%</option>
+                               <option value="30">30%</option>
+                               <option value="40">40%</option>
+                               <option value="50">50%</option>
+                               <option value="60">60%</option>
+                             </select>
+                           </div>
+                         </div>
+         
+                         {/* Comments - Full Width */}
+                         <div className="mt-6">
+                           <label className="block text-sm font-semibold text-gray-700 mb-2">Comments</label>
+                           <textarea
+                             value={formData.comments}
+                             onChange={(e) => handleInputChange("comments", e.target.value)}
+                             rows={4}
+                             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                             placeholder="Enter your comments here..."
+                           />
+                         </div>
+         
+                         {/* Terms & Conditions */}
+                         <div className="mt-6">
+                           <label className="flex items-start">
+                             <input
+                               type="checkbox"
+                               checked={formData.termsAccepted}
+                               onChange={(e) => handleInputChange("termsAccepted", e.target.checked)}
+                               className="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1 flex-shrink-0"
+                             />
+                             <span className="text-sm text-gray-700">
+                               I have read and accept{" "}
+                               <button type="button" onClick={handleTermsClick} className="text-blue-500 underline hover:text-blue-600">
+                                 Terms & Conditions
+                               </button>
+                             </span>
+                           </label>
+                         </div>
+         
+                         {/* Submit Button */}
+                         <div className="mt-8 flex justify-center sm:justify-start">
+                           <button
+                             onClick={handleSubmit}
+                             className="w-full sm:w-auto bg-black text-white px-8 md:px-12 py-3 md:py-4 rounded-md font-semibold hover:bg-gray-800 transition-colors duration-300 text-sm"
+                           >
+                             Submit
+                           </button>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           );
+         };
+         
 
 const OrderReview: React.FC<{
   orderData: OrderData;
