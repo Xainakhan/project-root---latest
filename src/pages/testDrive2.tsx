@@ -459,7 +459,7 @@ return (
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-800">CHOOSE YOUR CAR</h2>
               </div>
               <div className="flex justify-center mb-8 sm:mb-0">
-                <button className="px-6 sm:px-8 py-2 sm:py-3 text-sm font-semibold rounded-md bg-black text-white cursor-default">RIDDARA</button>
+                <button className="px-6 sm:px-8 py-2 sm:py-3 text-sm font-semibold rounded-md bg-black text-white cursor-default">FORTHING</button>
               </div>
               <div className="mt-8 sm:mt-12">
                 <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
