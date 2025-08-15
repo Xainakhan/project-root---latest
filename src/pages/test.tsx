@@ -194,13 +194,13 @@ const TestDrive: React.FC = () => {
         <div className="absolute inset-0 bg-black/40 z-10"></div>
 
         {/* Main content */}
-        <div className="relative z-20 flex items-center justify-center h-full">
-          <div className="text-center text-white max-w-2xl px-6">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-wider mb-8 drop-shadow-lg">
+        <div className="relative z-20 flex items-center justify-center h-full px-4">
+          <div className="text-center text-white max-w-2xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wider mb-6 sm:mb-8 drop-shadow-lg">
               REQUEST A TEST DRIVE
             </h1>
 
-            <p className="text-lg md:text-xl leading-relaxed mb-12 opacity-90 drop-shadow-md max-w-lg mx-auto">
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-8 sm:mb-12 opacity-90 drop-shadow-md max-w-lg mx-auto px-4">
               Pick your favorite EV and schedule a test drive at a time and
               place that's convenient for you.
             </p>
@@ -209,19 +209,21 @@ const TestDrive: React.FC = () => {
       </div>
 
       {/* Form Section */}
-      <div className="bg-gray-100 min-h-screen py-16">
-        <div className="max-w-4xl mx-auto px-6">
+      <div className="bg-gray-100 min-h-screen py-8 sm:py-12 md:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Choose Your Car Brand */}
-          <div className="bg-white p-8 rounded-lg shadow-md mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          <div className="bg-white p-4 sm:p-6 md:p-8 rounded-lg shadow-md mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">
               CHOOSE YOUR CAR BRAND
             </h2>
-            <div className="flex justify-center gap-0 mb-8">
+            
+            {/* Desktop Brand Selection - Hidden on mobile */}
+            <div className="hidden sm:flex justify-center gap-0 mb-6 sm:mb-8">
               {brands.map((brand, index) => (
                 <button
                   key={brand.id}
                   onClick={() => handleBrandChange(brand.id)}
-                  className={`px-6 py-3 font-semibold transition-colors duration-200 ${
+                  className={`px-4 md:px-6 py-3 font-semibold transition-colors duration-200 text-sm md:text-base ${
                     selectedBrand === brand.id
                       ? "bg-black text-white"
                       : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -238,38 +240,55 @@ const TestDrive: React.FC = () => {
               ))}
             </div>
 
+            {/* Mobile Brand Selection - Grid layout */}
+            <div className="grid grid-cols-2 gap-2 mb-6 sm:hidden">
+              {brands.map((brand) => (
+                <button
+                  key={brand.id}
+                  onClick={() => handleBrandChange(brand.id)}
+                  className={`px-4 py-3 font-semibold transition-colors duration-200 text-sm rounded-md ${
+                    selectedBrand === brand.id
+                      ? "bg-black text-white"
+                      : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                  }`}
+                >
+                  {brand.name}
+                </button>
+              ))}
+            </div>
+
             {/* Select Variant - Only show if brand is selected */}
             {selectedBrand && (
-              <div className="mt-8">
-                <h3 className="text-xl font-bold text-gray-800 text-center mb-6">
+              <div className="mt-6 sm:mt-8">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 text-center mb-4 sm:mb-6">
                   SELECT VARIANT <span className="text-red-500">*</span>
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {getCurrentVariants().map((variant) => (
                     <div
                       key={variant.id}
-                      className={`bg-white p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 border-2 ${
+                      className={`bg-white p-3 sm:p-4 rounded-lg shadow-md cursor-pointer transition-all duration-300 border-2 ${
                         selectedVariant === variant.id
                           ? "ring-2 ring-blue-500 bg-blue-50 border-blue-200"
                           : "hover:shadow-lg border-gray-200 hover:border-gray-300"
                       }`}
                       onClick={() => setSelectedVariant(variant.id)}
                     >
-                      <div className="mb-4">
+                      <div className="mb-3 sm:mb-4">
                         <img
                           src={variant.image}
                           alt={variant.name}
-                          className="w-full h-24 object-contain"
+                          className="w-full h-20 sm:h-24 object-contain"
                           onError={(e) => {
                             // Fallback to a default image if the specific variant image fails to load
                             e.currentTarget.src = testDrive;
                           }}
                         />
                       </div>
-                      <h4 className="font-bold text-gray-800 text-center text-lg mb-2">
+                      <h4 className="font-bold text-gray-800 text-center text-base sm:text-lg mb-2">
                         {variant.name}
                       </h4>
-                      <p className="text-gray-600 text-sm text-center">
+                      <p className="text-gray-600 text-xs sm:text-sm text-center">
                         {variant.subtitle}
                       </p>
                       {selectedVariant === variant.id && (
@@ -282,7 +301,7 @@ const TestDrive: React.FC = () => {
             )}
 
             {/* Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-8">
               {/* First Name */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -370,7 +389,7 @@ const TestDrive: React.FC = () => {
                   Primary Phone <span className="text-red-500">*</span>
                 </label>
                 <div className="flex">
-                  <select className="w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                  <select className="w-16 sm:w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
                     <option>+92</option>
                   </select>
                   <input
@@ -391,7 +410,7 @@ const TestDrive: React.FC = () => {
                   Secondary Phone
                 </label>
                 <div className="flex">
-                  <select className="w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
+                  <select className="w-16 sm:w-20 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm bg-white">
                     <option>+92</option>
                   </select>
                   <input
@@ -404,6 +423,7 @@ const TestDrive: React.FC = () => {
                   />
                 </div>
               </div>
+
               {/* State/Province */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -441,8 +461,8 @@ const TestDrive: React.FC = () => {
                 />
               </div>
 
-              {/* Location */}
-              <div>
+              {/* Location - Full width on mobile, half on desktop */}
+              <div className="lg:col-span-2">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Location <span className="text-red-500">*</span>
                 </label>
@@ -474,8 +494,8 @@ const TestDrive: React.FC = () => {
               </div>
             </div>
 
-            {/* Comments */}
-            <div className="mt-6">
+            {/* Comments - Full width */}
+            <div className="mt-4 sm:mt-6">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Comments
               </label>
@@ -489,7 +509,7 @@ const TestDrive: React.FC = () => {
             </div>
 
             {/* Terms and Conditions */}
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
               <label className="flex items-start">
                 <input
                   type="checkbox"
@@ -497,7 +517,7 @@ const TestDrive: React.FC = () => {
                   onChange={(e) =>
                     handleInputChange("termsAccepted", e.target.checked)
                   }
-                  className="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
+                  className="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1 flex-shrink-0"
                 />
                 <span className="text-sm text-gray-700">
                   I have read and accept{" "}
@@ -509,10 +529,10 @@ const TestDrive: React.FC = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="mt-8 flex justify-start">
+            <div className="mt-6 sm:mt-8 flex justify-center sm:justify-start">
               <button
                 onClick={handleSubmit}
-                className="bg-black text-white px-12 py-3 rounded-md font-semibold hover:bg-gray-800 transition-colors duration-300 text-sm"
+                className="w-full sm:w-auto bg-black text-white px-8 sm:px-12 py-3 rounded-md font-semibold hover:bg-gray-800 transition-colors duration-300 text-sm"
               >
                 Submit
               </button>
